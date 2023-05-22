@@ -1,6 +1,6 @@
 import { Patient_ } from "../components/patient/Get_patient";
 import React, { useEffect, useState } from 'react'
-export default function PatientInfo(){
+export default function PatientInfo(props){
     const [patient, setPatient] = useState([]);
     useEffect(() => {
         const PatientList = Patient_();
@@ -10,8 +10,12 @@ export default function PatientInfo(){
     }, []);
     return <>
     <h1 className="title top stroke">Bienvenue sur les infos des patients.</h1>
+    <div className="flex center margin-top ">
+        <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} ></input>
+    </div>
+    <div className= "flex">
     {patient.map((patient,key)=>{
-    return <div key={key} className= "flex">
+    return <div key={key} className="card">
         <p>{patient.nom}</p>
         <p>{patient.prenom}</p>
         <p>{patient.adresse}</p>
@@ -22,5 +26,6 @@ export default function PatientInfo(){
     }
     )
 }
+</div>
 </>
 }

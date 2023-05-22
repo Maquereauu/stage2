@@ -5,7 +5,7 @@ export function Header(props) {
     const link = links();
     return <div className='navbar'>
         <div className='flex space-between'>
-            <Link to={link.homeFull}><p>salut</p></Link>
+            <Link to={link.homeFull}><p>home</p></Link>
             <Link to={link.patients}><p>Patients</p></Link>
         </div>
     </div>

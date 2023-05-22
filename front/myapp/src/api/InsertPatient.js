@@ -1,4 +1,4 @@
-export const InsertProduct = async () => {
+export const InsertPatient = async () => {
     const response = await fetch(
         'http://localhost:4444/patient/insert', {
             method: 'POST', 
@@ -8,6 +8,6 @@ export const InsertProduct = async () => {
             }
         }
     )
-    const ProductList = await response.json()
-    return ProductList
+    const PatientList = await response.json()
+    return PatientList
 }
