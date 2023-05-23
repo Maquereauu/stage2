@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
-import { InsertPatient_ } from "../../components/InsertPatient/Patient";
+import { InsertPatient_ } from "../../components/AllPatient/Patient";
 
 export function PatientInsert(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitInsertPatient = async (data) => {
         InsertPatient_(data)
-        console.log(data)
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitInsertPatient)} className="align-center flex vertical center" >

@@ -14,8 +14,10 @@ export default function PatientInfo(props){
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} ></input>
     </div>
     {patient.map((patient,key)=>{
-    return <div key={key} className="box2 margin-top" onClick={()=>alert("salut")}>
-        <div className="background-color-2-3">
+    return <div key={key} className="box2 margin-top" infos={patient}>
+        <div onClick={()=>props.handleShowModalPatientDelete()&props.setPatientInfo(patient)}>test</div>
+        <div>test</div>
+        <div className="background-color-2-3" onClick={()=>props.handleShowModalPatientUpdate()&props.setPatientInfo(patient)}>
         <p>{patient.nom}</p>
         <p>{patient.prenom}</p>
         <p>{patient.adresse}</p>
