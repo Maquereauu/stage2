@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Lun 22 Mai 2023 à 11:56
+-- Généré le :  Mar 23 Mai 2023 à 16:11
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -38,6 +38,15 @@ CREATE TABLE `patient` (
   `tel_proche` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `patient`
+--
+
+INSERT INTO `patient` (`id`, `nom`, `prenom`, `tel`, `adresse`, `medecin`, `tel_proche`) VALUES
+(1, 'salut1', 'salut', 'salut', 'yo', 'salut', 'salut'),
+(2, 'Nom', 'Greg', '0654141414', 'ici,la bas,pas loin', 'Bernard', '0604040415'),
+(3, 'test', 'test', 'test', 'test', 'test', 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +54,7 @@ CREATE TABLE `patient` (
 --
 
 CREATE TABLE `traitement` (
+  `id` int(10) NOT NULL,
   `id_patient` int(10) NOT NULL,
   `traitement` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -63,6 +73,7 @@ ALTER TABLE `patient`
 -- Index pour la table `traitement`
 --
 ALTER TABLE `traitement`
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_patient` (`id_patient`);
 
 --
@@ -73,6 +84,11 @@ ALTER TABLE `traitement`
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `traitement`
+--
+ALTER TABLE `traitement`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

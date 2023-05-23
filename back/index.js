@@ -122,7 +122,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/traitement/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.traitement.create({ traitement: req.body.traitement })
+    await models.traitement.create({ id_patient:req.body.id_patient, traitement: req.body.traitement })
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
   })();

@@ -7,7 +7,6 @@ export function PatientUpdate(props) {
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdatePatient)} className="align-center flex vertical center" >
-        {console.log(props.patientInfo.id)}
         <h1 className="title flex2 center margin-top--">Patient</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Information</h2>
