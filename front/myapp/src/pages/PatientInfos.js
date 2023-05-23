@@ -9,13 +9,13 @@ export default function PatientInfo(props){
             .catch(error => console.error('Erreur avec notre API :', error.message));
     }, []);
     return <>
-    <h1 className="title top stroke">Bienvenue sur les infos des patients.</h1>
+    <h1 className="title top stroke box">Bienvenue sur les infos des patients.</h1>
     <div className="flex center margin-top ">
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} ></input>
     </div>
-    <div className= "flex">
     {patient.map((patient,key)=>{
-    return <div key={key} className="card">
+    return <div key={key} className="box2 margin-top" onClick={()=>alert("salut")}>
+        <div className="background-color-2-3">
         <p>{patient.nom}</p>
         <p>{patient.prenom}</p>
         <p>{patient.adresse}</p>
@@ -23,9 +23,9 @@ export default function PatientInfo(props){
         <p>{patient.medecin}</p>
         <p>{patient.tel_proche}</p>
     </div>
+    </div>
     }
     )
 }
-</div>
 </>
 }

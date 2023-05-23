@@ -6,7 +6,7 @@ export function PatientInsert(props) {
     const onSubmitInsertPatient = async (data) => {
         InsertPatient_(data)
         console.log(data)
-        // window.location.replace('/patients');
+        window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitInsertPatient)} className="align-center flex vertical center" >
         <h1 className="title flex2 center margin-top--">Patient</h1>
@@ -28,7 +28,7 @@ export function PatientInsert(props) {
                 </div>
             </div>
             <div className="flex2 center margin-top--">
-                <input type="submit" value="Insérer le nouveau patient" />
+                <input type="submit" value="Insérer le nouveau patient"/>
             </div>
         </div>
     </form>
