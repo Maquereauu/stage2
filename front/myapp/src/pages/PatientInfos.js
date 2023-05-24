@@ -11,7 +11,7 @@ export default function PatientInfo(props){
     return <>
     <h1 className="title top stroke box">Bienvenue sur les infos des patients.</h1>
     <div className="flex center margin-top ">
-        <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} ></input>
+        <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} />
     </div>
     {patient.map((patient,key)=>{
     return <div key={key} className="box2 margin-top" infos={patient}>

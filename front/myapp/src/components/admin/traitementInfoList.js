@@ -13,6 +13,6 @@ export function TraitementListAdmin(props){
     }, []);
     return <Modal animation={true} show={props.showModalTraitementList} onHide={props.handleCloseModalTraitementList}>
     <Modal.Body>
-        <TraitementList patientInfo={props.patientInfo} info={info}/>
+        <TraitementList handleCloseModalTraitementList={props.handleCloseModalTraitementList} handleShowModalTraitementInsert={props.handleShowModalTraitementInsert} handleShowModalTraitementUpdate={props.handleShowModalTraitementUpdate} handleShowModalTraitementDelete={props.handleShowModalTraitementDelete} patientInfo={props.patientInfo} info={info}/>
     </Modal.Body>
     </Modal>}
