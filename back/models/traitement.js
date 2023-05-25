@@ -9,11 +9,22 @@ module.exports = function(sequelize, DataTypes) {
     },
     id_patient: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: "id_patient"
+      allowNull: false
     },
-    traitement: {
+    medicament: {
       type: DataTypes.TEXT,
+      allowNull: false
+    },
+    dose: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    date_debut: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    date_fin: {
+      type: DataTypes.DATEONLY,
       allowNull: false
     }
   }, {
@@ -27,14 +38,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
-        ]
-      },
-      {
-        name: "id_patient",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "id_patient" },
         ]
       },
     ]

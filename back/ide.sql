@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  localhost
--- Généré le :  Mar 23 Mai 2023 à 16:11
+-- Généré le :  Jeu 25 Mai 2023 à 10:20
 -- Version du serveur :  5.7.11
 -- Version de PHP :  5.6.18
 
@@ -56,8 +56,18 @@ INSERT INTO `patient` (`id`, `nom`, `prenom`, `tel`, `adresse`, `medecin`, `tel_
 CREATE TABLE `traitement` (
   `id` int(10) NOT NULL,
   `id_patient` int(10) NOT NULL,
-  `traitement` text NOT NULL
+  `medicament` text NOT NULL,
+  `dose` int(11) NOT NULL,
+  `date_debut` date NOT NULL,
+  `date_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `traitement`
+--
+
+INSERT INTO `traitement` (`id`, `id_patient`, `medicament`, `dose`, `date_debut`, `date_fin`) VALUES
+(1, 1, 'Il prend du [redacted]', 0, '0000-00-00', '0000-00-00');
 
 --
 -- Index pour les tables exportées
@@ -84,12 +94,12 @@ ALTER TABLE `traitement`
 -- AUTO_INCREMENT pour la table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `traitement`
 --
 ALTER TABLE `traitement`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

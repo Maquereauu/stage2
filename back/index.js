@@ -122,7 +122,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/traitement/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.traitement.create({ id_patient:req.body.id_patient, traitement: req.body.traitement })
+    await models.traitement.create({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose: req.body.dose ,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
   })();
@@ -139,10 +139,10 @@ app.get("/traitement/list", function (req, res) {
 app.post("/traitement/update", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.traitement.update({ traitement: req.body.traitement },
+    await models.traitement.update({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose: req.body.dose ,date_debut: req.body.date_debut ,date_fin: req.body.date_fin },
       {
         where: {
-          id_patient: req.body.id_patient
+          id: req.body.id
         }
       })
     .then(result => res.json(result))
