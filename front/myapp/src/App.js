@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Planning from "./pages/Planning";
 import PatientInfo from "./pages/PatientInfos";
 import {Header} from "./components/header";
+import { PatientInfoAdmin } from './components/admin/patientInfoCard';
 import { PatientInsertAdmin } from './components/admin/patientInfoInsert';
 import { PatientUpdateAdmin } from './components/admin/patientInfoUpdate';
 import { PatientDeleteAdmin } from './components/admin/patientInfoDelete';
@@ -27,6 +28,9 @@ export function links() {
 function App() {
   const link = links()
   const [patientInfo, setPatientInfo] = useState([]);
+  const [showModalPatientInfo, setShowModalPatientInfo] = useState(false);
+  const handleShowModalPatientInfo = () => setShowModalPatientInfo(true);
+  const handleCloseModalPatientInfo = () => setShowModalPatientInfo(false);
   const [showModalPatientInsert, setShowModalPatientInsert] = useState(false);
   const handleShowModalPatientInsert = () => setShowModalPatientInsert(true);
   const handleCloseModalPatientInsert = () => setShowModalPatientInsert(false);
@@ -53,6 +57,7 @@ function App() {
     <div className="App">
       <Router>
         <Header/>
+        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
         <PatientDeleteAdmin patientInfo = {patientInfo} showModalPatientDelete={showModalPatientDelete} handleCloseModalPatientDelete={handleCloseModalPatientDelete}/>
@@ -63,12 +68,12 @@ function App() {
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.home} element={<Home/>} />
-          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete} setTraitementInfo={setTraitementInfo} handleShowModalTraitementList={handleShowModalTraitementList}/>} />
+          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo}/>} />
           <Route exact path={link.planning} element={<Planning/>} />
         </Routes>
       </Router>
     </div>
-    </>;
+    </>;  
 }
 
 export default App;

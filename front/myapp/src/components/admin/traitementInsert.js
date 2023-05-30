@@ -42,8 +42,8 @@ export function TraitementInsert(props) {
     const sendAllForms = async() => {
         for(let i=0;i<counter.length;i++){
             refs.current[i].click();
-            // console.log(refs.current[i])
         }
+        window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {

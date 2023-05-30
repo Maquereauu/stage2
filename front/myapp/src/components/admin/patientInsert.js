@@ -14,16 +14,16 @@ export function PatientInsert(props) {
             <div className="flex2 margin-top--- vertical align-center">
                 <div className="flex gap">
                     <input className='background my-account- margin-top--- margin-right--' {...register("nom")} placeholder="Nom" type="text" id="nom" />
-                    <input className='background my-account- margin-top---' {...register("prenom")} placeholder="prenom" type="text" id="prenom" />
+                    <input className='background my-account- margin-top---' {...register("prenom")} placeholder="Prenom" type="text" id="prenom" />
                 </div>
                 <div className="flex gap">
-                    <input className='background my-account- margin-top--- margin-right--' {...register("adresse")} placeholder="adresse" type="text" id="adresse" />
-                    <input className='background my-account- margin-top---' {...register("tel")} placeholder="tel" type="text" id="tel" />
+                    <input className='background my-account- margin-top--- margin-right--' {...register("adresse")} placeholder="Adresse" type="text" id="adresse" />
+                    <input className='background my-account- margin-top---' {...register("tel")} placeholder="Tel" type="text" id="tel" />
 
                 </div>
                 <div className="flex gap">
-                    <input className='background my-account- margin-top--- margin-right--' {...register("tel_proche")} placeholder="tel_proche" type="text" id="tel_proche" />
-                    <input className='background my-account- margin-top---' {...register("medecin")} placeholder="medecin" type="text" id="medecin" />
+                    <input className='background my-account- margin-top--- margin-right--' {...register("tel_proche")} placeholder="Tel proche" type="text" id="tel_proche" />
+                    <input className='background my-account- margin-top---' {...register("medecin")} placeholder="Medecin" type="text" id="medecin" />
                 </div>
             </div>
             <div className="flex2 center margin-top--">

@@ -12,6 +12,7 @@ export function TraitementListAdmin(props){
             .catch(error => console.error("Erreur avec notre API :", error.message));
     }, []);
     return <Modal animation={true} show={props.showModalTraitementList} onHide={props.handleCloseModalTraitementList}>
+    <div onClick={()=>props.handleCloseModalTraitementList()}>Fermer</div>
     <Modal.Body>
         <TraitementList setTraitementInfo={props.setTraitementInfo} handleCloseModalTraitementList={props.handleCloseModalTraitementList} handleShowModalTraitementInsert={props.handleShowModalTraitementInsert} handleShowModalTraitementUpdate={props.handleShowModalTraitementUpdate} handleShowModalTraitementDelete={props.handleShowModalTraitementDelete} patientInfo={props.patientInfo} info={info}/>
     </Modal.Body>

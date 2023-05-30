@@ -23,9 +23,9 @@ export default function PatientInfo(props){
         catch (err) { }
         setTimer(setTimeout((res) => {
             var val = ReactSession.get("searchbar")
-            if (val != "") {
+            if (val !== "") {
                 setSearch(true)
-                setPatientsMap(patient.map((val2) => {
+                setPatientsMap(patient.map((val2,index) => {
                     var verif = false
                     for (const key in val2) {
                         try {
@@ -35,10 +35,11 @@ export default function PatientInfo(props){
                         } catch (err) { }
                     };
                     if (verif) {
-                        return <div>
-                            <div className='flex'>
-                                <p className='text white align-center'>{val2.prenom}/</p>
-                                <p className='text white align-center'>{val2.nom}</p>
+                        return <div key={index} className="background-color-2-3">
+                            <div className='flex box2'>
+                                <p className='text align-center'>{val2.prenom}/</p>
+                                <p className='text align-center'>{val2.nom}</p>
+                                <div className='text align-center align-left' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(val2)}}>info patient</div>
                             </div>
                             </div>
                     }
@@ -53,8 +54,9 @@ export default function PatientInfo(props){
     <div className="flex center margin-top ">
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} />
     </div>
-            <div className='flex center margin-top--'>
-                <input type="text" placeholder="search here" onChange={detectChange} defaultValue={() => {
+            <div className="background-color-2-4">
+            <div className='center box2 margin-top'>
+                <input type="text" placeholder="Rechercher" onChange={detectChange} defaultValue={() => {
                     try {
                         return ReactSession.get("searchbar")
                     } catch (err) {
@@ -62,32 +64,18 @@ export default function PatientInfo(props){
                     }
                 }} />
             </div>
+            </div>
+            <div className="margin-top">
             {search?patientsMap:patient.map((patient,key)=>{
-    return <div key={key} className="box2 margin-top" infos={patient}>
-        <div className="margin-bottom-- flex space-evenly">
-        <div onClick={()=>props.handleShowModalPatientDelete()&props.setPatientInfo(patient)}>Supprimer</div>
-        <div onClick={()=>props.handleShowModalPatientUpdate()&props.setPatientInfo(patient)}>Modifier</div>
-        </div>
-        <div className="background-color-2-3">
-        <div className="margin-bottom--- flex space-evenly">
-        <p>Nom: {patient.nom}</p>
-        <p>Prenom: {patient.prenom}</p>
-        </div>
-        <div className="margin-bottom--- flex space-evenly">
-        <p>Adresse: {patient.adresse}</p>
-        <p>Tel: {patient.tel}</p>
-        </div>
-        <div className="margin-bottom--- flex space-evenly">
-        <p>Medecin: {patient.medecin}</p>
-        <p>Tel proche: {patient.tel_proche}</p>
-        </div>
-        <div className="center">
-            <p onClick={()=>props.handleShowModalTraitementList()&props.setPatientInfo(patient)}>Traitements</p>
-        </div>
-        </div>
+    return <div key={key} className="background-color-2-3">
+    <div className='flex box2'>
+        <p className='text align-center'>{patient.prenom}/</p>
+        <p className='text align-center'>{patient.nom}</p>
+        <div className='text align-center align-left' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(patient)}}>info patient</div>
+    </div>
     </div>
     }
     )
-}
+}</div>
 </>
 }
