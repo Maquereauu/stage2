@@ -1,31 +1,38 @@
 import { useForm } from "react-hook-form";
-import { InsertTraitement_ } from "../../components/AllTraitement/Traitement";
+import { InsertPhotos_ } from "../../components/AllPhotos/Photos";
+import { UploadPhotos_ } from "../../components/AllPhotos/Photos";
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import {useRef} from 'react';
-export function TraitementInsert(props) {
+export function PhotosInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const [allData,setAllData]=useState([]);
-    const list=["id_patient","medicament","dose_matin","dose_midi","dose_soir","date_debut","date_fin"];
+    const list=["id_patient","type","image"];
     const refs = useRef([]);
     let test = 1;
-    const onSubmitInsertTraitement = async (data) => {
+    const onSubmitInsertPhotos = async (data) => {
         if(test == 1){
         const calls=[...Array(counter.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(data).map(([key,value])=>{
-            calls2[0]=list[c%7]
+            calls2[0]=list[c%3]
+            if(c%3==2){
+                calls2[1]=value[0].name
+                UploadPhotos_(value)
+                console.log(value)
+            }else{
             calls2[1]=value
-            calls[Math.floor(c/7)][c%7]=calls2
+            }
+            calls[Math.floor(c/3)][c%3]=calls2
             calls2=[0,0]
             c++
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
             console.log(dictionary)
-            InsertTraitement_(dictionary)
+            InsertPhotos_(dictionary)
         }
         test = 0;
          // window.location.replace('/patients');
@@ -34,7 +41,7 @@ export function TraitementInsert(props) {
     //     console.log(allData)
     //     allData.map((data,key)=>{
     //         console.log(data)
-    //         InsertTraitement_(data)
+    //         InsertPhotos_(data)
     //     })
     //     setAllData([])
     //     // window.location.replace('/patients');
@@ -43,7 +50,7 @@ export function TraitementInsert(props) {
         for(let i=0;i<counter.length;i++){
             refs.current[i].click();
         }
-        window.location.replace('/patients');
+        // window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -51,21 +58,17 @@ export function TraitementInsert(props) {
         })
       }
     return <div>
-        <h1 className="title flex2 center margin-top--">Traitement</h1>
+        <h1 className="title flex2 center margin-top--">Photos</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Information</h2>
             <div className="flex2 margin-top--- vertical align-center">
             {counter.map((item,index)=>{
                 return <div key={index} className="flex gap">
-                    <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertTraitement)} className="align-center flex vertical center" >
+                    <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertPhotos)} className="align-center flex vertical center" >
                     <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient"+index)} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
-                    <input className='background my-account- margin-top---' {...register("medicament"+index)} placeholder="medicament" type="text" id={"medicament"+index} />
-                    <input className='background my-account- margin-top---' {...register("dose_matin"+index)} placeholder="dose matin" type="text" id="dose1" />
-                    <input className='background my-account- margin-top---' {...register("dose_midi"+index)} placeholder="dose midi" type="text" id="dose2" />
-                    <input className='background my-account- margin-top---' {...register("dose_soir"+index)} placeholder="dose soir" type="text" id="dose3" />
-                    <input className='background my-account- margin-top---' {...register("date_debut"+index)} placeholder="date_debut" type="text" id="date_debut" />
-                    <input className='background my-account- margin-top---' {...register("date_fin"+index)} placeholder="date_fin" type="text" id="date_fin" />
-                    <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer le nouveau Traitement" />
+                    <input className='background my-account- margin-top---' {...register("type"+index)} defaultValue={1} placeholder="type" type="hidden" id={"type"+index} />
+                    <input className='background my-account- margin-top---' {...register("image"+index)} placeholder="image" type="file" id="image" />
+                    <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer la nouvelle ordonnance" />
                     </form>
                 </div>})}
                 <Button variant="secondary" onClick={()=>setCounter(oldArray=>[...oldArray,"salut"])}>Ajouter une ligne</Button>
@@ -73,7 +76,7 @@ export function TraitementInsert(props) {
             </div>
             <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             <div className="flex2 center margin-top--">
-                <Button variant="primary" onClick={sendAllForms}>Insérer le nouveau Traitement</Button>
+                <Button variant="primary" onClick={sendAllForms}>Insérer la nouvelle ordonnance</Button>
             </div>
         </div>
     </div>

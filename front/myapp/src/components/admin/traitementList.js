@@ -12,12 +12,16 @@ export function TraitementList(props) {
             <div className="background-color-2-3">
                 <div className="margin-bottom--- flex space-evenly">
                     <p>{traitement.medicament}</p>
-                    <p>{traitement.dose}</p>
+                    <p>{traitement.dose_matin}</p>
+                    <p>{traitement.dose_midi}</p>
+                    <p>{traitement.dose_soir}</p>
                     <p>{traitement.date_debut}</p>
                     <p>{traitement.date_fin}</p>
             </div>
             </div>
             </div>})}
+        <div className='flex2 space-around'>
         <Button variant="secondary" disabled={disabled} onClick={()=>{props.handleShowModalTraitementInsert();setDisabled(true);}}>Insérer un traitement</Button>
+        </div>
         </>
 }

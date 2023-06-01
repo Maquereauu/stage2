@@ -1,0 +1,22 @@
+import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from 'react';
+export function PhotosList(props) {
+    const [disabled,setDisabled]=useState(false);
+    const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id)
+    return <>{yes.map((Photos,key)=>{
+        return <div key={key} className="box2 margin-top">
+            <div className="margin-bottom-- flex space-evenly">
+            <div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Photos)}>Supprimer</div>
+            <div onClick={()=>props.handleShowModalPhotosUpdate()&props.setPhotosInfo(Photos)}>Modifier</div>
+            </div>
+            <div className="background-color-2-3">
+                <div className="margin-bottom--- flex space-evenly">
+                    <img src={"./img/"+yes[key].image}></img>
+            </div>
+            </div>
+            </div>})}
+        <div className='flex2 space-around'>
+        <Button variant="secondary" disabled={disabled} onClick={()=>{props.handleShowModalPhotosInsert();setDisabled(true);}}>Insérer une ordonnance</Button>
+        </div>
+        </>
+}

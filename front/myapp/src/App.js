@@ -15,6 +15,10 @@ import { TraitementInsertAdmin } from './components/admin/traitementInfoInsert '
 import { TraitementUpdateAdmin } from './components/admin/traitementInfoUpdate';
 import { TraitementDeleteAdmin } from './components/admin/traitementInfoDelete';
 import { TraitementListAdmin } from './components/admin/traitementInfoList';
+import { PhotosInsertAdmin } from './components/admin/photosInfoInsert';
+import { PhotosUpdateAdmin } from './components/admin/photosInfoUpdate';
+import { PhotosDeleteAdmin } from './components/admin/photosInfoDelete';
+import { PhotosListAdmin } from './components/admin/photosInfoList';
 export function links() {
   return {
     homeFull: '/home',
@@ -53,11 +57,24 @@ function App() {
   const [showModalTraitementList, setShowModalTraitementList] = useState(false);
   const handleShowModalTraitementList = () => setShowModalTraitementList(true);
   const handleCloseModalTraitementList = () => setShowModalTraitementList(false);
+  const [photosInfo, setPhotosInfo] = useState([]);
+  const [showModalPhotosInsert, setShowModalPhotosInsert] = useState(false);
+  const handleShowModalPhotosInsert = () => setShowModalPhotosInsert(true);
+  const handleCloseModalPhotosInsert = () => setShowModalPhotosInsert(false);
+  const [showModalPhotosUpdate, setShowModalPhotosUpdate] = useState(false);
+  const handleShowModalPhotosUpdate = () => setShowModalPhotosUpdate(true);
+  const handleCloseModalPhotosUpdate = () => setShowModalPhotosUpdate(false);
+  const [showModalPhotosDelete, setShowModalPhotosDelete] = useState(false);
+  const handleShowModalPhotosDelete = () => setShowModalPhotosDelete(true);
+  const handleCloseModalPhotosDelete = () => setShowModalPhotosDelete(false);
+  const [showModalPhotosList, setShowModalPhotosList] = useState(false);
+  const handleShowModalPhotosList = () => setShowModalPhotosList(true);
+  const handleCloseModalPhotosList = () => setShowModalPhotosList(false);
   return <>
     <div className="App">
       <Router>
         <Header/>
-        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
+        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
         <PatientDeleteAdmin patientInfo = {patientInfo} showModalPatientDelete={showModalPatientDelete} handleCloseModalPatientDelete={handleCloseModalPatientDelete}/>
@@ -65,10 +82,14 @@ function App() {
         <TraitementUpdateAdmin traitementInfo = {traitementInfo} showModalTraitementUpdate={showModalTraitementUpdate} handleCloseModalTraitementUpdate={handleCloseModalTraitementUpdate}/>
         <TraitementDeleteAdmin traitementInfo = {traitementInfo} showModalTraitementDelete={showModalTraitementDelete} handleCloseModalTraitementDelete={handleCloseModalTraitementDelete}/>
         <TraitementListAdmin setTraitementInfo={setTraitementInfo} patientInfo = {patientInfo} showModalTraitementList={showModalTraitementList} handleCloseModalTraitementList={handleCloseModalTraitementList} handleShowModalTraitementInsert={handleShowModalTraitementInsert} handleShowModalTraitementUpdate={handleShowModalTraitementUpdate} handleShowModalTraitementDelete={handleShowModalTraitementDelete}/>
+        <PhotosInsertAdmin patientInfo = {patientInfo} showModalPhotosInsert={showModalPhotosInsert} handleCloseModalPhotosInsert={handleCloseModalPhotosInsert}/>
+        <PhotosUpdateAdmin photosInfo = {photosInfo} showModalPhotosUpdate={showModalPhotosUpdate} handleCloseModalPhotosUpdate={handleCloseModalPhotosUpdate}/>
+        <PhotosDeleteAdmin photosInfo = {photosInfo} showModalPhotosDelete={showModalPhotosDelete} handleCloseModalPhotosDelete={handleCloseModalPhotosDelete}/>
+        <PhotosListAdmin setPhotosInfo={setPhotosInfo} patientInfo = {patientInfo} showModalPhotosList={showModalPhotosList} handleCloseModalPhotosList={handleCloseModalPhotosList} handleShowModalPhotosInsert={handleShowModalPhotosInsert} handleShowModalPhotosUpdate={handleShowModalPhotosUpdate} handleShowModalPhotosDelete={handleShowModalPhotosDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.home} element={<Home/>} />
-          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo}/>} />
+          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo}/>} />
           <Route exact path={link.planning} element={<Planning/>} />
         </Routes>
       </Router>
