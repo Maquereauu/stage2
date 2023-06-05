@@ -121,29 +121,6 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
 });
 
 // CRUD photos
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//       cb(null, '../front/myapp/public/img')
-//   },
-//   filename: (req, file, cb) => {
-//       cb(null, Date.now() + path.extname(file.originalname))
-//   }
-// })
-
-// const upload = multer({
-//   storage: storage,
-//   limits: { fileSize: '10000000' },
-//   fileFilter: (req, file, cb) => {
-//       const fileTypes = /jpeg|jpg|png|gif/
-//       const mimeType = fileTypes.test(file.mimetype)  
-//       const extname = fileTypes.test(path.extname(file.originalname))
-
-//       if(mimeType && extname) {
-//           return cb(null, true)
-//       }
-//       cb('Give proper files formate to upload')
-//   }
-// }).single('image')
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
@@ -165,7 +142,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/photos/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.photos.create({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image})
+    await models.photos.create({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
   })();
@@ -182,7 +159,7 @@ app.get("/photos/list", function (req, res) {
 app.post("/photos/update", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.photos.update({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image },
+    await models.photos.update({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe },
       {
         where: {
           id: req.body.id
@@ -197,6 +174,52 @@ app.post("/photos/delete", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
     await models.photos.destroy({
+      where: {
+        id: req.body.id
+      }
+    })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+//CRUD plaies
+app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/plaies/insert", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.plaies.create({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe,type: req.body.type})
+      .then(result => res.json(result))
+      .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.get("/plaies/list", function (req, res) {
+  (async () => {
+    await sequelize.sync();
+    const body = await models.plaies.findAll({});
+    res.send(body)
+  })();
+});
+
+app.post("/plaies/update", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.plaies.update({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe ,type: req.body.type},
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.post("/plaies/delete", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.plaies.destroy({
       where: {
         id: req.body.id
       }

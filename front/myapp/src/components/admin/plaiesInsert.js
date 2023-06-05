@@ -1,28 +1,30 @@
 import { useForm } from "react-hook-form";
 import { InsertPhotos_ } from "../../components/AllPhotos/Photos";
+import { InsertPlaies_ } from "../../components/AllPlaies/Plaies";
 import { UploadPhotos_ } from "../../components/AllPhotos/Photos";
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import {useRef} from 'react';
-export function PhotosInsert(props) {
+export function PlaiesInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
-    const [allData,setAllData]=useState([]);
     const list=["id_patient","type","image","groupe"];
     const refs = useRef([]);
+    const refs2 = useRef([]);
     let test = 1;
     const onSubmitInsertPhotos = async (data) => {
+        const newList = Object.fromEntries(Object.entries(data).slice(0, 4));
+        const newData = Object.fromEntries(Object.entries(data).slice(4));
         if(test == 1){
+        InsertPlaies_(newList)
         const calls=[...Array(counter.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
-        Object.entries(data).map(([key,value])=>{
+        Object.entries(newData).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 calls2[1]=value[0].name
                 UploadPhotos_(value)
-            }else if(c%4==3){
-                calls2[1]=0
             }else{
             calls2[1]=value
             }
@@ -36,7 +38,7 @@ export function PhotosInsert(props) {
             InsertPhotos_(dictionary)
         }
         test = 0;
-         // window.location.replace('/patients');
+        window.location.replace('/patients');
     }}
     // const insertAllForms = async() => {
     //     console.log(allData)
@@ -51,7 +53,8 @@ export function PhotosInsert(props) {
         for(let i=0;i<counter.length;i++){
             refs.current[i].click();
         }
-        window.location.replace('/patients');
+        refs2.current[0].click();
+        // window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -59,17 +62,24 @@ export function PhotosInsert(props) {
         })
       }
     return <div>
-        <h1 className="title flex2 center margin-top--">Ordonnances</h1>
+        <h1 className="title flex2 center margin-top--">Plaies</h1>
         <div className="flex2 vertical center">
-            <h2 className='title top left align-center'>Images</h2>
+            <h2 className='title top left align-center'>Infos</h2>
             <div className="flex2 margin-top--- vertical align-center">
+            <form onSubmit={handleSubmit(onSubmitInsertPhotos)}>
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
+            <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
+            <input className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("type")} defaultValue={1} type="hidden" id="type" />
+            <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
+            </form>
             {counter.map((item,index)=>{
                 return <div key={index} className="flex gap">
                     <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertPhotos)} className="align-center flex vertical center" >
                     <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient"+index)} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
-                    <input className='background my-account- margin-top---' {...register("type"+index)} defaultValue={1} placeholder="type" type="hidden" id={"type"+index} />
+                    <input className='background my-account- margin-top---' {...register("type"+index)} defaultValue={2} placeholder="type" type="hidden" id={"type"+index} />
                     <input className='background my-account- margin-top---' {...register("image"+index)} placeholder="image" type="file" id="image" />
-                    <input className='background my-account- margin-top---' {...register("groupe"+index)} defaultValue={1} placeholder="type" type="hidden" id={"type"+index} />
+                    <input className='background my-account- margin-top---' {...register("groupe"+index)} placeholder="groupe" type="text" id="groupe" />
                     <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer la nouvelle ordonnance" />
                     </form>
                 </div>})}
@@ -78,7 +88,7 @@ export function PhotosInsert(props) {
             </div>
             <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             <div className="flex2 center margin-top--">
-                <Button variant="primary" onClick={sendAllForms}>Insérer la nouvelle ordonnance</Button>
+                <Button variant="primary" onClick={sendAllForms}>Insérer les nouvelles infos</Button>
             </div>
         </div>
     </div>

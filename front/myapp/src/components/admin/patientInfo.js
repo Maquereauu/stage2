@@ -23,6 +23,12 @@ export function PatientInfo(props) {
         <div className="center">
             <p onClick={()=>props.handleShowModalPhotosList()&props.setPatientInfo(props.patientInfo)}>Ordonnances</p>
         </div>
+        <div className="center">
+            <p onClick={()=>props.handleShowModalPlaiesList()&props.setPatientInfo(props.patientInfo)}>Suivi de plaies</p>
+        </div>
+        <div className="center">
+            <p onClick={()=>props.handleShowModalMedicList()&props.setPatientInfo(props.patientInfo)}>Comptes rendus médicaux</p>
+        </div>
         </div>
     </div>
 }
