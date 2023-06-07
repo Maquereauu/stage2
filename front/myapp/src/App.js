@@ -31,6 +31,10 @@ import { BilanInsertAdmin } from './components/admin/bilanInfoInsert';
 import { BilanUpdateAdmin } from './components/admin/bilanInfoUpdate';
 import { BilanDeleteAdmin } from './components/admin/bilanInfoDelete';
 import { BilanListAdmin } from './components/admin/bilanInfoList';
+import { RdvInsertAdmin } from './components/admin/rdvInfoInsert';
+import { RdvUpdateAdmin } from './components/admin/rdvInfoUpdate';
+import { RdvDeleteAdmin } from './components/admin/rdvInfoDelete';
+import { RdvListAdmin } from './components/admin/rdvInfoList';
 export function links() {
   return {
     homeFull: '/home',
@@ -120,11 +124,24 @@ function App() {
   const [showModalBilanList, setShowModalBilanList] = useState(false);
   const handleShowModalBilanList = () => setShowModalBilanList(true);
   const handleCloseModalBilanList = () => setShowModalBilanList(false);
+  const [rdvInfo, setRdvInfo] = useState([]);
+  const [showModalRdvInsert, setShowModalRdvInsert] = useState(false);
+  const handleShowModalRdvInsert = () => setShowModalRdvInsert(true);
+  const handleCloseModalRdvInsert = () => setShowModalRdvInsert(false);
+  const [showModalRdvUpdate, setShowModalRdvUpdate] = useState(false);
+  const handleShowModalRdvUpdate = () => setShowModalRdvUpdate(true);
+  const handleCloseModalRdvUpdate = () => setShowModalRdvUpdate(false);
+  const [showModalRdvDelete, setShowModalRdvDelete] = useState(false);
+  const handleShowModalRdvDelete = () => setShowModalRdvDelete(true);
+  const handleCloseModalRdvDelete = () => setShowModalRdvDelete(false);
+  const [showModalRdvList, setShowModalRdvList] = useState(false);
+  const handleShowModalRdvList = () => setShowModalRdvList(true);
+  const handleCloseModalRdvList = () => setShowModalRdvList(false);
   return <>
     <div className="App">
       <Router>
         <Header/>
-        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
+        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} handleShowModalRdvList={handleShowModalRdvList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
         <PatientDeleteAdmin patientInfo = {patientInfo} showModalPatientDelete={showModalPatientDelete} handleCloseModalPatientDelete={handleCloseModalPatientDelete}/>
@@ -148,10 +165,14 @@ function App() {
         <BilanUpdateAdmin bilanInfo = {bilanInfo} showModalBilanUpdate={showModalBilanUpdate} handleCloseModalBilanUpdate={handleCloseModalBilanUpdate}/>
         <BilanDeleteAdmin bilanInfo = {bilanInfo} showModalBilanDelete={showModalBilanDelete} handleCloseModalBilanDelete={handleCloseModalBilanDelete}/>
         <BilanListAdmin setBilanInfo={setBilanInfo} patientInfo = {patientInfo} showModalBilanList={showModalBilanList} handleCloseModalBilanList={handleCloseModalBilanList} handleShowModalBilanInsert={handleShowModalBilanInsert} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete}/>
+        <RdvInsertAdmin patientInfo = {patientInfo} showModalRdvInsert={showModalRdvInsert} handleCloseModalRdvInsert={handleCloseModalRdvInsert}/>
+        <RdvUpdateAdmin RdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
+        <RdvDeleteAdmin RdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
+        <RdvListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.home} element={<Home/>} />
-          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo}/>} />
+          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo}/>} />
           <Route exact path={link.planning} element={<Planning/>} />
         </Routes>
       </Router>

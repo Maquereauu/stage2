@@ -32,6 +32,9 @@ export function PatientInfo(props) {
         <div className="center">
             <p onClick={()=>props.handleShowModalBilanList()&props.setPatientInfo(props.patientInfo)}>Bilans</p>
         </div>
+        <div className="center">
+            <p onClick={()=>props.handleShowModalRdvList()&props.setPatientInfo(props.patientInfo)}>Rdvs</p>
+        </div>
         </div>
     </div>
 }

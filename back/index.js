@@ -273,3 +273,48 @@ app.post("/bilan/delete", jsonParser, (req, res) => {
     .catch(err => res.send(JSON.stringify(err.message)));
   })();
 });
+//CRUD rdv
+app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/rdv/insert", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date })
+      .then(result => res.json(result))
+      .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.get("/rdv/list", function (req, res) {
+  (async () => {
+    await sequelize.sync();
+    const body = await models.rdv.findAll({});
+    res.send(body)
+  })();
+});
+
+app.post("/rdv/update", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.rdv.update({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date },
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.post("/rdv/delete", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.rdv.destroy({
+      where: {
+        id: req.body.id
+      }
+    })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
