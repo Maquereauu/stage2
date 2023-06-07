@@ -11,7 +11,7 @@ import { PatientInfoAdmin } from './components/admin/patientInfoCard';
 import { PatientInsertAdmin } from './components/admin/patientInfoInsert';
 import { PatientUpdateAdmin } from './components/admin/patientInfoUpdate';
 import { PatientDeleteAdmin } from './components/admin/patientInfoDelete';
-import { TraitementInsertAdmin } from './components/admin/traitementInfoInsert ';
+import { TraitementInsertAdmin } from './components/admin/traitementInfoInsert';
 import { TraitementUpdateAdmin } from './components/admin/traitementInfoUpdate';
 import { TraitementDeleteAdmin } from './components/admin/traitementInfoDelete';
 import { TraitementListAdmin } from './components/admin/traitementInfoList';
@@ -27,6 +27,10 @@ import { MedicInsertAdmin } from './components/admin/medicInfoInsert';
 import { MedicUpdateAdmin } from './components/admin/medicInfoUpdate';
 import { MedicDeleteAdmin } from './components/admin/medicInfoDelete';
 import { MedicListAdmin } from './components/admin/medicInfoList';
+import { BilanInsertAdmin } from './components/admin/bilanInfoInsert';
+import { BilanUpdateAdmin } from './components/admin/bilanInfoUpdate';
+import { BilanDeleteAdmin } from './components/admin/bilanInfoDelete';
+import { BilanListAdmin } from './components/admin/bilanInfoList';
 export function links() {
   return {
     homeFull: '/home',
@@ -91,7 +95,6 @@ function App() {
   const [showModalPlaiesList, setShowModalPlaiesList] = useState(false);
   const handleShowModalPlaiesList = () => setShowModalPlaiesList(true);
   const handleCloseModalPlaiesList = () => setShowModalPlaiesList(false);
-  
   const [showModalMedicInsert, setShowModalMedicInsert] = useState(false);
   const handleShowModalMedicInsert = () => setShowModalMedicInsert(true);
   const handleCloseModalMedicInsert = () => setShowModalMedicInsert(false);
@@ -104,11 +107,24 @@ function App() {
   const [showModalMedicList, setShowModalMedicList] = useState(false);
   const handleShowModalMedicList = () => setShowModalMedicList(true);
   const handleCloseModalMedicList = () => setShowModalMedicList(false);
+  const [bilanInfo, setBilanInfo] = useState([]);
+  const [showModalBilanInsert, setShowModalBilanInsert] = useState(false);
+  const handleShowModalBilanInsert = () => setShowModalBilanInsert(true);
+  const handleCloseModalBilanInsert = () => setShowModalBilanInsert(false);
+  const [showModalBilanUpdate, setShowModalBilanUpdate] = useState(false);
+  const handleShowModalBilanUpdate = () => setShowModalBilanUpdate(true);
+  const handleCloseModalBilanUpdate = () => setShowModalBilanUpdate(false);
+  const [showModalBilanDelete, setShowModalBilanDelete] = useState(false);
+  const handleShowModalBilanDelete = () => setShowModalBilanDelete(true);
+  const handleCloseModalBilanDelete = () => setShowModalBilanDelete(false);
+  const [showModalBilanList, setShowModalBilanList] = useState(false);
+  const handleShowModalBilanList = () => setShowModalBilanList(true);
+  const handleCloseModalBilanList = () => setShowModalBilanList(false);
   return <>
     <div className="App">
       <Router>
         <Header/>
-        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
+        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
         <PatientDeleteAdmin patientInfo = {patientInfo} showModalPatientDelete={showModalPatientDelete} handleCloseModalPatientDelete={handleCloseModalPatientDelete}/>
@@ -128,10 +144,14 @@ function App() {
         <MedicUpdateAdmin plaiesInfo = {plaiesInfo} showModalMedicUpdate={showModalMedicUpdate} handleCloseModalMedicUpdate={handleCloseModalMedicUpdate}/>
         <MedicDeleteAdmin plaiesInfo = {plaiesInfo} showModalMedicDelete={showModalMedicDelete} handleCloseModalMedicDelete={handleCloseModalMedicDelete}/>
         <MedicListAdmin setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalMedicList={showModalMedicList} handleCloseModalMedicList={handleCloseModalMedicList} handleShowModalMedicInsert={handleShowModalMedicInsert} handleShowModalMedicUpdate={handleShowModalMedicUpdate} handleShowModalMedicDelete={handleShowModalMedicDelete}/>
+        <BilanInsertAdmin patientInfo = {patientInfo} showModalBilanInsert={showModalBilanInsert} handleCloseModalBilanInsert={handleCloseModalBilanInsert}/>
+        <BilanUpdateAdmin bilanInfo = {bilanInfo} showModalBilanUpdate={showModalBilanUpdate} handleCloseModalBilanUpdate={handleCloseModalBilanUpdate}/>
+        <BilanDeleteAdmin bilanInfo = {bilanInfo} showModalBilanDelete={showModalBilanDelete} handleCloseModalBilanDelete={handleCloseModalBilanDelete}/>
+        <BilanListAdmin setBilanInfo={setBilanInfo} patientInfo = {patientInfo} showModalBilanList={showModalBilanList} handleCloseModalBilanList={handleCloseModalBilanList} handleShowModalBilanInsert={handleShowModalBilanInsert} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.home} element={<Home/>} />
-          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo}/>} />
+          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo}/>} />
           <Route exact path={link.planning} element={<Planning/>} />
         </Routes>
       </Router>

@@ -228,3 +228,48 @@ app.post("/plaies/delete", jsonParser, (req, res) => {
     .catch(err => res.send(JSON.stringify(err.message)));
   })();
 });
+//CRUD bilan
+app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/bilan/insert", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe})
+      .then(result => res.json(result))
+      .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.get("/bilan/list", function (req, res) {
+  (async () => {
+    await sequelize.sync();
+    const body = await models.bilan.findAll({});
+    res.send(body)
+  })();
+});
+
+app.post("/bilan/update", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.bilan.update({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe},
+      {
+        where: {
+          id: req.body.id
+        }
+      })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+
+app.post("/bilan/delete", jsonParser, (req, res) => {
+  (async () => {
+    await sequelize.sync();
+    await models.bilan.destroy({
+      where: {
+        id: req.body.id
+      }
+    })
+    .then(result => res.json(result))
+    .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
