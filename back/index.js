@@ -233,7 +233,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/bilan/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe})
+    await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
   })();
@@ -250,7 +250,7 @@ app.get("/bilan/list", function (req, res) {
 app.post("/bilan/update", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.bilan.update({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe},
+    await models.bilan.update({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift},
       {
         where: {
           id: req.body.id
@@ -316,5 +316,13 @@ app.post("/rdv/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
+  })();
+});
+//Login
+app.get("/user/list", function (req, res) {
+  (async () => {
+    await sequelize.sync();
+    const body = await models.compte.findAll({});
+    res.send(body)
   })();
 });

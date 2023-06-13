@@ -1,39 +1,23 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('bilan', {
+  return sequelize.define('compte', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    id_patient: {
-      type: DataTypes.INTEGER,
+    username: {
+      type: DataTypes.STRING(50),
       allowNull: false
     },
-    text: {
-      type: DataTypes.TEXT,
-      allowNull: false
-    },
-    weekly: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    groupe: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    shift: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING(50),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'bilan',
+    tableName: 'compte',
     timestamps: false,
     indexes: [
       {

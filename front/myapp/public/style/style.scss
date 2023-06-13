@@ -51,7 +51,12 @@
     .background-color-2-4 {
         background-color: $secondaryColor4;
     }
-
+    .background-color-t1 {
+        background-color: $primaryColor2;
+    }
+    .background-color-t2 {
+        background-color: $primaryColor3;
+    }
     .background-button:hover {
         background-color: $buttonsColor;
     }

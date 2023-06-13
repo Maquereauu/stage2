@@ -51,7 +51,7 @@ export default function PatientInfo(props){
     }
     return <>
     <h1 className="title top stroke box">Bienvenue sur les infos des patients.</h1>
-    <div className="flex center margin-top ">
+    {ReactSession.get("username")?<><div className="flex center margin-top ">
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} />
     </div>
             <div className="background-color-2-4">
@@ -76,6 +76,6 @@ export default function PatientInfo(props){
     </div>
     }
     )
-}</div>
+}</div></>:<><p>Merci de bien vouloir vous connecter pour accéder aux services.</p></>}
 </>
 }

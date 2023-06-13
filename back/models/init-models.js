@@ -1,5 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _bilan = require("./bilan");
+var _compte = require("./compte");
 var _patient = require("./patient");
 var _photos = require("./photos");
 var _plaies = require("./plaies");
@@ -8,6 +9,7 @@ var _traitement = require("./traitement");
 
 function initModels(sequelize) {
   var bilan = _bilan(sequelize, DataTypes);
+  var compte = _compte(sequelize, DataTypes);
   var patient = _patient(sequelize, DataTypes);
   var photos = _photos(sequelize, DataTypes);
   var plaies = _plaies(sequelize, DataTypes);
@@ -17,6 +19,7 @@ function initModels(sequelize) {
 
   return {
     bilan,
+    compte,
     patient,
     photos,
     plaies,

@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Home from "./pages/Home";
 import Planning from "./pages/Planning";
 import PatientInfo from "./pages/PatientInfos";
+import LoginPage from "./pages/Login"
+import { ReactSession } from 'react-client-session';
 import {Header} from "./components/header";
 import { PatientInfoAdmin } from './components/admin/patientInfoCard';
 import { PatientInsertAdmin } from './components/admin/patientInfoInsert';
@@ -35,17 +37,22 @@ import { RdvInsertAdmin } from './components/admin/rdvInfoInsert';
 import { RdvUpdateAdmin } from './components/admin/rdvInfoUpdate';
 import { RdvDeleteAdmin } from './components/admin/rdvInfoDelete';
 import { RdvListAdmin } from './components/admin/rdvInfoList';
+import { PlanningInsert } from './components/admin/planningInsert';
+import { PlanningBilanInsert } from './components/admin/planningBilanInsert';
+import { PlanningRdvInsert } from './components/admin/planningRdvInsert';
 export function links() {
   return {
     homeFull: '/home',
     home: '/',
     patients : '/patients',
     planning : '/planning',
+    login : '/login',
     err404: '*'
   }
 }
 
 function App() {
+  ReactSession.setStoreType("cookie");
   const link = links()
   const [patientInfo, setPatientInfo] = useState([]);
   const [showModalPatientInfo, setShowModalPatientInfo] = useState(false);
@@ -137,10 +144,25 @@ function App() {
   const [showModalRdvList, setShowModalRdvList] = useState(false);
   const handleShowModalRdvList = () => setShowModalRdvList(true);
   const handleCloseModalRdvList = () => setShowModalRdvList(false);
+  const [dateInfo, setDateInfo] = useState([]);
+  const [showModalPlanningInsert, setShowModalPlanningInsert] = useState(false);
+  const handleShowModalPlanningInsert = () => setShowModalPlanningInsert(true);
+  const handleCloseModalPlanningInsert = () => setShowModalPlanningInsert(false);
+
+  const [showModalPlanningBilanInsert, setShowModalPlanningBilanInsert] = useState(false);
+  const handleShowModalPlanningBilanInsert = () => setShowModalPlanningBilanInsert(true);
+  const handleCloseModalPlanningBilanInsert = () => setShowModalPlanningBilanInsert(false);
+
+  const [showModalPlanningRdvInsert, setShowModalPlanningRdvInsert] = useState(false);
+  const handleShowModalPlanningRdvInsert = () => setShowModalPlanningRdvInsert(true);
+  const handleCloseModalPlanningRdvInsert = () => setShowModalPlanningRdvInsert(false);
   return <>
     <div className="App">
       <Router>
         <Header/>
+        <PlanningInsert showModalPlanningInsert={showModalPlanningInsert} handleCloseModalPlanningInsert={handleCloseModalPlanningInsert} handleShowModalPlanningBilanInsert={handleShowModalPlanningBilanInsert} handleShowModalPlanningRdvInsert={handleShowModalPlanningRdvInsert}/>
+        <PlanningBilanInsert dateInfo={dateInfo} showModalPlanningBilanInsert={showModalPlanningBilanInsert} handleCloseModalPlanningBilanInsert={handleCloseModalPlanningBilanInsert}/>
+        <PlanningRdvInsert dateInfo={dateInfo} showModalPlanningRdvInsert={showModalPlanningRdvInsert} handleCloseModalPlanningRdvInsert={handleCloseModalPlanningRdvInsert}/>
         <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} handleShowModalRdvList={handleShowModalRdvList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
@@ -171,9 +193,10 @@ function App() {
         <RdvListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
+          <Route exact path={link.login} element={<LoginPage/>} />
           <Route exact path={link.home} element={<Home/>} />
           <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo}/>} />
-          <Route exact path={link.planning} element={<Planning/>} />
+          <Route exact path={link.planning} element={<Planning setDateInfo={setDateInfo} handleShowModalPlanningInsert={handleShowModalPlanningInsert}/>} />
         </Routes>
       </Router>
     </div>

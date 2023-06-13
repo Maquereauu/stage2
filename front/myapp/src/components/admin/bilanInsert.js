@@ -13,8 +13,8 @@ export function BilanInsert(props) {
     const refs2 = useRef([]);
     let test = 1;
     const onSubmitInsertPhotos = async (data) => {
-        const newList = Object.fromEntries(Object.entries(data).slice(0, 5));
-        const newData = Object.fromEntries(Object.entries(data).slice(5));
+        const newList = Object.fromEntries(Object.entries(data).slice(0, 6));
+        const newData = Object.fromEntries(Object.entries(data).slice(6));
         if(test == 1){
         InsertBilan_(newList)
         const calls=[...Array(counter.length)].map(e => Array(list.length))
@@ -71,6 +71,7 @@ export function BilanInsert(props) {
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
             <input className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
             <input className='background my-account- margin-top---' {...register("weekly")} placeholder="weekly" type="text" id="weekly" />
+            <input className='background my-account- margin-top---' {...register("shift")} placeholder="tournée" type="text" id="shift" />
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="text" id="date" />
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>
