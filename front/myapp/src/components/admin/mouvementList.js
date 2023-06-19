@@ -1,7 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import React, { useEffect, useState } from 'react';
-import { ReactSession } from 'react-client-session';
-export function BilanList(props) {
+export function MouvementList(props) {
     const [disabled,setDisabled]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 4)
     const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id)
@@ -16,29 +15,25 @@ export function BilanList(props) {
     return (
         <>
           {Object.keys(newlist).map((groupe) => {
+            console.log(groupe);
             return (
               <>
                 <div>Groupe{groupe}</div>
-                <div onClick={()=>props.handleShowModalBilanGroupDelete()&props.setGroup(groupe)}>Supprimer</div>
                 <div className='box2 background-color-1-5'>
-                {newlist[groupe].map((Bilan, key) => {
+                {newlist[groupe].map((Mouvement, key) => {
+                  console.log(Mouvement);
                   return (
                     <div key={key} className="box2 margin-top">
                       <div className="margin-bottom-- flex space-evenly">
-                        {/* <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)}>Supprimer</div>
-                        <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)}>Modifier</div> */}
+                        {/* <div onClick={()=>props.handleShowModalMouvementDelete()&props.setMouvementInfo(Mouvement)}>Supprimer</div>
+                        <div onClick={()=>props.handleShowModalMouvementUpdate()&props.setMouvementInfo(Mouvement)}>Modifier</div> */}
                       </div>
                       <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">
-                          {"image" in Bilan ? (
-                            <img className="prod-img" src={"./img/" + Bilan.image} alt={Bilan.image} />
+                          {"image" in Mouvement ? (
+                            <img className="prod-img" src={"./img/" + Mouvement.image} alt={Mouvement.image} />
                           ) : (
-                            <>
-                            {ReactSession.set("bilan"+Bilan.id, true)}
-                            {ReactSession.remove("patient"+Bilan.id_patient, true)}
-                            {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
-                            <p>{Bilan.text}</p>
-                            </>
+                            <p>{Mouvement.text}</p>
                           )}
                         </div>
                       </div>
@@ -49,8 +44,8 @@ export function BilanList(props) {
             );
           })}
           <div className="flex2 space-around">
-            <Button variant="secondary" disabled={disabled} onClick={() => { props.handleShowModalBilanInsert(); setDisabled(true); }}>
-              Insérer un bilan
+            <Button variant="secondary" disabled={disabled} onClick={() => { props.handleShowModalMouvementInsert(); setDisabled(true); }}>
+              Insérer des infos sur une plaie
             </Button>
           </div>
         </>

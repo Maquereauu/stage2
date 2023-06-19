@@ -24,14 +24,17 @@ import { PhotosListAdmin } from './components/admin/photosInfoList';
 import { PlaiesInsertAdmin } from './components/admin/plaiesInfoInsert';
 import { PlaiesUpdateAdmin } from './components/admin/plaiesInfoUpdate';
 import { PlaiesDeleteAdmin } from './components/admin/plaiesInfoDelete';
+import { PlaiesGroupDeleteAdmin } from './components/admin/plaiesGroupInfoDelete';
 import { PlaiesListAdmin } from './components/admin/plaiesInfoList';
 import { MedicInsertAdmin } from './components/admin/medicInfoInsert';
 import { MedicUpdateAdmin } from './components/admin/medicInfoUpdate';
 import { MedicDeleteAdmin } from './components/admin/medicInfoDelete';
+import { MedicGroupDeleteAdmin } from './components/admin/medicGroupInfoDelete';
 import { MedicListAdmin } from './components/admin/medicInfoList';
 import { BilanInsertAdmin } from './components/admin/bilanInfoInsert';
 import { BilanUpdateAdmin } from './components/admin/bilanInfoUpdate';
 import { BilanDeleteAdmin } from './components/admin/bilanInfoDelete';
+import { BilanGroupDeleteAdmin } from './components/admin/bilanGroupInfoDelete';
 import { BilanListAdmin } from './components/admin/bilanInfoList';
 import { RdvInsertAdmin } from './components/admin/rdvInfoInsert';
 import { RdvUpdateAdmin } from './components/admin/rdvInfoUpdate';
@@ -103,6 +106,9 @@ function App() {
   const [showModalPlaiesDelete, setShowModalPlaiesDelete] = useState(false);
   const handleShowModalPlaiesDelete = () => setShowModalPlaiesDelete(true);
   const handleCloseModalPlaiesDelete = () => setShowModalPlaiesDelete(false);
+  const [showModalPlaiesGroupDelete, setShowModalPlaiesGroupDelete] = useState(false);
+  const handleShowModalPlaiesGroupDelete = () => setShowModalPlaiesGroupDelete(true);
+  const handleCloseModalPlaiesGroupDelete = () => setShowModalPlaiesGroupDelete(false);
   const [showModalPlaiesList, setShowModalPlaiesList] = useState(false);
   const handleShowModalPlaiesList = () => setShowModalPlaiesList(true);
   const handleCloseModalPlaiesList = () => setShowModalPlaiesList(false);
@@ -115,6 +121,9 @@ function App() {
   const [showModalMedicDelete, setShowModalMedicDelete] = useState(false);
   const handleShowModalMedicDelete = () => setShowModalMedicDelete(true);
   const handleCloseModalMedicDelete = () => setShowModalMedicDelete(false);
+  const [showModalMedicGroupDelete, setShowModalMedicGroupDelete] = useState(false);
+  const handleShowModalMedicGroupDelete = () => setShowModalMedicGroupDelete(true);
+  const handleCloseModalMedicGroupDelete = () => setShowModalMedicGroupDelete(false);
   const [showModalMedicList, setShowModalMedicList] = useState(false);
   const handleShowModalMedicList = () => setShowModalMedicList(true);
   const handleCloseModalMedicList = () => setShowModalMedicList(false);
@@ -128,6 +137,9 @@ function App() {
   const [showModalBilanDelete, setShowModalBilanDelete] = useState(false);
   const handleShowModalBilanDelete = () => setShowModalBilanDelete(true);
   const handleCloseModalBilanDelete = () => setShowModalBilanDelete(false);
+  const [showModalBilanGroupDelete, setShowModalBilanGroupDelete] = useState(false);
+  const handleShowModalBilanGroupDelete = () => setShowModalBilanGroupDelete(true);
+  const handleCloseModalBilanGroupDelete = () => setShowModalBilanGroupDelete(false);
   const [showModalBilanList, setShowModalBilanList] = useState(false);
   const handleShowModalBilanList = () => setShowModalBilanList(true);
   const handleCloseModalBilanList = () => setShowModalBilanList(false);
@@ -148,14 +160,15 @@ function App() {
   const [showModalPlanningInsert, setShowModalPlanningInsert] = useState(false);
   const handleShowModalPlanningInsert = () => setShowModalPlanningInsert(true);
   const handleCloseModalPlanningInsert = () => setShowModalPlanningInsert(false);
-
   const [showModalPlanningBilanInsert, setShowModalPlanningBilanInsert] = useState(false);
   const handleShowModalPlanningBilanInsert = () => setShowModalPlanningBilanInsert(true);
   const handleCloseModalPlanningBilanInsert = () => setShowModalPlanningBilanInsert(false);
-
   const [showModalPlanningRdvInsert, setShowModalPlanningRdvInsert] = useState(false);
   const handleShowModalPlanningRdvInsert = () => setShowModalPlanningRdvInsert(true);
   const handleCloseModalPlanningRdvInsert = () => setShowModalPlanningRdvInsert(false);
+  const [isPlanning,setIsPlanning] = useState(0);
+  const [group,setGroup] = useState(0);
+  const [notification, setNotification] = useState(false);
   return <>
     <div className="App">
       <Router>
@@ -170,7 +183,7 @@ function App() {
         <TraitementInsertAdmin patientInfo = {patientInfo} showModalTraitementInsert={showModalTraitementInsert} handleCloseModalTraitementInsert={handleCloseModalTraitementInsert}/>
         <TraitementUpdateAdmin traitementInfo = {traitementInfo} showModalTraitementUpdate={showModalTraitementUpdate} handleCloseModalTraitementUpdate={handleCloseModalTraitementUpdate}/>
         <TraitementDeleteAdmin traitementInfo = {traitementInfo} showModalTraitementDelete={showModalTraitementDelete} handleCloseModalTraitementDelete={handleCloseModalTraitementDelete}/>
-        <TraitementListAdmin setTraitementInfo={setTraitementInfo} patientInfo = {patientInfo} showModalTraitementList={showModalTraitementList} handleCloseModalTraitementList={handleCloseModalTraitementList} handleShowModalTraitementInsert={handleShowModalTraitementInsert} handleShowModalTraitementUpdate={handleShowModalTraitementUpdate} handleShowModalTraitementDelete={handleShowModalTraitementDelete}/>
+        <TraitementListAdmin setNotification={setNotification}setTraitementInfo={setTraitementInfo} patientInfo = {patientInfo} showModalTraitementList={showModalTraitementList} handleCloseModalTraitementList={handleCloseModalTraitementList} handleShowModalTraitementInsert={handleShowModalTraitementInsert} handleShowModalTraitementUpdate={handleShowModalTraitementUpdate} handleShowModalTraitementDelete={handleShowModalTraitementDelete}/>
         <PhotosInsertAdmin patientInfo = {patientInfo} showModalPhotosInsert={showModalPhotosInsert} handleCloseModalPhotosInsert={handleCloseModalPhotosInsert}/>
         <PhotosUpdateAdmin photosInfo = {photosInfo} showModalPhotosUpdate={showModalPhotosUpdate} handleCloseModalPhotosUpdate={handleCloseModalPhotosUpdate}/>
         <PhotosDeleteAdmin photosInfo = {photosInfo} showModalPhotosDelete={showModalPhotosDelete} handleCloseModalPhotosDelete={handleCloseModalPhotosDelete}/>
@@ -178,25 +191,28 @@ function App() {
         <PlaiesInsertAdmin patientInfo = {patientInfo} showModalPlaiesInsert={showModalPlaiesInsert} handleCloseModalPlaiesInsert={handleCloseModalPlaiesInsert}/>
         <PlaiesUpdateAdmin plaiesInfo = {plaiesInfo} showModalPlaiesUpdate={showModalPlaiesUpdate} handleCloseModalPlaiesUpdate={handleCloseModalPlaiesUpdate}/>
         <PlaiesDeleteAdmin plaiesInfo = {plaiesInfo} showModalPlaiesDelete={showModalPlaiesDelete} handleCloseModalPlaiesDelete={handleCloseModalPlaiesDelete}/>
-        <PlaiesListAdmin setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalPlaiesList={showModalPlaiesList} handleCloseModalPlaiesList={handleCloseModalPlaiesList} handleShowModalPlaiesInsert={handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={handleShowModalPlaiesDelete}/>
+        <PlaiesGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} plaiesInfo = {plaiesInfo} showModalPlaiesGroupDelete={showModalPlaiesGroupDelete} handleCloseModalPlaiesGroupDelete={handleCloseModalPlaiesGroupDelete}/>
+        <PlaiesListAdmin setGroup={setGroup} setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalPlaiesList={showModalPlaiesList} handleCloseModalPlaiesList={handleCloseModalPlaiesList} handleShowModalPlaiesInsert={handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={handleShowModalPlaiesDelete} handleShowModalPlaiesGroupDelete={handleShowModalPlaiesGroupDelete}/>
         <MedicInsertAdmin patientInfo = {patientInfo} showModalMedicInsert={showModalMedicInsert} handleCloseModalMedicInsert={handleCloseModalMedicInsert}/>
         <MedicUpdateAdmin plaiesInfo = {plaiesInfo} showModalMedicUpdate={showModalMedicUpdate} handleCloseModalMedicUpdate={handleCloseModalMedicUpdate}/>
         <MedicDeleteAdmin plaiesInfo = {plaiesInfo} showModalMedicDelete={showModalMedicDelete} handleCloseModalMedicDelete={handleCloseModalMedicDelete}/>
-        <MedicListAdmin setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalMedicList={showModalMedicList} handleCloseModalMedicList={handleCloseModalMedicList} handleShowModalMedicInsert={handleShowModalMedicInsert} handleShowModalMedicUpdate={handleShowModalMedicUpdate} handleShowModalMedicDelete={handleShowModalMedicDelete}/>
+        <MedicGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} plaiesInfo = {plaiesInfo} showModalMedicGroupDelete={showModalMedicGroupDelete} handleCloseModalMedicGroupDelete={handleCloseModalMedicGroupDelete}/>
+        <MedicListAdmin setGroup={setGroup} setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalMedicList={showModalMedicList} handleCloseModalMedicList={handleCloseModalMedicList} handleShowModalMedicInsert={handleShowModalMedicInsert} handleShowModalMedicUpdate={handleShowModalMedicUpdate} handleShowModalMedicDelete={handleShowModalMedicDelete} handleShowModalMedicGroupDelete={handleShowModalMedicGroupDelete}/>
         <BilanInsertAdmin patientInfo = {patientInfo} showModalBilanInsert={showModalBilanInsert} handleCloseModalBilanInsert={handleCloseModalBilanInsert}/>
-        <BilanUpdateAdmin bilanInfo = {bilanInfo} showModalBilanUpdate={showModalBilanUpdate} handleCloseModalBilanUpdate={handleCloseModalBilanUpdate}/>
-        <BilanDeleteAdmin bilanInfo = {bilanInfo} showModalBilanDelete={showModalBilanDelete} handleCloseModalBilanDelete={handleCloseModalBilanDelete}/>
-        <BilanListAdmin setBilanInfo={setBilanInfo} patientInfo = {patientInfo} showModalBilanList={showModalBilanList} handleCloseModalBilanList={handleCloseModalBilanList} handleShowModalBilanInsert={handleShowModalBilanInsert} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete}/>
+        <BilanUpdateAdmin isPlanning={isPlanning} bilanInfo = {bilanInfo} showModalBilanUpdate={showModalBilanUpdate} handleCloseModalBilanUpdate={handleCloseModalBilanUpdate}/>
+        <BilanDeleteAdmin isPlanning={isPlanning} bilanInfo = {bilanInfo} showModalBilanDelete={showModalBilanDelete} handleCloseModalBilanDelete={handleCloseModalBilanDelete}/>
+        <BilanGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} bilanInfo = {bilanInfo} showModalBilanGroupDelete={showModalBilanGroupDelete} handleCloseModalBilanGroupDelete={handleCloseModalBilanGroupDelete}/>
+        <BilanListAdmin setGroup={setGroup} setBilanInfo={setBilanInfo} patientInfo = {patientInfo} showModalBilanList={showModalBilanList} handleCloseModalBilanList={handleCloseModalBilanList} handleShowModalBilanInsert={handleShowModalBilanInsert} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete} handleShowModalBilanGroupDelete={handleShowModalBilanGroupDelete}/>
         <RdvInsertAdmin patientInfo = {patientInfo} showModalRdvInsert={showModalRdvInsert} handleCloseModalRdvInsert={handleCloseModalRdvInsert}/>
-        <RdvUpdateAdmin RdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
-        <RdvDeleteAdmin RdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
+        <RdvUpdateAdmin isPlanning={isPlanning} RdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
+        <RdvDeleteAdmin isPlanning={isPlanning} RdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
         <RdvListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.login} element={<LoginPage/>} />
           <Route exact path={link.home} element={<Home/>} />
           <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo}/>} />
-          <Route exact path={link.planning} element={<Planning setDateInfo={setDateInfo} handleShowModalPlanningInsert={handleShowModalPlanningInsert}/>} />
+          <Route exact path={link.planning} element={<Planning setDateInfo={setDateInfo} handleShowModalPlanningInsert={handleShowModalPlanningInsert} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete} setIsPlanning={setIsPlanning}/>} />
         </Routes>
       </Router>
     </div>

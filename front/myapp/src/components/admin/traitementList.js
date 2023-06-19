@@ -1,9 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import React, { useEffect, useState } from 'react';
+import { ReactSession } from 'react-client-session';
 export function TraitementList(props) {
     const [disabled,setDisabled]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id)
     return <>{yes.map((traitement,key)=>{
+        ReactSession.set("traitement"+traitement.id, true)
+        ReactSession.remove("patient"+traitement.id_patient, true)
+        ReactSession.remove("patient"+traitement.id_patient+"traitement", true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             <div onClick={()=>props.handleShowModalTraitementDelete()&props.setTraitementInfo(traitement)}>Supprimer</div>
@@ -11,12 +15,12 @@ export function TraitementList(props) {
             </div>
             <div className="background-color-2-3">
                 <div className="margin-bottom--- flex space-evenly">
-                    <p>{traitement.medicament}</p>
-                    <p>{traitement.dose_matin}</p>
-                    <p>{traitement.dose_midi}</p>
-                    <p>{traitement.dose_soir}</p>
-                    <p>{traitement.date_debut}</p>
-                    <p>{traitement.date_fin}</p>
+                    <p>Médicament: {traitement.medicament}</p>
+                    <p>Dose matin: {traitement.dose_matin}</p>
+                    <p>Dose midi: {traitement.dose_midi}</p>
+                    <p>Dose soir: {traitement.dose_soir}</p>
+                    <p>Date du début: {traitement.date_debut}</p>
+                    <p>Date de fin: {traitement.date_fin}</p>
             </div>
             </div>
             </div>})}

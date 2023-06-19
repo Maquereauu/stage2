@@ -3,9 +3,24 @@ import { Photos_ } from "../photos/Get_photos";
 import { Rdv_ } from "../rdv/Get_rdv";
 import React, { useEffect, useState } from 'react';
 import { RdvList } from "./rdvList"
-
+import { ReactSession } from 'react-client-session';
 export function RdvListAdmin(props){
     const [info2,setInfo2]=useState([]);
+    var groupBy = function(xs, key) {
+        return xs.reduce(function(rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x);
+          return rv;
+        }, {});
+      };
+    const yes = groupBy(info2, 'id_patient')
+    Object.keys(yes).map((id_patient)=>{
+        yes[id_patient].map((rdv,key)=>{
+            if(!ReactSession.get("rdv"+rdv.id)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"rdv", true)
+            }
+        })
+        })
     useEffect(() => {
         const list2 = Rdv_();
         list2

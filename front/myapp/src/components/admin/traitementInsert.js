@@ -63,8 +63,8 @@ export function TraitementInsert(props) {
                     <input className='background my-account- margin-top---' {...register("dose_matin"+index)} placeholder="dose matin" type="text" id="dose1" />
                     <input className='background my-account- margin-top---' {...register("dose_midi"+index)} placeholder="dose midi" type="text" id="dose2" />
                     <input className='background my-account- margin-top---' {...register("dose_soir"+index)} placeholder="dose soir" type="text" id="dose3" />
-                    <input className='background my-account- margin-top---' {...register("date_debut"+index)} placeholder="date_debut" type="text" id="date_debut" />
-                    <input className='background my-account- margin-top---' {...register("date_fin"+index)} placeholder="date_fin" type="text" id="date_fin" />
+                    <input className='background my-account- margin-top---' {...register("date_debut"+index)} placeholder="debut (année-mois-jour)" type="text" id="date_debut" />
+                    <input className='background my-account- margin-top---' {...register("date_fin"+index)} placeholder="fin (année-mois-jour)" type="text" id="date_fin" />
                     <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer le nouveau Traitement" />
                     </form>
                 </div>})}

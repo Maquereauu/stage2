@@ -1,3 +1,4 @@
+import { ReactSession } from 'react-client-session';
 export function PatientInfo(props) {
     return <div className="box2 margin-top">
         <div className="margin-bottom-- flex space-evenly">
@@ -18,22 +19,22 @@ export function PatientInfo(props) {
         <p>Tel proche: {props.patientInfo.tel_proche}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalTraitementList()&props.setPatientInfo(props.patientInfo)}>Traitements</p>
+            <p onClick={()=>props.handleShowModalTraitementList()&props.setPatientInfo(props.patientInfo)}>Traitements {ReactSession.get("patient"+props.patientInfo.id+"traitement")?"Notif non lue":<></>}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalPhotosList()&props.setPatientInfo(props.patientInfo)}>Ordonnances</p>
+            <p onClick={()=>props.handleShowModalPhotosList()&props.setPatientInfo(props.patientInfo)}>Ordonnances {ReactSession.get("patient"+props.patientInfo.id+"photo")?"Notif non lue":<></>}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalPlaiesList()&props.setPatientInfo(props.patientInfo)}>Suivi de plaies</p>
+            <p onClick={()=>props.handleShowModalPlaiesList()&props.setPatientInfo(props.patientInfo)}>Suivi de plaies {ReactSession.get("patient"+props.patientInfo.id+"plaies")?"Notif non lue":<></>}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalMedicList()&props.setPatientInfo(props.patientInfo)}>Comptes rendus médicaux</p>
+            <p onClick={()=>props.handleShowModalMedicList()&props.setPatientInfo(props.patientInfo)}>Comptes rendus médicaux {ReactSession.get("patient"+props.patientInfo.id+"medic")?"Notif non lue":<></>}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalBilanList()&props.setPatientInfo(props.patientInfo)}>Bilans</p>
+            <p onClick={()=>props.handleShowModalBilanList()&props.setPatientInfo(props.patientInfo)}>Bilans {ReactSession.get("patient"+props.patientInfo.id+"bilan")?"Notif non lue":<></>}</p>
         </div>
         <div className="center">
-            <p onClick={()=>props.handleShowModalRdvList()&props.setPatientInfo(props.patientInfo)}>Rdvs</p>
+            <p onClick={()=>props.handleShowModalRdvList()&props.setPatientInfo(props.patientInfo)}>Rdvs {ReactSession.get("patient"+props.patientInfo.id+"rdv")?"Notif non lue":<></>}</p>
         </div>
         </div>
     </div>

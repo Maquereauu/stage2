@@ -19,6 +19,7 @@
     $primaryColor3: #367ab2;
     $primaryColor4: #eef0ef;
     $primaryColor5: #222626;
+    $primaryColor6: #000000;
 
     $secondaryColor1: #e1ffd2;
     $secondaryColor2: #ffd2d2;
@@ -625,7 +626,7 @@
             font-size: 30px;
 
             &.border {
-                border: 4px solid $primaryColor5 !important;
+                border: 4px solid $primaryColor6 !important;
                 border-radius: 20px;
                 width: fit-content;
                 padding: 20px;
@@ -987,7 +988,7 @@
             top: 0px;
             border-radius: 0px 0px 0px 0px;
             max-height: 70vh;
-            overflow-y: scroll;
+            // overflow-y: scroll;
             overflow-x: hidden;
 
             div {

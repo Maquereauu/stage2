@@ -5,7 +5,7 @@ import { RdvUpdate } from "./rdvUpdate"
 export function RdvUpdateAdmin(props){
     return <Modal animation={true} show={props.showModalRdvUpdate} onHide={props.handleCloseModalRdvUpdate}>
     <Modal.Body>
-        <RdvUpdate rdvInfo={props.rdvInfo}/>
+        <RdvUpdate isPlanning={props.isPlanning} rdvInfo={props.rdvInfo}/>
     </Modal.Body>
     </Modal>}
 

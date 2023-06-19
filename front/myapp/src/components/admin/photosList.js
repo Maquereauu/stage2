@@ -1,9 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import React, { useEffect, useState } from 'react';
+import { ReactSession } from 'react-client-session';
 export function PhotosList(props) {
     const [disabled,setDisabled]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 1)
     return <>{yes.map((Photos,key)=>{
+        ReactSession.set("photo"+Photos.id, true)
+        ReactSession.remove("patient"+Photos.id_patient, true)
+        ReactSession.remove("patient"+Photos.id_patient+"photo", true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             <div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Photos)}>Supprimer</div>

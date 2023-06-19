@@ -4,7 +4,9 @@ export function BilanUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateBilan = async (data) => {
         UpdateBilan_(data)
-        window.location.replace('/patients');
+        if(props.isPlanning)
+        {window.location.replace('/planning');}
+        else{window.location.replace('/patients');}
     }
     return <form onSubmit={handleSubmit(onSubmitUpdateBilan)} className="align-center flex vertical center" >
         <h1 className="title flex2 center margin-top--">Bilan</h1>

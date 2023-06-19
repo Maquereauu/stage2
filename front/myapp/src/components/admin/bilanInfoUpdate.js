@@ -5,7 +5,7 @@ import { BilanUpdate } from "./bilanUpdate"
 export function BilanUpdateAdmin(props){
     return <Modal animation={true} show={props.showModalBilanUpdate} onHide={props.handleCloseModalBilanUpdate}>
     <Modal.Body>
-        <BilanUpdate bilanInfo={props.bilanInfo}/>
+        <BilanUpdate isPlanning={props.isPlanning} bilanInfo={props.bilanInfo}/>
     </Modal.Body>
     </Modal>}
 

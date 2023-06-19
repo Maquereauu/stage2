@@ -7,6 +7,7 @@ export default function PatientInfo(props){
     const [timer, setTimer] = useState();
     const [search, setSearch] = useState();
     const [patientsMap, setPatientsMap] = useState([]);
+    const patientList = patient.sort((a, b) => a.nom.localeCompare(b.nom))
     useEffect(() => {
         const PatientList = Patient_();
         PatientList
@@ -25,7 +26,7 @@ export default function PatientInfo(props){
             var val = ReactSession.get("searchbar")
             if (val !== "") {
                 setSearch(true)
-                setPatientsMap(patient.map((val2,index) => {
+                setPatientsMap(patientList.map((val2,index) => {
                     var verif = false
                     for (const key in val2) {
                         try {
@@ -35,7 +36,7 @@ export default function PatientInfo(props){
                         } catch (err) { }
                     };
                     if (verif) {
-                        return <div key={index} className="background-color-2-3">
+                        return <div key={index} className="background-color-2-3 border">
                             <div className='flex box2'>
                                 <p className='text align-center'>{val2.prenom}/</p>
                                 <p className='text align-center'>{val2.nom}</p>
@@ -66,11 +67,12 @@ export default function PatientInfo(props){
             </div>
             </div>
             <div className="">
-            {search?patientsMap:patient.map((patient,key)=>{
-    return <div key={key} className="background-color-2-3">
+            {search?patientsMap:patientList.map((patient,key)=>{
+    return <div key={key} className="background-color-2-3 border">
     <div className='flex box2'>
         <p className='text align-center'>{patient.prenom}/</p>
         <p className='text align-center'>{patient.nom}</p>
+        {ReactSession.get("patient"+patient.id)?<div>Notif non lue</div>:<></>}
         <div className='text align-center align-left' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(patient)}}>info patient</div>
     </div>
     </div>

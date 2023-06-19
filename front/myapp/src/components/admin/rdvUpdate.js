@@ -4,7 +4,9 @@ export function RdvUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateRdv = async (data) => {
         UpdateRdv_(data)
-        window.location.replace('/patients');
+        if(props.isPlanning)
+        {window.location.replace('/planning');}
+        else{window.location.replace('/patients');}
     }
     return <form onSubmit={handleSubmit(onSubmitUpdateRdv)} className="align-center flex vertical center" >
         <h1 className="title flex2 center margin-top--">Rdv</h1>
