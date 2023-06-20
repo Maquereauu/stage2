@@ -278,7 +278,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/rdv/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date })
+    await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type })
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
   })();
@@ -295,7 +295,7 @@ app.get("/rdv/list", function (req, res) {
 app.post("/rdv/update", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
-    await models.rdv.update({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date },
+    await models.rdv.update({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type},
       {
         where: {
           id: req.body.id

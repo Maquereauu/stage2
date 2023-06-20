@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { UpdateRdv_ } from "../../components/AllRdv/Rdv";
-export function RdvUpdate(props) {
+export function MoveUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateRdv = async (data) => {
         UpdateRdv_(data)
@@ -19,7 +19,7 @@ export function RdvUpdate(props) {
                 </div>
             </div>
             <div className="flex2 center margin-top--">
-                <input type="submit" value="Modifier le Rdv"/>
+                <input type="submit" value="Modifier le mouvement"/>
             </div>
         </div>
     </form>

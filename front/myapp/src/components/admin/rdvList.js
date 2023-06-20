@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactSession } from 'react-client-session';
 export function RdvList(props) {
     const [disabled,setDisabled]=useState(false);
-    const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id)
+    const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.type == 1)
     return <>{no.map((Rdv,key)=>{
         ReactSession.set("rdv"+Rdv.id, true)
         ReactSession.remove("patient"+Rdv.id_patient, true)

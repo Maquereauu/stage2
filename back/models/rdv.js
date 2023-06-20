@@ -18,6 +18,10 @@ module.exports = function(sequelize, DataTypes) {
     text: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    type: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     sequelize,

@@ -12,15 +12,16 @@ export function RdvListAdmin(props){
           return rv;
         }, {});
       };
-    const yes = groupBy(info2, 'id_patient')
-    Object.keys(yes).map((id_patient)=>{
-        yes[id_patient].map((rdv,key)=>{
-            if(!ReactSession.get("rdv"+rdv.id)){
-                ReactSession.set("patient"+id_patient, true)
-                ReactSession.set("patient"+id_patient+"rdv", true)
-            }
-        })
-        })
+      const no = info2.filter((info2)=>info2.type == 1)
+      const yes = groupBy(no, 'id_patient')
+      Object.keys(yes).map((id_patient)=>{
+          yes[id_patient].map((rdv,key)=>{
+              if(!ReactSession.get("rdv"+rdv.id)){
+                  ReactSession.set("patient"+id_patient, true)
+                  ReactSession.set("patient"+id_patient+"rdv", true)
+              }
+          })
+          })
     useEffect(() => {
         const list2 = Rdv_();
         list2

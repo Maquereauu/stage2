@@ -52,8 +52,13 @@ export default function PatientInfo(props){
     }
     return <>
     <h1 className="title top stroke box">Bienvenue sur les infos des patients.</h1>
-    {ReactSession.get("username")?<><div className="flex center margin-top ">
+    {ReactSession.get("username")?<>
+    <div className="box2 background-color-1-5 border"><div className="flex center ">
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} />
+    </div>
+    <div className="flex center margin-top ">
+        <input className="padding-right-left" type="submit" value="Mouvements patients" onClick={() => { props.handleShowModalMoveList() }} />
+    </div>
     </div>
             <div className="background-color-2-4">
             <div className='center box2 margin-top'>

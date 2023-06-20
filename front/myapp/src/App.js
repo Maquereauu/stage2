@@ -40,6 +40,10 @@ import { RdvInsertAdmin } from './components/admin/rdvInfoInsert';
 import { RdvUpdateAdmin } from './components/admin/rdvInfoUpdate';
 import { RdvDeleteAdmin } from './components/admin/rdvInfoDelete';
 import { RdvListAdmin } from './components/admin/rdvInfoList';
+import { MoveInsertAdmin } from './components/admin/moveInfoInsert';
+import { MoveUpdateAdmin } from './components/admin/moveInfoUpdate';
+import { MoveDeleteAdmin } from './components/admin/moveInfoDelete';
+import { MoveListAdmin } from './components/admin/moveInfoList';
 import { PlanningInsert } from './components/admin/planningInsert';
 import { PlanningBilanInsert } from './components/admin/planningBilanInsert';
 import { PlanningRdvInsert } from './components/admin/planningRdvInsert';
@@ -156,6 +160,18 @@ function App() {
   const [showModalRdvList, setShowModalRdvList] = useState(false);
   const handleShowModalRdvList = () => setShowModalRdvList(true);
   const handleCloseModalRdvList = () => setShowModalRdvList(false);
+  const [showModalMoveInsert, setShowModalMoveInsert] = useState(false);
+  const handleShowModalMoveInsert = () => setShowModalMoveInsert(true);
+  const handleCloseModalMoveInsert = () => setShowModalMoveInsert(false);
+  const [showModalMoveUpdate, setShowModalMoveUpdate] = useState(false);
+  const handleShowModalMoveUpdate = () => setShowModalMoveUpdate(true);
+  const handleCloseModalMoveUpdate = () => setShowModalMoveUpdate(false);
+  const [showModalMoveDelete, setShowModalMoveDelete] = useState(false);
+  const handleShowModalMoveDelete = () => setShowModalMoveDelete(true);
+  const handleCloseModalMoveDelete = () => setShowModalMoveDelete(false);
+  const [showModalMoveList, setShowModalMoveList] = useState(false);
+  const handleShowModalMoveList = () => setShowModalMoveList(true);
+  const handleCloseModalMoveList = () => setShowModalMoveList(false);
   const [dateInfo, setDateInfo] = useState([]);
   const [showModalPlanningInsert, setShowModalPlanningInsert] = useState(false);
   const handleShowModalPlanningInsert = () => setShowModalPlanningInsert(true);
@@ -204,14 +220,18 @@ function App() {
         <BilanGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} bilanInfo = {bilanInfo} showModalBilanGroupDelete={showModalBilanGroupDelete} handleCloseModalBilanGroupDelete={handleCloseModalBilanGroupDelete}/>
         <BilanListAdmin setGroup={setGroup} setBilanInfo={setBilanInfo} patientInfo = {patientInfo} showModalBilanList={showModalBilanList} handleCloseModalBilanList={handleCloseModalBilanList} handleShowModalBilanInsert={handleShowModalBilanInsert} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete} handleShowModalBilanGroupDelete={handleShowModalBilanGroupDelete}/>
         <RdvInsertAdmin patientInfo = {patientInfo} showModalRdvInsert={showModalRdvInsert} handleCloseModalRdvInsert={handleCloseModalRdvInsert}/>
-        <RdvUpdateAdmin isPlanning={isPlanning} RdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
-        <RdvDeleteAdmin isPlanning={isPlanning} RdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
+        <RdvUpdateAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
+        <RdvDeleteAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
         <RdvListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
+        <MoveInsertAdmin patientInfo = {patientInfo} showModalMoveInsert={showModalMoveInsert} handleCloseModalMoveInsert={handleCloseModalMoveInsert}/>
+        <MoveUpdateAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalMoveUpdate={showModalMoveUpdate} handleCloseModalMoveUpdate={handleCloseModalMoveUpdate}/>
+        <MoveDeleteAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalMoveDelete={showModalMoveDelete} handleCloseModalMoveDelete={handleCloseModalMoveDelete}/>
+        <MoveListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalMoveList={showModalMoveList} handleCloseModalMoveList={handleCloseModalMoveList} handleShowModalMoveInsert={handleShowModalMoveInsert} handleShowModalMoveUpdate={handleShowModalMoveUpdate} handleShowModalMoveDelete={handleShowModalMoveDelete}/>
         <Routes>
           <Route exact path={link.homeFull} element={<Home/>} />
           <Route exact path={link.login} element={<LoginPage/>} />
           <Route exact path={link.home} element={<Home/>} />
-          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo}/>} />
+          <Route exact path={link.patients} element={<PatientInfo setPatientInfo={setPatientInfo} handleShowModalPatientInfo={handleShowModalPatientInfo} handleShowModalPatientInsert={handleShowModalPatientInsert} handleShowModalMoveList={handleShowModalMoveList} setTraitementInfo={setTraitementInfo} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo}/>} />
           <Route exact path={link.planning} element={<Planning setDateInfo={setDateInfo} handleShowModalPlanningInsert={handleShowModalPlanningInsert} setBilanInfo={setBilanInfo} setRdvInfo={setRdvInfo} handleShowModalBilanUpdate={handleShowModalBilanUpdate} handleShowModalBilanDelete={handleShowModalBilanDelete} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete} setIsPlanning={setIsPlanning}/>} />
         </Routes>
       </Router>

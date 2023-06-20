@@ -34,9 +34,9 @@ export default function Planning(props){
       for (let i = 0; i < daysInWeek; i++) {
         const day = weekStart.clone().add(i, 'days');
         days.push(
-          <div className="day border" key={day.format('YYYY-MM-DD')}>
-            <div className="day-header">{day.format('dddd Do MMMM')}</div>
-            <div className="event-container">
+          <div className="border" key={day.format('YYYY-MM-DD')}>
+            <div>{day.format('dddd Do MMMM')}</div>
+            <div>
               {renderEventsForDay(day)}
               <input type="submit" value="+" onClick={() =>{props.handleShowModalPlanningInsert();props.setDateInfo(day.format("YYYY-MM-DD"))}}/>
             </div>
@@ -48,16 +48,17 @@ export default function Planning(props){
     };
 
     const renderEventsForDay = (day) => {
-      const bilanDay = info.filter((info)=>info.date==day.format("YYYY-MM-DD"))
-      const rdvDay = info2.filter((info)=>info.date==day.format("YYYY-MM-DD"))
+      const bilanDay = info.filter((info)=>info.date===day.format("YYYY-MM-DD"))
+      const rdvDay = info2.filter((info)=>info.date===day.format("YYYY-MM-DD"))
       return(<>{info.map((Bilan,index)=>{
-        const patient = info3.filter((info)=>info.id==Bilan.id_patient)
-        if(day.format("dddd") == moment(Bilan.date,"YYYY-MM-DD").format("dddd") && moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date,"YYYY-MM-DD")) && Bilan.weekly == 1 ){
+        const patient = info3.filter((info)=>info.id===Bilan.id_patient)
+        if(day.format("dddd") === moment(Bilan.date,"YYYY-MM-DD").format("dddd") && moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date,"YYYY-MM-DD")) && Bilan.weekly === 1 ){
           if (Bilan.shift == 1){
             if(Bilan.id_patient != 0 ){
-              return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div> 
-              <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
-              <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
+              if(typeof(patient[0]) !== "undefined")
+                {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div> 
+                <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
+                <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
               return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
@@ -65,9 +66,10 @@ export default function Planning(props){
             }
           }else if (Bilan.shift == 2){
             if(Bilan.id_patient != 0 ){
-              return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
-              <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
-              <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
+              if(typeof(patient[0]) !== "undefined")
+                {return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+                <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
+                <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
               return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
@@ -79,9 +81,10 @@ export default function Planning(props){
         const patient = info3.filter((info)=>info.id==Bilan.id_patient)
         if (Bilan.shift == 1){
           if(Bilan.id_patient != 0 ){
-            return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
-            <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
-              <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
+            if(typeof(patient[0]) !== "undefined")
+              {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+              <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
+                <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
             return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
@@ -89,9 +92,10 @@ export default function Planning(props){
           }
         }else if (Bilan.shift == 2){
           if(Bilan.id_patient != 0 ){
-            return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
-            <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
-              <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
+            if(typeof(patient[0]) !== "undefined")
+              {return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+              <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
+                <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
             return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
@@ -102,9 +106,10 @@ export default function Planning(props){
       {rdvDay.map(((Rdv,key)=>{
         const patient = info3.filter((info)=>info.id==Rdv.id_patient)
         if(Rdv.id_patient != 0 ){
-          return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text} {patient[0].nom}/{patient[0].prenom}</p></div>
-          <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
-              <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>
+          if(typeof(patient[0]) !== "undefined")
+            {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+            <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
+                <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>}
         }else{
           return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text}</p></div>
           <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
