@@ -35,7 +35,7 @@ export function TraitementInsert(props) {
             }
         }
         test = 0;
-        // window.location.replace('/patients');
+        window.location.replace('/patients');
     }}
     // const insertAllForms = async() => {
     //     console.log(allData)

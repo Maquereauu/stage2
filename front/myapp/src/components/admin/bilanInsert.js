@@ -22,14 +22,16 @@ export function BilanInsert(props) {
                 InsertBilan_(newList)
             }
         if(counter.length !==0)
-        {const calls=[...Array(counter.length)].map(e => Array(list.length))
+        {const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(newData).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
-                calls2[1]=value[0].name
+                if(typeof(value[0]) !== "undefined")
+                {calls2[1]=value[0].name
                 UploadPhotos_(value)
+            }
             }else{
             calls2[1]=value
             }

@@ -17,14 +17,16 @@ export function PlaiesInsert(props) {
         const newData = Object.fromEntries(Object.entries(data).slice(4));
         if(test == 1){
         InsertPlaies_(newList)
-        const calls=[...Array(counter.length)].map(e => Array(list.length))
+        const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(newData).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
-                calls2[1]=value[0].name
+                if(typeof(value[0]) !== "undefined")
+                {calls2[1]=value[0].name
                 UploadPhotos_(value)
+            }
             }else{
             calls2[1]=value
             }
@@ -34,7 +36,6 @@ export function PlaiesInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
-            console.log(dictionary)
             InsertPhotos_(dictionary)
         }
         test = 0;
