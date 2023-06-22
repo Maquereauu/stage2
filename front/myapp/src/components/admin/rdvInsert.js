@@ -17,7 +17,7 @@ export function RdvInsert(props) {
             <form onSubmit={handleSubmit(onSubmitInsertRdv)}>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
-            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="text" id="date" />
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="date" id="date" />
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("type")}  defaultValue={1} type="hidden" id="date" />
             <input type="submit" value="Insérer le nouveau rendez-vous" />
             </form>

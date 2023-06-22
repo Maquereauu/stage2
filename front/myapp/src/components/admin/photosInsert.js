@@ -13,14 +13,16 @@ export function PhotosInsert(props) {
     let test = 1;
     const onSubmitInsertPhotos = async (data) => {
         if(test == 1){
-        const calls=[...Array(counter.length)].map(e => Array(list.length))
+        const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(data).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
-                calls2[1]=value[0].name
+                if(typeof(value[0]) !== "undefined")
+                {calls2[1]=value[0].name
                 UploadPhotos_(value)
+            }
             }else if(c%4==3){
                 calls2[1]=0
             }else{

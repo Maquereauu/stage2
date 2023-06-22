@@ -22,7 +22,7 @@ export function MoveInsert(props) {
                 })}
             </select>
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
-            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="text" id="date" />
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="date" id="date" />
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("type")}  defaultValue={2} type="hidden" id="date" />
             <input type="submit" value="Insérer le nouveau mouvement" />
             </form>

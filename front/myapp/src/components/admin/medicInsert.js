@@ -62,7 +62,7 @@ export function MedicInsert(props) {
         })
       }
     return <div>
-        <h1 className="title flex2 center margin-top--">Plaies</h1>
+        <h1 className="title flex2 center margin-top--">Compte rendu medic</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Infos</h2>
             <div className="flex2 margin-top--- vertical align-center">

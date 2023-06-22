@@ -88,7 +88,7 @@ export function BilanInsert(props) {
                 <option value={1}>1</option>
                 <option value={2}>2</option>
             </select>
-            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="text" id="date" />
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="date" id="date" />
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>
             {counter.map((item,index)=>{
