@@ -38,6 +38,23 @@ export function BilanList(props) {
                             {ReactSession.remove("patient"+Bilan.id_patient, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
                             <p>{Bilan.text}</p>
+                            <p>{Bilan.date}</p>
+                            {
+                            (() => {
+                              switch (Bilan.weekly) {
+                                case 0:
+                                  return <p>Récurrence: Aucune</p>;
+                                case 1:
+                                  return <p>Récurrence: Hebdomadaire</p>;
+                                case 2:
+                                  return <p>Récurrence: 15 jours</p>;
+                                case 3:
+                                  return <p>Récurrence: 1 mois</p>;
+                                case 4:
+                                  return <p>Récurrence: 2 mois</p>;
+                              }
+                            })()
+                          }
                             </>
                           )}
                         </div>

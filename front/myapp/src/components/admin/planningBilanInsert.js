@@ -4,12 +4,10 @@ import { useState } from 'react';
 import { InsertBilan_ } from "../../components/AllBilan/Bilan";
 import { useForm } from "react-hook-form";
 export function PlanningBilanInsert(props){
-    const [isSelected, setSelection] = useState(false);
     const onSubmitInsertBilan = async (data) => {
-        console.log(isSelected)
-        if(data.shift !== '0')
-{        console.log(data)
-        InsertBilan_(data);
+        console.log(data)
+        if(data.shift !== '0' && data.weekly !== '-1')
+{       InsertBilan_(data);
         window.location.replace('/planning')
     }
     }
@@ -20,11 +18,14 @@ export function PlanningBilanInsert(props){
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={0} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
             <input className='background my-account- margin-top---' {...register("groupe")} type="hidden" defaultValue={0} placeholder="groupe" id="groupe" />
-            <label>
-                <input className='background my-account- margin-top---' placeholder="hebdomadaire" {...register("weekly")} onChange={()=>{setSelection(!isSelected)}} type="checkbox" id="weekly" />
-                <span>{"hebdomadaire"}</span>
-            </label>
-            {isSelected?<input {...register("weekly")} defaultValue={1} type="hidden"/>:<input {...register("weekly")} defaultValue={0} type="hidden"/>}
+            <select {...register("weekly")} id="weekly" name="weekly">
+                <option value={-1}>Récurrence</option>
+                <option value={0}>Aucune</option>
+                <option value={1}>Hebdomadaire</option>
+                <option value={2}>15 jours</option>
+                <option value={3}>1 mois</option>
+                <option value={4}>2 mois</option>
+            </select>
             <select {...register("shift")} id="shift" name="shift">
                 <option value={0}>Tournée</option>
                 <option value={1}>1</option>

@@ -124,11 +124,9 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-      console.log(req);
       callback(null, '../front/myapp/public/img');
   },
   filename: (req, file, callback) => {
-      console.log(req);
       callback(null,file.originalname);
   }
 });

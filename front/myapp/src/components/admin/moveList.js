@@ -28,8 +28,9 @@ export function MoveList(props) {
                 return <div key={key} className="box2">
                     <div className="margin-bottom-- flex space-evenly">
                     {console.log(Rdv)}
-                    {/* <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>
-                    <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)}>Modifier</div> */}
+                    
+                    <div onClick={()=>props.handleShowModalMoveDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>
+                    {/* <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)}>Modifier</div> */}
                     </div>
                     <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">

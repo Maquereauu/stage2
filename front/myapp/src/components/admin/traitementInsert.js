@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import moment from 'moment';
+import 'moment/locale/fr';
 import { InsertTraitement_ } from "../../components/AllTraitement/Traitement";
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
@@ -12,7 +14,7 @@ export function TraitementInsert(props) {
     let test = 1;
     const onSubmitInsertTraitement = async (data) => {
         if(test == 1){
-        const calls=[...Array(counter.length)].map(e => Array(list.length))
+        const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(data).map(([key,value])=>{
@@ -24,11 +26,16 @@ export function TraitementInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
-            console.log(dictionary)
+            if(moment(dictionary.date_debut,"YYYY-MM-DD").isAfter(moment(dictionary.date_fin,"YYYY-MM-DD"))){
+                console.log(">:(")
+            }else{
+                console.log(":D")
+                console.log(dictionary)
             InsertTraitement_(dictionary)
+            }
         }
         test = 0;
-         // window.location.replace('/patients');
+        // window.location.replace('/patients');
     }}
     // const insertAllForms = async() => {
     //     console.log(allData)
@@ -43,7 +50,7 @@ export function TraitementInsert(props) {
         for(let i=0;i<counter.length;i++){
             refs.current[i].click();
         }
-        window.location.replace('/patients');
+        // window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -59,12 +66,18 @@ export function TraitementInsert(props) {
                 return <div key={index} className="flex gap">
                     <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertTraitement)} className="align-center flex vertical center" >
                     <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient"+index)} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
+                    <div className="margin-right">
                     <input className='background my-account- margin-top---' {...register("medicament"+index)} placeholder="medicament" type="text" id={"medicament"+index} />
+                    </div>
                     <input className='background my-account- margin-top---' {...register("dose_matin"+index)} placeholder="dose matin" type="text" id="dose1" />
                     <input className='background my-account- margin-top---' {...register("dose_midi"+index)} placeholder="dose midi" type="text" id="dose2" />
                     <input className='background my-account- margin-top---' {...register("dose_soir"+index)} placeholder="dose soir" type="text" id="dose3" />
-                    <input className='background my-account- margin-top---' {...register("date_debut"+index)} placeholder="debut (année-mois-jour)" type="text" id="date_debut" />
-                    <input className='background my-account- margin-top---' {...register("date_fin"+index)} placeholder="fin (année-mois-jour)" type="text" id="date_fin" />
+                    <label>Date début
+                    <input className='background my-account- margin-top---' {...register("date_debut"+index)} placeholder="debut (année-mois-jour)" type="date" id="date_debut" />
+                    </label>
+                    <label>Date fin
+                    <input className='background my-account- margin-top---' {...register("date_fin"+index)} placeholder="fin (année-mois-jour)" type="date" id="date_fin" />
+                    </label>
                     <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer le nouveau Traitement" />
                     </form>
                 </div>})}

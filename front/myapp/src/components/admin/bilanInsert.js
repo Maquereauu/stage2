@@ -16,8 +16,13 @@ export function BilanInsert(props) {
         const newList = Object.fromEntries(Object.entries(data).slice(0, 6));
         const newData = Object.fromEntries(Object.entries(data).slice(6));
         if(test == 1){
-        InsertBilan_(newList)
-        const calls=[...Array(counter.length)].map(e => Array(list.length))
+            console.log(newList)
+            if(newList.shift !== '0' && newList.weekly !== '-1'){
+                console.log(newList)
+                InsertBilan_(newList)
+            }
+        if(counter.length !==0)
+        {const calls=[...Array(counter.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
         Object.entries(newData).map(([key,value])=>{
@@ -34,9 +39,8 @@ export function BilanInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
-            console.log(dictionary)
             InsertPhotos_(dictionary)
-        }
+        }}
         test = 0;
         window.location.replace('/patients');
     }}
@@ -54,7 +58,6 @@ export function BilanInsert(props) {
             refs.current[i].click();
         }
         refs2.current[0].click();
-        // window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -70,8 +73,19 @@ export function BilanInsert(props) {
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
             <input className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
-            <input className='background my-account- margin-top---' {...register("weekly")} placeholder="weekly" type="text" id="weekly" />
-            <input className='background my-account- margin-top---' {...register("shift")} placeholder="tournée" type="text" id="shift" />
+            <select {...register("weekly")} id="weekly" name="weekly">
+                <option value={-1}>Récurrence</option>
+                <option value={0}>Aucune</option>
+                <option value={1}>Hebdomadaire</option>
+                <option value={2}>15 jours</option>
+                <option value={3}>1 mois</option>
+                <option value={4}>2 mois</option>
+            </select>
+            <select {...register("shift")} id="shift" name="shift">
+                <option value={0}>Tournée</option>
+                <option value={1}>1</option>
+                <option value={2}>2</option>
+            </select>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")}placeholder="date" type="text" id="date" />
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>

@@ -9,7 +9,7 @@ export function MoveUpdate(props) {
         else{window.location.replace('/patients');}
     }
     return <form onSubmit={handleSubmit(onSubmitUpdateRdv)} className="align-center flex vertical center" >
-        <h1 className="title flex2 center margin-top--">Rdv</h1>
+        <h1 className="title flex2 center margin-top--">Mouvement</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Information</h2>
             <div className="flex2 margin-top--- vertical align-center">
