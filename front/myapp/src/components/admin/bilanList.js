@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactSession } from 'react-client-session';
 export function BilanList(props) {
     const [disabled,setDisabled]=useState(false);
+    const [update,setUpdate]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 4)
     const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id)
     const list = [...yes,...no]
@@ -14,7 +15,7 @@ export function BilanList(props) {
       };
     const newlist = groupBy(list, 'groupe')
     return (
-        <>
+        <><div onClick={()=>update?setUpdate(false):setUpdate(true)}>Modifier</div>
           {Object.keys(newlist).map((groupe) => {
             return (
               <>
@@ -25,14 +26,13 @@ export function BilanList(props) {
                   return (
                     <div key={key} className="box2 margin-top">
                       <div className="margin-bottom-- flex space-evenly">
-                        {/* <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)}>Supprimer</div>
-                        <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)}>Modifier</div> */}
                       </div>
                       <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">
-                          {"image" in Bilan ? (
+                          {"image" in Bilan ? (<>
                             <img className="prod-img" src={"./img/" + Bilan.image} alt={Bilan.image} />
-                          ) : (
+                            {update?<><div onClick={()=>props.handleShowModalPhotosUpdate()}>Modifier</div><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Bilan)}>Supprimer</div></>:<></>}
+                            </>) : (
                             <>
                             {ReactSession.set("bilan"+Bilan.id, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient, true)}
@@ -52,9 +52,13 @@ export function BilanList(props) {
                                   return <p>Récurrence: 1 mois</p>;
                                 case 4:
                                   return <p>Récurrence: 2 mois</p>;
+                                case 5:
+                                  return <p>Récurrence: 3 mois</p>;
                               }
                             })()
                           }
+                          {Bilan.weekly != 0?<><p>date début {Bilan.date_debut}</p><p>date fin {Bilan.date_fin}</p></>:<></>}
+                          {update?<><div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)}>Modifier</div><div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)}>Supprimer</div></>:<></>}
                             </>
                           )}
                         </div>

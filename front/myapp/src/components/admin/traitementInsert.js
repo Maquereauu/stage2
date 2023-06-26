@@ -8,7 +8,6 @@ import {useRef} from 'react';
 export function TraitementInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
-    const [allData,setAllData]=useState([]);
     const list=["id_patient","medicament","dose_matin","dose_midi","dose_soir","date_debut","date_fin"];
     const refs = useRef([]);
     let test = 1;

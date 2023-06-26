@@ -35,6 +35,6 @@ export function BilanListAdmin(props){
     return <Modal animation={true} show={props.showModalBilanList} onHide={props.handleCloseModalBilanList}>
     <div onClick={()=>props.handleCloseModalBilanList()}>Fermer</div>
     <Modal.Body>
-        <BilanList handleShowModalBilanGroupDelete={props.handleShowModalBilanGroupDelete} setGroup={props.setGroup} setBilanInfo={props.setBilanInfo} handleCloseModalBilanList={props.handleCloseModalBilanList} handleShowModalBilanInsert={props.handleShowModalBilanInsert} handleShowModalBilanUpdate={props.handleShowModalBilanUpdate} handleShowModalBilanDelete={props.handleShowModalBilanDelete} patientInfo={props.patientInfo} info={info} info2={info2}/>
+        <BilanList handleShowModalPhotosUpdate={props.handleShowModalPhotosUpdate} handleShowModalPhotosDelete={props.handleShowModalPhotosDelete} setPhotosInfo={props.setPhotosInfo} handleShowModalBilanGroupDelete={props.handleShowModalBilanGroupDelete} setGroup={props.setGroup} setBilanInfo={props.setBilanInfo} handleCloseModalBilanList={props.handleCloseModalBilanList} handleShowModalBilanInsert={props.handleShowModalBilanInsert} handleShowModalBilanUpdate={props.handleShowModalBilanUpdate} handleShowModalBilanDelete={props.handleShowModalBilanDelete} patientInfo={props.patientInfo} info={info} info2={info2}/>
     </Modal.Body>
     </Modal>}

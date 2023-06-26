@@ -5,7 +5,7 @@ import { PlaiesUpdate } from "./plaiesUpdate"
 export function PlaiesUpdateAdmin(props){
     return <Modal animation={true} show={props.showModalPlaiesUpdate} onHide={props.handleCloseModalPlaiesUpdate}>
     <Modal.Body>
-        <PlaiesUpdate PlaiesInfo={props.PlaiesInfo}/>
+        <PlaiesUpdate plaiesInfo={props.plaiesInfo}/>
     </Modal.Body>
     </Modal>}
 

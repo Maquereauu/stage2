@@ -37,7 +37,7 @@ export function PlaiesListAdmin(props){
     return <Modal animation={true} show={props.showModalPlaiesList} onHide={props.handleCloseModalPlaiesList}>
     <div onClick={()=>props.handleCloseModalPlaiesList()}>Fermer</div>
     <Modal.Body>
-        <PlaiesList setGroup={props.setGroup} handleShowModalPlaiesGroupDelete={props.handleShowModalPlaiesGroupDelete} setPlaiesInfo={props.setPlaiesInfo} handleCloseModalPlaiesList={props.handleCloseModalPlaiesList} handleShowModalPlaiesInsert={props.handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={props.handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={props.handleShowModalPlaiesDelete} patientInfo={props.patientInfo} info={info} info2={info2}/>
+        <PlaiesList setGroup={props.setGroup} setPhotosInfo={props.setPhotosInfo} handleShowModalPlaiesGroupDelete={props.handleShowModalPlaiesGroupDelete} setPlaiesInfo={props.setPlaiesInfo} handleCloseModalPlaiesList={props.handleCloseModalPlaiesList} handleShowModalPlaiesInsert={props.handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={props.handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={props.handleShowModalPlaiesDelete} handleShowModalPhotosDelete={props.handleShowModalPhotosDelete} handleShowModalPhotosUpdate={props.handleShowModalPhotosUpdate} patientInfo={props.patientInfo} info={info} info2={info2}/>
     </Modal.Body>
     </Modal>}
 

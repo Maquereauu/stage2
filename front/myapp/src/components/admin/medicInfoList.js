@@ -36,7 +36,7 @@ export function MedicListAdmin(props){
     return <Modal animation={true} show={props.showModalMedicList} onHide={props.handleCloseModalMedicList}>
     <div onClick={()=>props.handleCloseModalMedicList()}>Fermer</div>
     <Modal.Body>
-        <MedicList setGroup={props.setGroup} handleShowModalMedicGroupDelete={props.handleShowModalMedicGroupDelete} setPlaiesInfo={props.setPlaiesInfo} handleCloseModalMedicList={props.handleCloseModalMedicList} handleShowModalMedicInsert={props.handleShowModalMedicInsert} handleShowModalMedicUpdate={props.handleShowModalMedicUpdate} handleShowModalMedicDelete={props.handleShowModalMedicDelete} patientInfo={props.patientInfo} info={info} info2={info2}/>
+        <MedicList setPhotosInfo={props.setPhotosInfo} handleShowModalPhotosUpdate={props.handleShowModalPhotosUpdate} handleShowModalPhotosDelete={props.handleShowModalPhotosDelete} setGroup={props.setGroup} handleShowModalMedicGroupDelete={props.handleShowModalMedicGroupDelete} setPlaiesInfo={props.setPlaiesInfo} handleCloseModalMedicList={props.handleCloseModalMedicList} handleShowModalMedicInsert={props.handleShowModalMedicInsert} handleShowModalMedicUpdate={props.handleShowModalMedicUpdate} handleShowModalMedicDelete={props.handleShowModalMedicDelete} patientInfo={props.patientInfo} info={info} info2={info2}/>
     </Modal.Body>
     </Modal>}
 

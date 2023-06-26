@@ -23,6 +23,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
+    date_debut: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
+    date_fin: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
     groupe: {
       type: DataTypes.INTEGER,
       allowNull: false
