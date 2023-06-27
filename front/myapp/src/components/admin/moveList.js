@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import 'moment/locale/fr';
+import { ReactSession } from 'react-client-session';
 export function MoveList(props) {
     const [disabled,setDisabled]=useState(false);
     const no = props.info2.filter((info2)=>info2.type == 2)
@@ -27,8 +28,6 @@ export function MoveList(props) {
                 const patient = props.info3.filter((info)=>info.id==Rdv.id_patient)
                 return <div key={key} className="box2">
                     <div className="margin-bottom-- flex space-evenly">
-                    {console.log(Rdv)}
-                    
                     <div onClick={()=>props.handleShowModalMoveDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>
                     {/* <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)}>Modifier</div> */}
                     </div>
@@ -37,6 +36,8 @@ export function MoveList(props) {
                             <p>Détails: {Rdv.text}</p>
                             <p>Patient: {patient[0].nom}/{patient[0].prenom}</p>
                             <p>Date: {Rdv.date}</p>
+                            {ReactSession.set("move"+Rdv.id, true)}
+                            {ReactSession.remove("movenotif", true)}
                     </div>
                     </div>
                     </div>})}

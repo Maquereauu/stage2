@@ -57,7 +57,8 @@ export default function PatientInfo(props){
         <input className="padding-right-left" type="submit" value="Ajouter un patient" onClick={() => { props.handleShowModalPatientInsert() }} />
     </div>
     <div className="flex center margin-top ">
-        <input className="padding-right-left" type="submit" value="Mouvements patients" onClick={() => { props.handleShowModalMoveList() }} />
+        <input className="padding-right-left" type="submit" value={"Mouvements patients"} onClick={() => { props.handleShowModalMoveList() }} />
+        {ReactSession.get("movenotif")?<img className="notif" src={"./image/notification.png"} alt="notif" />:<></>}
     </div>
     </div>
             <div className="background-color-2-4">
@@ -77,8 +78,8 @@ export default function PatientInfo(props){
     <div className='flex box2'>
         <p className='text align-center'>{patient.prenom}/</p>
         <p className='text align-center'>{patient.nom}</p>
-        {ReactSession.get("patient"+patient.id)?<div>Notif non lue</div>:<></>}
-        <div className='text align-center align-left' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(patient)}}>info patient</div>
+        {ReactSession.get("patient"+patient.id)?<img className="notif" src={"./image/notification.png"} alt="notif" />:<></>}
+        <img src="./image/eye.png" className='align-left align-center eye-icon' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(patient)}}></img>
     </div>
     </div>
     }

@@ -389,13 +389,20 @@
     .chat-size {
         width: 300px;
     }
-
-    .robot {
-        height: 80px !important;
-        width: 80px !important;
-        margin-top: 40px !important;
+    .eye-icon {
+        height: 20px !important;
+        width: auto !important;
     }
-
+    .notif {
+        height: 10px !important;
+        width: auto !important;
+        margin-top: 10px !important;
+    }
+    .notif2 {
+        margin-top: -2.5px !important;
+        height: 10px !important;
+        width: auto !important;
+    }
     .account-img {
         width: 30vw;
     }

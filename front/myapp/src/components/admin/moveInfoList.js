@@ -3,9 +3,16 @@ import { Rdv_ } from "../rdv/Get_rdv";
 import { Patient_ } from "../patient/Get_patient";
 import React, { useEffect, useState } from 'react';
 import { MoveList } from "./moveList"
+import { ReactSession } from 'react-client-session';
 export function MoveListAdmin(props){
     const [info2,setInfo2]=useState([]);
     const [info3,setInfo3]=useState([]);
+    const no = info2.filter((info2)=>info2.type == 2)
+    no.map((rdv)=>{
+        if(!ReactSession.get("move"+rdv.id)){
+            ReactSession.set("movenotif", true)
+        }
+    })
     useEffect(() => {
         const list2 = Rdv_();
         list2

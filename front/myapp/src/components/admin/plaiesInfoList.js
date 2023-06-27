@@ -18,7 +18,6 @@ export function PlaiesListAdmin(props){
     Object.keys(yes).map((id_patient)=>{
         yes[id_patient].map((plaies,key)=>{
             if(!ReactSession.get("plaies"+plaies.id)){
-                {console.log("test")}
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"plaies", true)
             }

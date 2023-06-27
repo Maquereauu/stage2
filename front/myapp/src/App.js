@@ -26,6 +26,11 @@ import { PlaiesUpdateAdmin } from './components/admin/plaiesInfoUpdate';
 import { PlaiesDeleteAdmin } from './components/admin/plaiesInfoDelete';
 import { PlaiesGroupDeleteAdmin } from './components/admin/plaiesGroupInfoDelete';
 import { PlaiesListAdmin } from './components/admin/plaiesInfoList';
+import { TransmissionInsertAdmin } from './components/admin/transmissionInfoInsert';
+import { TransmissionUpdateAdmin } from './components/admin/transmissionInfoUpdate';
+import { TransmissionDeleteAdmin } from './components/admin/transmissionInfoDelete';
+import { TransmissionGroupDeleteAdmin } from './components/admin/transmissionGroupInfoDelete';
+import { TransmissionListAdmin } from './components/admin/transmissionInfoList';
 import { MedicInsertAdmin } from './components/admin/medicInfoInsert';
 import { MedicUpdateAdmin } from './components/admin/medicInfoUpdate';
 import { MedicDeleteAdmin } from './components/admin/medicInfoDelete';
@@ -116,6 +121,21 @@ function App() {
   const [showModalPlaiesList, setShowModalPlaiesList] = useState(false);
   const handleShowModalPlaiesList = () => setShowModalPlaiesList(true);
   const handleCloseModalPlaiesList = () => setShowModalPlaiesList(false);
+  const [showModalTransmissionInsert, setShowModalTransmissionInsert] = useState(false);
+  const handleShowModalTransmissionInsert = () => setShowModalTransmissionInsert(true);
+  const handleCloseModalTransmissionInsert = () => setShowModalTransmissionInsert(false);
+  const [showModalTransmissionUpdate, setShowModalTransmissionUpdate] = useState(false);
+  const handleShowModalTransmissionUpdate = () => setShowModalTransmissionUpdate(true);
+  const handleCloseModalTransmissionUpdate = () => setShowModalTransmissionUpdate(false);
+  const [showModalTransmissionDelete, setShowModalTransmissionDelete] = useState(false);
+  const handleShowModalTransmissionDelete = () => setShowModalTransmissionDelete(true);
+  const handleCloseModalTransmissionDelete = () => setShowModalTransmissionDelete(false);
+  const [showModalTransmissionGroupDelete, setShowModalTransmissionGroupDelete] = useState(false);
+  const handleShowModalTransmissionGroupDelete = () => setShowModalTransmissionGroupDelete(true);
+  const handleCloseModalTransmissionGroupDelete = () => setShowModalTransmissionGroupDelete(false);
+  const [showModalTransmissionList, setShowModalTransmissionList] = useState(false);
+  const handleShowModalTransmissionList = () => setShowModalTransmissionList(true);
+  const handleCloseModalTransmissionList = () => setShowModalTransmissionList(false);
   const [showModalMedicInsert, setShowModalMedicInsert] = useState(false);
   const handleShowModalMedicInsert = () => setShowModalMedicInsert(true);
   const handleCloseModalMedicInsert = () => setShowModalMedicInsert(false);
@@ -192,7 +212,7 @@ function App() {
         <PlanningInsert showModalPlanningInsert={showModalPlanningInsert} handleCloseModalPlanningInsert={handleCloseModalPlanningInsert} handleShowModalPlanningBilanInsert={handleShowModalPlanningBilanInsert} handleShowModalPlanningRdvInsert={handleShowModalPlanningRdvInsert}/>
         <PlanningBilanInsert dateInfo={dateInfo} showModalPlanningBilanInsert={showModalPlanningBilanInsert} handleCloseModalPlanningBilanInsert={handleCloseModalPlanningBilanInsert}/>
         <PlanningRdvInsert dateInfo={dateInfo} showModalPlanningRdvInsert={showModalPlanningRdvInsert} handleCloseModalPlanningRdvInsert={handleCloseModalPlanningRdvInsert}/>
-        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} handleShowModalRdvList={handleShowModalRdvList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
+        <PatientInfoAdmin handleShowModalTraitementList={handleShowModalTraitementList} handleShowModalPhotosList={handleShowModalPhotosList} handleShowModalPlaiesList={handleShowModalPlaiesList} handleShowModalMedicList={handleShowModalMedicList} handleShowModalBilanList={handleShowModalBilanList} handleShowModalTransmissionList={handleShowModalTransmissionList} handleShowModalRdvList={handleShowModalRdvList} setPatientInfo={setPatientInfo} patientInfo = {patientInfo} showModalPatientInfo={showModalPatientInfo} handleCloseModalPatientInfo={handleCloseModalPatientInfo} handleShowModalPatientUpdate={handleShowModalPatientUpdate} handleShowModalPatientDelete={handleShowModalPatientDelete}/>
         <PatientInsertAdmin showModalPatientInsert={showModalPatientInsert} handleCloseModalPatientInsert={handleCloseModalPatientInsert}/>
         <PatientUpdateAdmin patientInfo = {patientInfo} showModalPatientUpdate={showModalPatientUpdate} handleCloseModalPatientUpdate={handleCloseModalPatientUpdate}/>
         <PatientDeleteAdmin patientInfo = {patientInfo} showModalPatientDelete={showModalPatientDelete} handleCloseModalPatientDelete={handleCloseModalPatientDelete}/>
@@ -208,7 +228,12 @@ function App() {
         <PlaiesUpdateAdmin plaiesInfo = {plaiesInfo} showModalPlaiesUpdate={showModalPlaiesUpdate} handleCloseModalPlaiesUpdate={handleCloseModalPlaiesUpdate}/>
         <PlaiesDeleteAdmin plaiesInfo = {plaiesInfo} showModalPlaiesDelete={showModalPlaiesDelete} handleCloseModalPlaiesDelete={handleCloseModalPlaiesDelete}/>
         <PlaiesGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} plaiesInfo = {plaiesInfo} showModalPlaiesGroupDelete={showModalPlaiesGroupDelete} handleCloseModalPlaiesGroupDelete={handleCloseModalPlaiesGroupDelete}/>
-        <PlaiesListAdmin setGroup={setGroup} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalPlaiesList={showModalPlaiesList} handleCloseModalPlaiesList={handleCloseModalPlaiesList} handleShowModalPlaiesInsert={handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={handleShowModalPlaiesDelete} handleShowModalPlaiesGroupDelete={handleShowModalPlaiesGroupDelete} handleShowModalPhotosUpdate={handleShowModalPhotosUpdate} handleShowModalPhotosDelete={handleShowModalPhotosDelete}/>
+        <PlaiesListAdmin setGroup={setGroup} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalPlaiesList={showModalPlaiesList} handleCloseModalPlaiesList={handleCloseModalPlaiesList} handleShowModalPlaiesInsert={handleShowModalPlaiesInsert} handleShowModalPlaiesUpdate={handleShowModalPlaiesUpdate} handleShowModalPlaiesDelete={handleShowModalPlaiesDelete} handleShowModalPlaiesGroupDelete={handleShowModalPlaiesGroupDelete} handleShowModalPhotosUpdate={handleShowModalPhotosUpdate} handleShowModalPhotosDelete={handleShowModalPhotosDelete}/> 
+        <TransmissionInsertAdmin patientInfo = {patientInfo} showModalTransmissionInsert={showModalTransmissionInsert} handleCloseModalTransmissionInsert={handleCloseModalTransmissionInsert}/>
+        <TransmissionUpdateAdmin plaiesInfo = {plaiesInfo} showModalTransmissionUpdate={showModalTransmissionUpdate} handleCloseModalTransmissionUpdate={handleCloseModalTransmissionUpdate}/>
+        <TransmissionDeleteAdmin plaiesInfo = {plaiesInfo} showModalTransmissionDelete={showModalTransmissionDelete} handleCloseModalTransmissionDelete={handleCloseModalTransmissionDelete}/>
+        <TransmissionGroupDeleteAdmin group={group} patientInfo = {patientInfo} isPlanning={isPlanning} plaiesInfo = {plaiesInfo} showModalTransmissionGroupDelete={showModalTransmissionGroupDelete} handleCloseModalTransmissionGroupDelete={handleCloseModalTransmissionGroupDelete}/>
+        <TransmissionListAdmin setGroup={setGroup} setPhotosInfo={setPhotosInfo} setPlaiesInfo={setPlaiesInfo} patientInfo = {patientInfo} showModalTransmissionList={showModalTransmissionList} handleCloseModalTransmissionList={handleCloseModalTransmissionList} handleShowModalTransmissionInsert={handleShowModalTransmissionInsert} handleShowModalTransmissionUpdate={handleShowModalTransmissionUpdate} handleShowModalTransmissionDelete={handleShowModalTransmissionDelete} handleShowModalTransmissionGroupDelete={handleShowModalTransmissionGroupDelete} handleShowModalPhotosUpdate={handleShowModalPhotosUpdate} handleShowModalPhotosDelete={handleShowModalPhotosDelete}/>
         <MedicInsertAdmin patientInfo = {patientInfo} showModalMedicInsert={showModalMedicInsert} handleCloseModalMedicInsert={handleCloseModalMedicInsert}/>
         <MedicUpdateAdmin plaiesInfo = {plaiesInfo} showModalMedicUpdate={showModalMedicUpdate} handleCloseModalMedicUpdate={handleCloseModalMedicUpdate}/>
         <MedicDeleteAdmin plaiesInfo = {plaiesInfo} showModalMedicDelete={showModalMedicDelete} handleCloseModalMedicDelete={handleCloseModalMedicDelete}/>
