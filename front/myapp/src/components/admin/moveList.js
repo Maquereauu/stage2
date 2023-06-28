@@ -29,7 +29,7 @@ export function MoveList(props) {
                 return <div key={key} className="box2">
                     <div className="margin-bottom-- flex space-evenly">
                     <div onClick={()=>props.handleShowModalMoveDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>
-                    {/* <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)}>Modifier</div> */}
+                    <div onClick={()=>props.handleShowModalMoveUpdate()&props.setRdvInfo(Rdv)}>Modifier</div>
                     </div>
                     <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">
@@ -37,6 +37,7 @@ export function MoveList(props) {
                             <p>Patient: {patient[0].nom}/{patient[0].prenom}</p>
                             <p>Date: {Rdv.date}</p>
                             {ReactSession.set("move"+Rdv.id, true)}
+                            {ReactSession.set("move"+Rdv.id+Rdv.text+Rdv.date,true)}
                             {ReactSession.remove("movenotif", true)}
                     </div>
                     </div>

@@ -13,15 +13,31 @@ export function BilanListAdmin(props){
           return rv;
         }, {});
       };
-    const yes = groupBy(info2, 'id_patient')
+    const no1 = info.filter((info)=>info.type == 4)
+    const no = info2.filter((info2)=>info2.id_patient != 0)
+    const yes = groupBy(no, 'id_patient')
+    const yes1 = groupBy(no1, 'id_patient')
     Object.keys(yes).map((id_patient)=>{
         yes[id_patient].map((bilan,key)=>{
             if(!ReactSession.get("bilan"+bilan.id)){
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"bilan", true)
+                ReactSession.set("notifpatient",true)
+            }else if(!ReactSession.get("bilan"+bilan.id+bilan.text+bilan.weekly+bilan.date+bilan.date_fin+bilan.shift)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"bilan", true)
+                ReactSession.set("notifpatient",true)
             }
         })
         })
+    Object.keys(yes1).map((id_patient)=>{
+            yes1[id_patient].map((photo,key)=>{
+                if(!ReactSession.get("photo"+photo.id)){
+                    ReactSession.set("patient"+id_patient, true)
+                    ReactSession.set("patient"+id_patient+"bilan", true)
+                    ReactSession.set("notifpatient",true)
+                } 
+        })})
     useEffect(() => {
         const list = Photos_();
         list

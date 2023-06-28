@@ -32,12 +32,18 @@ export function TransmissionList(props) {
                           {"image" in Plaies ? (
                             <>
                             <img className="prod-img" src={"./img/" + Plaies.image} alt={Plaies.image} />
-                            {update?<><div onClick={()=>props.handleShowModalPhotosUpdate()}>Modifier</div><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}
+                            {ReactSession.set("photo"+Plaies.id, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient+"transmission", true)}
+                            {ReactSession.remove("notifpatient",true)}
+                            {update?<><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>) : (
                             <>
                             {ReactSession.set("transmission"+Plaies.id, true)}
+                            {ReactSession.set("transmission"+Plaies.id+Plaies.text,true)}
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"transmission", true)}
+                            {ReactSession.remove("notifpatient",true)}
                             <p>{Plaies.text}</p>
                             {update?<><div onClick={()=>props.handleShowModalTransmissionUpdate()&props.setPlaiesInfo(Plaies)}>Modifier</div><div onClick={()=>props.handleShowModalTransmissionDelete()&props.setPlaiesInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>

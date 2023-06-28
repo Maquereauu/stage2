@@ -17,6 +17,9 @@ export function MoveUpdate(props) {
                     <input type="hidden" {...register("id")} id="id" defaultValue={props.rdvInfo.id}/>
                     <input className='background my-account- margin-top--- margin-right--' {...register("text")} defaultValue={props.rdvInfo.text} placeholder="text" type="text" id="text" />
                 </div>
+                <label>Date
+            <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")} defaultValue={props.rdvInfo.date} placeholder="date" type="date" id="date" />
+            </label>
             </div>
             <div className="flex2 center margin-top--">
                 <input type="submit" value="Modifier le mouvement"/>

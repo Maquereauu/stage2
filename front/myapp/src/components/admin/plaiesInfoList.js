@@ -14,15 +14,30 @@ export function PlaiesListAdmin(props){
         }, {});
       };
     const no = info2.filter((info2)=>info2.type == 1)
+    const no1 = info.filter((info)=>info.type == 2)
     const yes = groupBy(no, 'id_patient')
+    const yes1 = groupBy(no1, 'id_patient')
     Object.keys(yes).map((id_patient)=>{
         yes[id_patient].map((plaies,key)=>{
             if(!ReactSession.get("plaies"+plaies.id)){
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"plaies", true)
+                ReactSession.set("notifpatient",true)
+            }else if(!ReactSession.get("plaies"+plaies.id+plaies.text)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"plaies", true)
+                ReactSession.set("notifpatient",true)
             }
         })
         })
+    Object.keys(yes1).map((id_patient)=>{
+            yes1[id_patient].map((photo,key)=>{
+                if(!ReactSession.get("photo"+photo.id)){
+                    ReactSession.set("patient"+id_patient, true)
+                    ReactSession.set("patient"+id_patient+"plaies", true)
+                    ReactSession.set("notifpatient",true)
+                } 
+        })})
     useEffect(() => {
         const list = Photos_();
         list

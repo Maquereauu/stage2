@@ -6,8 +6,10 @@ export function RdvList(props) {
     const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.type == 1)
     return <>{no.map((Rdv,key)=>{
         ReactSession.set("rdv"+Rdv.id, true)
+        ReactSession.set("rdv"+Rdv.id+Rdv.text+Rdv.date,true)
         ReactSession.remove("patient"+Rdv.id_patient, true)
         ReactSession.remove("patient"+Rdv.id_patient+"rdv", true)
+        ReactSession.remove("notifpatient",true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             {/* <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>

@@ -19,7 +19,12 @@ export function RdvListAdmin(props){
               if(!ReactSession.get("rdv"+rdv.id)){
                   ReactSession.set("patient"+id_patient, true)
                   ReactSession.set("patient"+id_patient+"rdv", true)
-              }
+                  ReactSession.set("notifpatient",true)
+              }else if(!ReactSession.get("rdv"+rdv.id+rdv.text+rdv.date)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"rdv", true)
+                ReactSession.set("notifpatient",true)
+            }
           })
           })
     useEffect(() => {

@@ -17,6 +17,11 @@ export function TraitementListAdmin(props){
             if(!ReactSession.get("traitement"+traitement.id)){
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"traitement", true)
+                ReactSession.set("notifpatient",true)
+            }else if(!ReactSession.get("traitement"+traitement.id+traitement.medicament+traitement.dose_matin+traitement.dose_midi+traitement.dose_soir+traitement.date_debut+traitement.date_fin)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"traitement", true)
+                ReactSession.set("notifpatient",true)
             }
         })
         })

@@ -8,6 +8,7 @@ export function PhotosList(props) {
         ReactSession.set("photo"+Photos.id, true)
         ReactSession.remove("patient"+Photos.id_patient, true)
         ReactSession.remove("patient"+Photos.id_patient+"photo", true)
+        ReactSession.remove("notifpatient",true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             <div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Photos)}>Supprimer</div>

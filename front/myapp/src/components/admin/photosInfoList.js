@@ -18,6 +18,7 @@ export function PhotosListAdmin(props){
             if(!ReactSession.get("photo"+photo.id)){
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"photo", true)
+                ReactSession.set("notifpatient",true)
             }
         })
         })

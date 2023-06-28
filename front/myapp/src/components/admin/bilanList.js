@@ -31,12 +31,18 @@ export function BilanList(props) {
                         <div className="margin-bottom--- flex space-evenly">
                           {"image" in Bilan ? (<>
                             <img className="prod-img" src={"./img/" + Bilan.image} alt={Bilan.image} />
-                            {update?<><div onClick={()=>props.handleShowModalPhotosUpdate()}>Modifier</div><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Bilan)}>Supprimer</div></>:<></>}
+                            {ReactSession.set("photo"+Bilan.id, true)}
+                            {ReactSession.remove("patient"+Bilan.id_patient, true)}
+                            {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
+                            {ReactSession.remove("notifpatient",true)}
+                            {update?<><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Bilan)}>Supprimer</div></>:<></>}
                             </>) : (
                             <>
                             {ReactSession.set("bilan"+Bilan.id, true)}
+                            {ReactSession.set("bilan"+Bilan.id+Bilan.text+Bilan.weekly+Bilan.date+Bilan.date_fin+Bilan.shift,true)}
                             {ReactSession.remove("patient"+Bilan.id_patient, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
+                            {ReactSession.remove("notifpatient",true)}
                             <p>{Bilan.text}</p>
                             <p>{Bilan.date}</p>
                             {

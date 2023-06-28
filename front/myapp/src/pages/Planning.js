@@ -23,10 +23,30 @@ export default function Planning(props){
             .then(result => setInfo3(result))
             .catch(error => console.error("Erreur avec notre API :", error.message));
 }, []);
+
+  const Notifications = () =>{
+    const bilanList = info.filter((info)=>info.id_patient==0)
+    const rdvList = info2.filter((info2)=>info2.id_patient==0 && info2.type == 1)
+    bilanList.map((Bilan)=>{
+      if(!ReactSession.get("planningBilan"+Bilan.id)){
+        ReactSession.set("notifplanning", true)
+    }else if(!ReactSession.get("planningBilan"+Bilan.id+Bilan.text+Bilan.date+Bilan.weekly+Bilan.date_fin+Bilan.shift)){
+        ReactSession.set("notifplanning", true)
+    }
+    })
+    rdvList.map((Rdv)=>{
+      if(!ReactSession.get("planningRdv"+Rdv.id)){
+        {console.log("planningRdv"+Rdv.id)}
+        ReactSession.set("notifplanning", true)
+    }else if(!ReactSession.get("planningRdv"+Rdv.id+Rdv.text+Rdv.date)){
+        ReactSession.set("notifplanning", true)
+    }
+    })
+  }
   const WeeklyCalendar = () => {
     const [startDate, setStartDate] = useState(moment());
     const daysInWeek = 7;
-    
+
     const generateWeek = () => {
       const weekStart = startDate.clone().startOf('week');
       const days = [];
@@ -46,10 +66,9 @@ export default function Planning(props){
   
       return days;
     };
-
     const renderEventsForDay = (day) => {
       const bilanDay = info.filter((info)=>info.date===day.format("YYYY-MM-DD"))
-      const rdvDay = info2.filter((info)=>info.date===day.format("YYYY-MM-DD"))
+      const rdvDay = info2.filter((info)=>info.date===day.format("YYYY-MM-DD") && info.type == 1)
       return(<>{info.map((Bilan,index)=>{
         const patient = info3.filter((info)=>info.id===Bilan.id_patient)
         if(day.format("dddd") === moment(Bilan.date,"YYYY-MM-DD").format("dddd") && moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date,"YYYY-MM-DD")) && Bilan.weekly !== 0 && (!moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date_fin,"YYYY-MM-DD"))||moment(day.format("YYYY-MM-DD"))==moment(Bilan.date_fin,"YYYY-MM-DD")) ){
@@ -88,6 +107,9 @@ export default function Planning(props){
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
+            ReactSession.set("planningBilan"+Bilan.id,true)
+            ReactSession.set("planningBilan"+Bilan.id+Bilan.text+Bilan.date+Bilan.weekly+Bilan.date_fin+Bilan.shift,true)
+            ReactSession.remove("notifplanning", true)
             return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
@@ -99,6 +121,9 @@ export default function Planning(props){
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
+            ReactSession.set("planningBilan"+Bilan.id,true)
+            ReactSession.set("planningBilan"+Bilan.id+Bilan.text+Bilan.date+Bilan.weekly+Bilan.date_fin+Bilan.shift,true)
+            ReactSession.remove("notifplanning", true)
             return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
@@ -113,6 +138,10 @@ export default function Planning(props){
             <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>}
         }else{
+          {console.log("planningRdv"+Rdv.id)}
+          ReactSession.set("planningRdv"+Rdv.id,true)
+          ReactSession.set("planningRdv"+Rdv.id+Rdv.text+Rdv.date,true)
+          ReactSession.remove("notifplanning", true)
           return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text}</p></div>
           <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>
@@ -127,14 +156,14 @@ export default function Planning(props){
     const nextWeek = () => {
       setStartDate(startDate.clone().add(daysInWeek, 'days'));
     };
-  
-    return (
+    return (<>{ReactSession.get("notifplanning")?<div className="flex"><img className="notif" src={"./image/notification.png"} alt="notif" /><p className="margin-top----">Notif planning non lue</p></div>:<></>}
       <div>
         <button onClick={previousWeek}>Semaine précédente</button>
         <button onClick={nextWeek}>Semaine suivante</button>
         <div className="calendar">{generateWeek()}</div>
+        {Notifications()}
       </div>
-    );
+      </>);
   };
     return <>
     <h1 className="title top stroke box">Bienvenue sur le planning.</h1>

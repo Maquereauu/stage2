@@ -40,7 +40,8 @@ export default function PatientInfo(props){
                             <div className='flex box2'>
                                 <p className='text align-center'>{val2.prenom}/</p>
                                 <p className='text align-center'>{val2.nom}</p>
-                                <div className='text align-center align-left' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(val2)}}>info patient</div>
+                                {ReactSession.get("patient"+val2.id)?<><img className="notif" src={"./image/notification.png"} alt="notif" /></>:<></>}
+                                <img src="./image/eye.png" className='align-left align-center eye-icon' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(val2)}}></img>
                             </div>
                             </div>
                     }
@@ -61,6 +62,7 @@ export default function PatientInfo(props){
         {ReactSession.get("movenotif")?<img className="notif" src={"./image/notification.png"} alt="notif" />:<></>}
     </div>
     </div>
+    {ReactSession.get("notifpatient")?<div className="flex"><img className="notif" src={"./image/notification.png"} alt="notif" /><p className="margin-top----">Notif patient non lue</p></div>:<></>}
             <div className="background-color-2-4">
             <div className='center box2 margin-top'>
                 <input type="text" placeholder="Rechercher" onChange={detectChange} defaultValue={() => {
@@ -78,7 +80,7 @@ export default function PatientInfo(props){
     <div className='flex box2'>
         <p className='text align-center'>{patient.prenom}/</p>
         <p className='text align-center'>{patient.nom}</p>
-        {ReactSession.get("patient"+patient.id)?<img className="notif" src={"./image/notification.png"} alt="notif" />:<></>}
+        {ReactSession.get("patient"+patient.id)?<><img className="notif" src={"./image/notification.png"} alt="notif" /></>:<></>}
         <img src="./image/eye.png" className='align-left align-center eye-icon' onClick={() => { props.handleShowModalPatientInfo();props.setPatientInfo(patient)}}></img>
     </div>
     </div>

@@ -17,7 +17,7 @@ export function TransmissionUpdate(props) {
                 </div>
             </div>
             <div className="flex2 center margin-top--">
-                <input type="submit" value="Modifier le Plaies"/>
+                <input type="submit" value="Modifier le texte"/>
             </div>
         </div>
     </form>

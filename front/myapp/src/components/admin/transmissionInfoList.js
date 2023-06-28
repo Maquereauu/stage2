@@ -14,15 +14,30 @@ export function TransmissionListAdmin(props){
         }, {});
       };
     const no = info2.filter((info2)=>info2.type == 3)
+    const no1 = info.filter((info)=>info.type == 5)
     const yes = groupBy(no, 'id_patient')
+    const yes1 = groupBy(no1, 'id_patient')
     Object.keys(yes).map((id_patient)=>{
         yes[id_patient].map((plaies,key)=>{
             if(!ReactSession.get("transmission"+plaies.id)){
                 ReactSession.set("patient"+id_patient, true)
                 ReactSession.set("patient"+id_patient+"transmission", true)
+                ReactSession.set("notifpatient",true)
+            }else if(!ReactSession.get("transmission"+plaies.id+plaies.text)){
+                ReactSession.set("patient"+id_patient, true)
+                ReactSession.set("patient"+id_patient+"transmission", true)
+                ReactSession.set("notifpatient",true)
             }
         })
         })
+        Object.keys(yes1).map((id_patient)=>{
+            yes1[id_patient].map((photo,key)=>{
+                if(!ReactSession.get("photo"+photo.id)){
+                    ReactSession.set("patient"+id_patient, true)
+                    ReactSession.set("patient"+id_patient+"transmission", true)
+                    ReactSession.set("notifpatient",true)
+                } 
+        })})
     useEffect(() => {
         const list = Photos_();
         list
@@ -36,7 +51,7 @@ export function TransmissionListAdmin(props){
     return <Modal animation={true} show={props.showModalTransmissionList} onHide={props.handleCloseModalTransmissionList}>
     <div onClick={()=>props.handleCloseModalTransmissionList()}>Fermer</div>
     <Modal.Body>
-        <TransmissionList setGroup={props.setGroup} setPhotosInfo={props.setPhotosInfo} handleShowModalTransmissionGroupDelete={props.handleShowModalTransmissionGroupDelete} setTransmissionInfo={props.setTransmissionInfo} handleCloseModalTransmissionList={props.handleCloseModalTransmissionList} handleShowModalTransmissionInsert={props.handleShowModalTransmissionInsert} handleShowModalTransmissionUpdate={props.handleShowModalTransmissionUpdate} handleShowModalTransmissionDelete={props.handleShowModalTransmissionDelete} handleShowModalPhotosDelete={props.handleShowModalPhotosDelete} handleShowModalPhotosUpdate={props.handleShowModalPhotosUpdate} patientInfo={props.patientInfo} info={info} info2={info2}/>
+        <TransmissionList setGroup={props.setGroup} setPhotosInfo={props.setPhotosInfo} handleShowModalTransmissionGroupDelete={props.handleShowModalTransmissionGroupDelete} setPlaiesInfo={props.setPlaiesInfo} handleCloseModalTransmissionList={props.handleCloseModalTransmissionList} handleShowModalTransmissionInsert={props.handleShowModalTransmissionInsert} handleShowModalTransmissionUpdate={props.handleShowModalTransmissionUpdate} handleShowModalTransmissionDelete={props.handleShowModalTransmissionDelete} handleShowModalPhotosDelete={props.handleShowModalPhotosDelete} handleShowModalPhotosUpdate={props.handleShowModalPhotosUpdate} patientInfo={props.patientInfo} info={info} info2={info2}/>
     </Modal.Body>
     </Modal>}
 

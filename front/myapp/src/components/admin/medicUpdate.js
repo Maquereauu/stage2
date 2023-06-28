@@ -7,7 +7,7 @@ export function MedicUpdate(props) {
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdatePlaies)} className="align-center flex vertical center" >
-        <h1 className="title flex2 center margin-top--">Plaies</h1>
+        <h1 className="title flex2 center margin-top--">Compte rendu</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Information</h2>
             <div className="flex2 margin-top--- vertical align-center">
@@ -17,7 +17,7 @@ export function MedicUpdate(props) {
                 </div>
             </div>
             <div className="flex2 center margin-top--">
-                <input type="submit" value="Modifier le Plaies"/>
+                <input type="submit" value="Modifier le compte-rendu"/>
             </div>
         </div>
     </form>

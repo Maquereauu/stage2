@@ -32,12 +32,18 @@ export function PlaiesList(props) {
                           {"image" in Plaies ? (
                             <>
                             <img className="prod-img" src={"./img/" + Plaies.image} alt={Plaies.image} />
-                            {update?<><div onClick={()=>props.handleShowModalPhotosUpdate()}>Modifier</div><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}
+                            {ReactSession.set("photo"+Plaies.id, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient+"plaies", true)}
+                            {ReactSession.remove("notifpatient",true)}
+                            {update?<><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>) : (
                             <>
                             {ReactSession.set("plaies"+Plaies.id, true)}
+                            {ReactSession.set("plaies"+Plaies.id+Plaies.text, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"plaies", true)}
+                            {ReactSession.remove("notifpatient",true)}
                             <p>{Plaies.text}</p>
                             {update?<><div onClick={()=>props.handleShowModalPlaiesUpdate()&props.setPlaiesInfo(Plaies)}>Modifier</div><div onClick={()=>props.handleShowModalPlaiesDelete()&props.setPlaiesInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>

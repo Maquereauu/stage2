@@ -6,8 +6,10 @@ export function TraitementList(props) {
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id)
     return <>{yes.map((traitement,key)=>{
         ReactSession.set("traitement"+traitement.id, true)
+        ReactSession.set("traitement"+traitement.id+traitement.medicament+traitement.dose_matin+traitement.dose_midi+traitement.dose_soir+traitement.date_debut+traitement.date_fin, true)
         ReactSession.remove("patient"+traitement.id_patient, true)
         ReactSession.remove("patient"+traitement.id_patient+"traitement", true)
+        ReactSession.remove("notifpatient",true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             <div onClick={()=>props.handleShowModalTraitementDelete()&props.setTraitementInfo(traitement)}>Supprimer</div>

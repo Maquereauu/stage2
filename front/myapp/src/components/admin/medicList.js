@@ -33,12 +33,18 @@ export function MedicList(props) {
                         <div className="margin-bottom--- flex space-evenly">
                           {"image" in Plaies ? (<>
                             <img className="prod-img" src={"./img/" + Plaies.image} alt={Plaies.image} />
-                            {update?<><div onClick={()=>props.handleShowModalPhotosUpdate()}>Modifier</div><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}</>
+                            {ReactSession.set("photo"+Plaies.id, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient, true)}
+                            {ReactSession.remove("patient"+Plaies.id_patient+"medic", true)}
+                            {ReactSession.remove("notifpatient",true)}
+                            {update?<><div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Plaies)}>Supprimer</div></>:<></>}</>
                           ) : (
                             <>
                             {ReactSession.set("medic"+Plaies.id, true)}
+                            {ReactSession.set("medic"+Plaies.id+Plaies.text, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"medic", true)}
+                            {ReactSession.remove("notifpatient",true)}
                             <p>{Plaies.text}</p>
                             {update?<><div onClick={()=>props.handleShowModalMedicUpdate()&props.setPlaiesInfo(Plaies)}>Modifier</div><div onClick={()=>props.handleShowModalMedicDelete()&props.setPlaiesInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>

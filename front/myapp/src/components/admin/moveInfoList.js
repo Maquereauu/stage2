@@ -11,6 +11,8 @@ export function MoveListAdmin(props){
     no.map((rdv)=>{
         if(!ReactSession.get("move"+rdv.id)){
             ReactSession.set("movenotif", true)
+        }else if(!ReactSession.get("move"+rdv.id+rdv.text+rdv.date)){
+            ReactSession.set("movenotif", true)
         }
     })
     useEffect(() => {

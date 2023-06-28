@@ -17,7 +17,7 @@ export function PlaiesUpdate(props) {
                 </div>
             </div>
             <div className="flex2 center margin-top--">
-                <input type="submit" value="Modifier le Plaies"/>
+                <input type="submit" value="Modifier la Plaie"/>
             </div>
         </div>
     </form>
