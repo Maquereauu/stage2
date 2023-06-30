@@ -8,12 +8,14 @@ import {useRef} from 'react';
 export function TraitementInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
+    const [oops,setOops]=useState(0);
     const list=["id_patient","medicament","dose_matin","dose_midi","dose_soir","date_debut","date_fin"];
+    const errors=["","Merci de bien vouloir rentrer des dates valides","Merci de bien vouloir remplir tous les formulaires","-_-"]
     const refs = useRef([]);
-    let test = 1;
-    const onSubmitInsertTraitement = async (data) => {
-        if(test == 1){
+    const onSubmitInsertTraitement = (data) => {
+            {console.log("test")}
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
+        let error = 0
         let c = 0
         let calls2 = [0,0];
         Object.entries(data).map(([key,value])=>{
@@ -26,16 +28,25 @@ export function TraitementInsert(props) {
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
             if(moment(dictionary.date_debut,"YYYY-MM-DD").isAfter(moment(dictionary.date_fin,"YYYY-MM-DD"))){
-                console.log(">:(")
-            }else{
-                console.log(":D")
-                console.log(dictionary)
-            InsertTraitement_(dictionary)
+                error = 1
+                setOops(1)
+            }else if(dictionary.medicament == "" || dictionary.dose_matin == "" || dictionary.dose_midi == "" || dictionary.dose_soir == "" || dictionary.date_debut == "" ||dictionary.date_fin == ""){
+                error = 2
+                setOops(2)
+            }else if(error == 0){
+                setOops(0)
             }
         }
-        test = 0;
-        window.location.replace('/patients');
-    }}
+        for(let i = 0;i<counter.length;i++){
+            if(!error)
+            {const dictionary = Object.fromEntries(calls[i]);
+            InsertTraitement_(dictionary)
+        }
+        }
+        if(!error){
+            window.location.replace('/patients');
+        }
+    }
     // const insertAllForms = async() => {
     //     console.log(allData)
     //     allData.map((data,key)=>{
@@ -46,10 +57,10 @@ export function TraitementInsert(props) {
     //     // window.location.replace('/patients');
     // }
     const sendAllForms = async() => {
-        for(let i=0;i<counter.length;i++){
-            refs.current[i].click();
+        if(refs.current[0])
+        {refs.current[0].click();}else{
+            setOops(3)
         }
-        // window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -61,6 +72,7 @@ export function TraitementInsert(props) {
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Information</h2>
             <div className="flex2 margin-top--- vertical align-center">
+            <p>{errors[oops]}</p>
             {counter.map((item,index)=>{
                 return <div key={index} className="flex gap">
                     <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertTraitement)} className="align-center flex vertical center" >
@@ -82,8 +94,8 @@ export function TraitementInsert(props) {
                 </div>})}
                 <Button variant="secondary" onClick={()=>setCounter(oldArray=>[...oldArray,"salut"])}>Ajouter une ligne</Button>
                 <Button variant="danger" onClick={()=>deleteByIndex(counter.length-1)}>Supprimer une ligne</Button>
+                <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             </div>
-            <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             <div className="flex2 center margin-top--">
                 <Button variant="primary" onClick={sendAllForms}>Insérer le nouveau Traitement</Button>
             </div>

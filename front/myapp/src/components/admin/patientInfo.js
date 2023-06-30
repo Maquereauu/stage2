@@ -1,20 +1,20 @@
 import { ReactSession } from 'react-client-session';
 export function PatientInfo(props) {
     return <div className="box2 margin-top">
-        <div className="margin-bottom-- flex space-evenly">
-        <div onClick={()=>props.handleShowModalPatientDelete()&props.setPatientInfo(props.patientInfo)}>Supprimer</div>
-        <div onClick={()=>props.handleShowModalPatientUpdate()&props.setPatientInfo(props.patientInfo)}>Modifier</div>
+        <div className="margin-bottom-- flex2 space-evenly">
+        <img className="del-icon background-color-del radius" onClick={()=>props.handleShowModalPatientDelete()&props.setPatientInfo(props.patientInfo)} src={"./image/delete.png"} alt="delete" />
+        <img className="del-icon background-color-edit radius" onClick={()=>props.handleShowModalPatientUpdate()&props.setPatientInfo(props.patientInfo)} src={"./image/edit.png"} alt="edit" />
         </div>
         <div className="background-color-2-3">
-        <div className="margin-bottom--- flex space-evenly">
+        <div className="margin-bottom--- flex2 space-around">
         <p>Nom: {props.patientInfo.nom}</p>
         <p>Prenom: {props.patientInfo.prenom}</p>
         </div>
-        <div className="margin-bottom--- flex space-evenly">
+        <div className="margin-bottom--- flex2 space-around">
         <p>Adresse: {props.patientInfo.adresse}</p>
         <p>Tel: {props.patientInfo.tel}</p>
         </div>
-        <div className="margin-bottom--- flex space-evenly">
+        <div className="margin-bottom--- flex2 space-around">
         <p>Medecin: {props.patientInfo.medecin}</p>
         <p>Tel proche: {props.patientInfo.tel_proche}</p>
         </div>

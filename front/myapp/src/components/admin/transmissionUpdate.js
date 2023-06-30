@@ -13,7 +13,7 @@ export function TransmissionUpdate(props) {
             <div className="flex2 margin-top--- vertical align-center">
                 <div className="flex gap">
                     <input type="hidden" {...register("id")} id="id" defaultValue={props.plaiesInfo.id}/>
-                    <input className='background my-account- margin-top--- margin-right--' {...register("text")} defaultValue={props.plaiesInfo.text} placeholder="text" type="text" id="text" />
+                    <input required className='background my-account- margin-top--- margin-right--' {...register("text")} defaultValue={props.plaiesInfo.text} placeholder="text" type="text" id="text" />
                 </div>
             </div>
             <div className="flex2 center margin-top--">

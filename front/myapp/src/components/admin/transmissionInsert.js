@@ -9,17 +9,17 @@ export function TransmissionInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const list=["id_patient","type","image","groupe"];
+    const errors=["","Merci de bien vouloir remplir tous les formulaires","-_-"]
+    const [oops,setOops]=useState(0);
     const refs = useRef([]);
     const refs2 = useRef([]);
-    let test = 1;
     const onSubmitInsertPhotos = async (data) => {
         const newList = Object.fromEntries(Object.entries(data).slice(0, 4));
         const newData = Object.fromEntries(Object.entries(data).slice(4));
-        if(test == 1){
-        InsertPlaies_(newList)
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
+        let error = 0
         Object.entries(newData).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
@@ -36,11 +36,29 @@ export function TransmissionInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
+            if(dictionary.image == "" || dictionary.groupe == ""){
+                error = 1
+                setOops(1)
+            }else if(error == 0){
+                setOops(0)
+            }
+        }
+        if(newList.text == "" || newList.groupe == ""){
+            setOops(1)
+        }
+        if(!error){
+            InsertPlaies_(newList)
+        }
+        for(let i = 0;i<counter.length;i++){
+            if(!error)
+            {const dictionary = Object.fromEntries(calls[i]);
             InsertPhotos_(dictionary)
         }
-        test = 0;
-        window.location.replace('/patients');
-    }}
+        }
+        if(!error){
+            window.location.replace('/patients');
+        }
+    }
     // const insertAllForms = async() => {
     //     console.log(allData)
     //     allData.map((data,key)=>{
@@ -51,11 +69,8 @@ export function TransmissionInsert(props) {
     //     // window.location.replace('/patients');
     // }
     const sendAllForms = async() => {
-        for(let i=0;i<counter.length;i++){
-            refs.current[i].click();
-        }
-        refs2.current[0].click();
-        // window.location.replace('/patients');
+        if(refs2.current[0])
+        {refs2.current[0].click();}
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -67,6 +82,7 @@ export function TransmissionInsert(props) {
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Infos</h2>
             <div className="flex2 margin-top--- vertical align-center">
+            <p>{errors[oops]}</p>
             <form onSubmit={handleSubmit(onSubmitInsertPhotos)}>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />

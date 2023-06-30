@@ -12,7 +12,7 @@ export function RdvListAdmin(props){
           return rv;
         }, {});
       };
-      const no = info2.filter((info2)=>info2.type == 1)
+      const no = info2.filter((info2)=>info2.type == 1 && info2.id_patient !=0)
       const yes = groupBy(no, 'id_patient')
       Object.keys(yes).map((id_patient)=>{
           yes[id_patient].map((rdv,key)=>{
@@ -36,7 +36,7 @@ export function RdvListAdmin(props){
     return <Modal animation={true} show={props.showModalRdvList} onHide={props.handleCloseModalRdvList}>
     <div onClick={()=>props.handleCloseModalRdvList()}>Fermer</div>
     <Modal.Body>
-        <RdvList setRdvInfo={props.setRdvInfo} handleCloseModalRdvList={props.handleCloseModalRdvList} handleShowModalRdvInsert={props.handleShowModalRdvInsert} handleShowModalRdvUpdate={props.handleShowModalRdvUpdate} handleShowModalRdvDelete={props.handleShowModalRdvDelete} patientInfo={props.patientInfo} info2={info2}/>
+        <RdvList setIsPlanning={props.setIsPlanning} setRdvInfo={props.setRdvInfo} handleCloseModalRdvList={props.handleCloseModalRdvList} handleShowModalRdvInsert={props.handleShowModalRdvInsert} handleShowModalRdvUpdate={props.handleShowModalRdvUpdate} handleShowModalRdvDelete={props.handleShowModalRdvDelete} patientInfo={props.patientInfo} info2={info2}/>
     </Modal.Body>
     </Modal>}
 

@@ -133,8 +133,6 @@ const storage = multer.diskStorage({
 
 app.use(multer({ storage: storage }).single('myFile'));
 app.post('/photos/upload', function (req, res) {
-  console.log(req.file, req.body)
-  console.log("test")
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/photos/insert", jsonParser, (req, res) => {

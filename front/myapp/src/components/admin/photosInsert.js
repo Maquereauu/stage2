@@ -6,16 +6,16 @@ import Button from 'react-bootstrap/Button';
 import {useRef} from 'react';
 export function PhotosInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
+    const [oops,setOops]=useState(0);
     const [counter,setCounter]=useState(["salut"]);
-    const [allData,setAllData]=useState([]);
     const list=["id_patient","type","image","groupe"];
+    const errors=["","Merci de bien vouloir remplir tous les formulaires","-_-"]
     const refs = useRef([]);
-    let test = 1;
     const onSubmitInsertPhotos = async (data) => {
-        if(test == 1){
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
+        let error = 0
         Object.entries(data).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
@@ -34,12 +34,22 @@ export function PhotosInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
-            console.log(dictionary)
-            InsertPhotos_(dictionary)
+            if(dictionary.image == ""){
+                error = 1
+                setOops(1)
+            }else if(error == 0){
+                setOops(0)
+            }
         }
-        test = 0;
-         // window.location.replace('/patients');
-    }}
+        for(let i = 0;i<counter.length;i++){
+            if(!error)
+            {const dictionary = Object.fromEntries(calls[i]);
+            InsertPhotos_(dictionary)}
+        }
+        if(!error){
+            window.location.replace('/patients');
+        }
+    }
     // const insertAllForms = async() => {
     //     console.log(allData)
     //     allData.map((data,key)=>{
@@ -50,10 +60,10 @@ export function PhotosInsert(props) {
     //     // window.location.replace('/patients');
     // }
     const sendAllForms = async() => {
-        for(let i=0;i<counter.length;i++){
-            refs.current[i].click();
+        if(refs.current[0])
+        {refs.current[0].click();}else{
+            setOops(2)
         }
-        window.location.replace('/patients');
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -65,6 +75,7 @@ export function PhotosInsert(props) {
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Images</h2>
             <div className="flex2 margin-top--- vertical align-center">
+            <p>{errors[oops]}</p>
             {counter.map((item,index)=>{
                 return <div key={index} className="flex gap">
                     <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertPhotos)} className="align-center flex vertical center" >

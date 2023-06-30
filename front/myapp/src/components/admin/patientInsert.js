@@ -13,17 +13,17 @@ export function PatientInsert(props) {
             <h2 className='title top left align-center'>Information</h2>
             <div className="flex2 margin-top--- vertical align-center">
                 <div className="flex gap">
-                    <input className='background my-account- margin-top--- margin-right--' {...register("nom")} placeholder="Nom" type="text" id="nom" />
-                    <input className='background my-account- margin-top---' {...register("prenom")} placeholder="Prenom" type="text" id="prenom" />
+                    <input required className='background my-account- margin-top--- margin-right--' {...register("nom")} placeholder="Nom" type="text" id="nom" />
+                    <input required className='background my-account- margin-top---' {...register("prenom")} placeholder="Prenom" type="text" id="prenom" />
                 </div>
                 <div className="flex gap">
-                    <input className='background my-account- margin-top--- margin-right--' {...register("adresse")} placeholder="Adresse" type="text" id="adresse" />
-                    <input className='background my-account- margin-top---' {...register("tel")} placeholder="Tel" type="text" id="tel" />
+                    <input required className='background my-account- margin-top--- margin-right--' {...register("adresse")} placeholder="Adresse" type="text" id="adresse" />
+                    <input required className='background my-account- margin-top---' {...register("tel")} placeholder="Tel" type="text" id="tel" />
 
                 </div>
                 <div className="flex gap">
-                    <input className='background my-account- margin-top--- margin-right--' {...register("tel_proche")} placeholder="Tel proche" type="text" id="tel_proche" />
-                    <input className='background my-account- margin-top---' {...register("medecin")} placeholder="Medecin" type="text" id="medecin" />
+                    <input required className='background my-account- margin-top--- margin-right--' {...register("tel_proche")} placeholder="Tel proche" type="text" id="tel_proche" />
+                    <input required className='background my-account- margin-top---' {...register("medecin")} placeholder="Medecin" type="text" id="medecin" />
                 </div>
             </div>
             <div className="flex2 center margin-top--">

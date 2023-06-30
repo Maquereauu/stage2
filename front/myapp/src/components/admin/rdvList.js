@@ -12,8 +12,8 @@ export function RdvList(props) {
         ReactSession.remove("notifpatient",true)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
-            {/* <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)}>Supprimer</div>
-            <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)}>Modifier</div> */}
+            <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(0)}>Supprimer</div>
+            <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(0)}>Modifier</div>
             </div>
             <div className="background-color-2-3">
                 <div className="margin-bottom--- flex space-evenly">

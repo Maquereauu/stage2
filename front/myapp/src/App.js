@@ -247,7 +247,7 @@ function App() {
         <RdvInsertAdmin patientInfo = {patientInfo} showModalRdvInsert={showModalRdvInsert} handleCloseModalRdvInsert={handleCloseModalRdvInsert}/>
         <RdvUpdateAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalRdvUpdate={showModalRdvUpdate} handleCloseModalRdvUpdate={handleCloseModalRdvUpdate}/>
         <RdvDeleteAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalRdvDelete={showModalRdvDelete} handleCloseModalRdvDelete={handleCloseModalRdvDelete}/>
-        <RdvListAdmin setRdvInfo={setRdvInfo} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
+        <RdvListAdmin setRdvInfo={setRdvInfo} setIsPlanning= {setIsPlanning} patientInfo = {patientInfo} showModalRdvList={showModalRdvList} handleCloseModalRdvList={handleCloseModalRdvList} handleShowModalRdvInsert={handleShowModalRdvInsert} handleShowModalRdvUpdate={handleShowModalRdvUpdate} handleShowModalRdvDelete={handleShowModalRdvDelete}/>
         <MoveInsertAdmin patientInfo = {patientInfo} showModalMoveInsert={showModalMoveInsert} handleCloseModalMoveInsert={handleCloseModalMoveInsert}/>
         <MoveUpdateAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalMoveUpdate={showModalMoveUpdate} handleCloseModalMoveUpdate={handleCloseModalMoveUpdate}/>
         <MoveDeleteAdmin isPlanning={isPlanning} rdvInfo = {rdvInfo} showModalMoveDelete={showModalMoveDelete} handleCloseModalMoveDelete={handleCloseModalMoveDelete}/>

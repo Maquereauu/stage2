@@ -75,24 +75,24 @@ export default function Planning(props){
           if (Bilan.shift == 1){
             if(Bilan.id_patient !== 0 ){
                 if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
-                  {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div> 
+                  {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t1'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div> 
                 <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
               if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
-              {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text}</p></div>
+              {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t1'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }
           }else if (Bilan.shift == 2){
             if(Bilan.id_patient !== 0 ){
               if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
-                {return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+                {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t2'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div>
                 <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
               if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
-              {return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text}</p></div>
+              {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t2'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }
@@ -103,28 +103,28 @@ export default function Planning(props){
         if (Bilan.shift == 1){
           if(Bilan.id_patient != 0 ){
             if(typeof(patient[0]) !== "undefined")
-              {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+              {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t1'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
             ReactSession.set("planningBilan"+Bilan.id,true)
             ReactSession.set("planningBilan"+Bilan.id+Bilan.text+Bilan.date+Bilan.weekly+Bilan.date_fin+Bilan.shift,true)
             ReactSession.remove("notifplanning", true)
-            return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Bilan.text}</p></div>
+            return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t1'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
           }
         }else if (Bilan.shift == 2){
           if(Bilan.id_patient != 0 ){
             if(typeof(patient[0]) !== "undefined")
-              {return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+              {return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t2'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
           }else{
             ReactSession.set("planningBilan"+Bilan.id,true)
             ReactSession.set("planningBilan"+Bilan.id+Bilan.text+Bilan.date+Bilan.weekly+Bilan.date_fin+Bilan.shift,true)
             ReactSession.remove("notifplanning", true)
-            return <><div className="box2 background-color-2-3"><div className='background-color-t2'><p>{Bilan.text}</p></div>
+            return <><div className="box2 background-color-2-3"><p>Bilan</p><div className='background-color-t2'><p>{Bilan.text}</p></div>
             <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>
           }
@@ -134,7 +134,7 @@ export default function Planning(props){
         const patient = info3.filter((info)=>info.id==Rdv.id_patient)
         if(Rdv.id_patient != 0 ){
           if(typeof(patient[0]) !== "undefined")
-            {return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text} {patient[0].nom}/{patient[0].prenom}</p></div>
+            {return <><div className="box2 background-color-2-3"><p>Rdv</p><div className='background-color-t1'><p>{Rdv.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div>
             <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>}
         }else{
@@ -142,7 +142,7 @@ export default function Planning(props){
           ReactSession.set("planningRdv"+Rdv.id,true)
           ReactSession.set("planningRdv"+Rdv.id+Rdv.text+Rdv.date,true)
           ReactSession.remove("notifplanning", true)
-          return <><div className="box2 background-color-2-3"><div className='background-color-t1'><p>{Rdv.text}</p></div>
+          return <><div className="box2 background-color-2-3"><p>Rdv</p><div className='background-color-t1'><p>{Rdv.text}</p></div>
           <div onClick={()=>props.handleShowModalRdvDelete()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalRdvUpdate()&props.setRdvInfo(Rdv)&props.setIsPlanning(1)}>Modifier</div></div></>
         }

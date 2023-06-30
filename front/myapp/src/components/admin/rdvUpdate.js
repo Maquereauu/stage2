@@ -4,6 +4,7 @@ export function RdvUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateRdv = async (data) => {
         UpdateRdv_(data)
+        console.log(props.isPlanning)
         if(props.isPlanning)
         {window.location.replace('/planning');}
         else{window.location.replace('/patients');}
@@ -15,7 +16,8 @@ export function RdvUpdate(props) {
             <div className="flex2 margin-top--- vertical align-center">
                 <div className="flex gap">
                     <input type="hidden" {...register("id")} id="id" defaultValue={props.rdvInfo.id}/>
-                    <input className='background my-account- margin-top--- margin-right--' {...register("text")} defaultValue={props.rdvInfo.text} placeholder="text" type="text" id="text" />
+                    <input required  className='background my-account- margin-top--- margin-right--' {...register("text")} defaultValue={props.rdvInfo.text} placeholder="text" type="text" id="text" />
+                    <input required={true} className='background my-account- margin-top--- margin-right--' {...register("date")} defaultValue={props.rdvInfo.date} placeholder="date" type="date" id="date" />
                 </div>
             </div>
             <div className="flex2 center margin-top--">

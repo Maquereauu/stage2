@@ -9,23 +9,23 @@ export function PlaiesInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const list=["id_patient","type","image","groupe"];
+    const errors=["","Merci de bien vouloir remplir tous les formulaires","-_-"]
+    const [oops,setOops]=useState(0);
     const refs = useRef([]);
     const refs2 = useRef([]);
-    let test = 1;
     const onSubmitInsertPhotos = async (data) => {
         const newList = Object.fromEntries(Object.entries(data).slice(0, 4));
         const newData = Object.fromEntries(Object.entries(data).slice(4));
-        if(test == 1){
-        InsertPlaies_(newList)
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
+        let error = 0
         Object.entries(newData).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
-                UploadPhotos_(value)
+                    UploadPhotos_(value)
             }
             }else{
             calls2[1]=value
@@ -36,26 +36,31 @@ export function PlaiesInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
-            InsertPhotos_(dictionary)
+            if(dictionary.image == "" || dictionary.groupe == ""){
+                error = 1
+                setOops(1)
+            }else if(error == 0){
+                setOops(0)
+            }
         }
-        test = 0;
-        window.location.replace('/patients');
-    }}
-    // const insertAllForms = async() => {
-    //     console.log(allData)
-    //     allData.map((data,key)=>{
-    //         console.log(data)
-    //         InsertPhotos_(data)
-    //     })
-    //     setAllData([])
-    //     // window.location.replace('/patients');
-    // }
+        if(newList.text == "" || newList.groupe == ""){
+            setOops(1)
+        }
+        if(!error){
+            InsertPlaies_(newList)
+        }
+        for(let i = 0;i<counter.length;i++){
+            if(!error)
+            {const dictionary = Object.fromEntries(calls[i]);
+            InsertPhotos_(dictionary)}
+        }
+        if(!error){
+            window.location.replace('/patients');
+        }
+    }
     const sendAllForms = async() => {
-        for(let i=0;i<counter.length;i++){
-            refs.current[i].click();
-        }
-        refs2.current[0].click();
-        // window.location.replace('/patients');
+        if(refs2.current[0])
+        {refs2.current[0].click();}
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {
@@ -67,10 +72,11 @@ export function PlaiesInsert(props) {
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Infos</h2>
             <div className="flex2 margin-top--- vertical align-center">
+            <p>{errors[oops]}</p>
             <form onSubmit={handleSubmit(onSubmitInsertPhotos)}>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
-            <input className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
+            <input required={true} className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("type")} defaultValue={1} type="hidden" id="type" />
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>
