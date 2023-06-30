@@ -1,14 +1,16 @@
 var cors = require('cors')
 const express = require("express");
 const multer = require("multer");
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
 app.use(cors())
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('ide', 'root', 'root', {
-  host: 'localhost',
+const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, {
+  host: process.env.LINK,
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
 });
 try {
