@@ -1,6 +1,6 @@
 export const Login = async () => {
     const response = await fetch(
-        'http://stage-backend-ashy.vercel.app/user/list', {
+        'http://https://stage-dun.vercel.app/user/list', {
             method: 'GET', 
             headers: {
                 'Accept': 'application/json', 
