@@ -11,7 +11,8 @@ const jsonParser = bodyParser.json();
 const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, {
   host: process.env.LINK,
-  dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+  dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
+  dialectModule: require('mysql2'),
 });
 try {
   sequelize.authenticate();
