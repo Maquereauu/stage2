@@ -1,6 +1,6 @@
 export const DeletePhotos = async (photos) => {
     const response = await fetch(
-        'http://localhost:4444/photos/delete', {
+        'http://stage-dun.vercel.app/photos/delete', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 
