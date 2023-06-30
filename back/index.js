@@ -1,8 +1,6 @@
 var cors = require('cors')
 const express = require("express");
 const multer = require("multer");
-const dotenv = require('dotenv');
-dotenv.config();
 const app = express();
 app.use(cors())
 const port = 4444;
