@@ -205,7 +205,7 @@ function App() {
   const [isPlanning,setIsPlanning] = useState(0);
   const [group,setGroup] = useState(0);
   const [notification, setNotification] = useState(false);
-  return (<>
+  return <>
     <div className="App">
       <Router>
         <Header/>
@@ -261,7 +261,7 @@ function App() {
         </Routes>
       </Router>
     </div>
-    </>);  
+    </>;  
 }
 
 export default App;
