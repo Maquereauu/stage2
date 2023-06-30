@@ -1,6 +1,6 @@
 export const GetBilan_ = async () => {
     const response = await fetch(
-        'http://stage-dun.vercel.app/bilan/list', {
+        'https://stage-dun.vercel.app/bilan/list', {
             method: 'GET', 
             headers: {
                 'Accept': 'application/json', 

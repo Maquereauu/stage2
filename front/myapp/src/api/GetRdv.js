@@ -1,6 +1,6 @@
 export const GetRdv_ = async () => {
     const response = await fetch(
-        'http://stage-dun.vercel.app/rdv/list', {
+        'https://stage-dun.vercel.app/rdv/list', {
             method: 'GET', 
             headers: {
                 'Accept': 'application/json', 
