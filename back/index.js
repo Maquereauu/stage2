@@ -4,7 +4,7 @@ const multer = require("multer");
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-var whitelist = ['https://ide-front.vercel.app','https://stage-dun.vercel.app']
+var whitelist = ['https://ide-front.vercel.app','https://stage-dun.vercel.app','https://ide-front.vercel.app/patients','https://ide-front.vercel.app/planning']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
