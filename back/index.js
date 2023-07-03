@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 app.use(cors({
-  origin: 'ide-front.vercel.app'
+  origin: 'https://ide-front.vercel.app'
 }))
 const port = 4444;
 const bodyParser = require('body-parser');
