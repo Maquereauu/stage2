@@ -24,7 +24,6 @@ const allowCorsHandler = (req, res, next) => {
 };
 
 app.use(allowCorsHandler);
-// app.use(cors())
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
