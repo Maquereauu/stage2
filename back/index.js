@@ -30,13 +30,14 @@ const allowCors = fn => async (req, res) => {
     'Access-Control-Allow-Headers',
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   )
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+  return await fn(req, res)
 }
 
-const handler = (req, res) => {
-  const d = new Date()
-  res.end(d.toString())
-}
-const oAllowCors = allowCors(handler)
+const oAllowCors = allowCors()
 app.use(oAllowCors);
 const port = 4444;
 const bodyParser = require('body-parser');
