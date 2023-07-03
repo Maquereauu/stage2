@@ -1,9 +1,16 @@
 var cors = require('cors')
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200,
+var whitelist = ['ide-front.vercel.app']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }
+
+app.use(cors(corsOptions));
 const express = require("express");
 const multer = require("multer");
 const dotenv = require('dotenv');
