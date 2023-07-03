@@ -16,7 +16,7 @@ const app = express();
 // }
 
 // app.use(cors(corsOptions));
-app.use(cors())
+app.use(cors({origin:['https://ide-front.vercel.app','https://stage-dun.vercel.app']}))
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
