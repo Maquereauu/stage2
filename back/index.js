@@ -4,41 +4,26 @@ const multer = require("multer");
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-var whitelist = ['https://ide-front.vercel.app','https://stage-dun.vercel.app']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+const allowCorsHandler = (req, res, next) => {
+  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app'];
+  const origin = req.headers.origin;
+
+  if (whitelist.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+    res.setHeader('Access-Control-Allow-Credentials', true);
+  } else {
+    return res.status(403).json({ error: 'Not allowed by CORS' });
   }
-}
-const allowCors = fn => async (req, res) => {
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  // another common pattern
-  // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  )
-  if (req.method === 'OPTIONS') {
-    res.status(200).end()
-    return
-  }
-  return await fn(req, res)
-}
 
-const handler = (req, res) => {
-  const d = new Date()
-  res.end(d.toString())
-}
+  next();
+};
 
-const allowCorsHandler = allowCors(handler)
-
-app.use(cors(corsOptions));
+app.use(allowCorsHandler);
 // app.use(cors())
 const port = 4444;
 const bodyParser = require('body-parser');
@@ -78,7 +63,7 @@ app.post("/patient/insert", jsonParser, (req, res) => {
   })();
 });
 
-app.get("/patient/list",allowCorsHandler, function (req, res) {
+app.get("/patient/list", function (req, res) {
   (async () => {
     await sequelize.sync();
     const body = await models.patient.findAll({});
