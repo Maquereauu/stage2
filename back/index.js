@@ -22,7 +22,7 @@ const allowCorsHandler = (req, res, next) => {
 
   next();
 };
-
+app.use(cors());
 app.use(allowCorsHandler);
 const port = 4444;
 const bodyParser = require('body-parser');
