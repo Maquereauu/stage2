@@ -1,21 +1,12 @@
 var cors = require('cors')
-var whitelist = ['ide-front.vercel.app']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 const express = require("express");
 const multer = require("multer");
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-app.use(cors(corsOptions))
+app.use(cors({
+  origin: 'ide-front.vercel.app'
+}))
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
