@@ -4,9 +4,18 @@ const multer = require("multer");
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-app.use(cors({
-  origin: 'https://ide-front.vercel.app'
-}))
+var whitelist = ['https://ide-front.vercel.app']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
