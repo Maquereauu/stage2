@@ -10,7 +10,6 @@ var corsOptions = {
   }
 }
 
-app.use(cors(corsOptions));
 const express = require("express");
 const multer = require("multer");
 const dotenv = require('dotenv');
