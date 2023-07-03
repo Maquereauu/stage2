@@ -16,7 +16,7 @@ const app = express();
 // }
 
 // app.use(cors(corsOptions));
-app.use()
+app.use(cors)
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
