@@ -16,7 +16,7 @@ const allowCorsHandler = (req, res, next) => {
     );
     res.setHeader('Access-Control-Allow-Credentials', true);
   } else {
-    return res.status(403).json({ error: 'Not allowed by CORS' });
+    return res.status(403).json({ error: 'Not allowed by CORS',origin : origin });
   }
 
   next();
