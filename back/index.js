@@ -6,7 +6,7 @@ const app = express();
 const allowCorsHandler = (req, res, next) => {
   const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app'];
   const origin = req.headers.origin;
-
+  console.log(origin)
   if (whitelist.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT');
