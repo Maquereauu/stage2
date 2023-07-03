@@ -4,19 +4,19 @@ const multer = require("multer");
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-// var whitelist = ['https://ide-front.vercel.app','https://stage-dun.vercel.app']
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error('Not allowed by CORS'))
-//     }
-//   }
-// }
+var whitelist = ['https://ide-front.vercel.app','https://stage-dun.vercel.app']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
-// app.use(cors(corsOptions));
-app.use(cors())
+app.use(cors(corsOptions));
+// app.use(cors())
 const port = 4444;
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
