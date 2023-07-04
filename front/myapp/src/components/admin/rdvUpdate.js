@@ -3,7 +3,7 @@ import { UpdateRdv_ } from "../../components/AllRdv/Rdv";
 export function RdvUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateRdv = async (data) => {
-        UpdateRdv_(data)
+        await UpdateRdv_(data)
         console.log(props.isPlanning)
         if(props.isPlanning)
         {window.location.replace('/planning');}

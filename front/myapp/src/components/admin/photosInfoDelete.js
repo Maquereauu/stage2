@@ -6,6 +6,6 @@ export function PhotosDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalPhotosDelete} onHide={props.handleCloseModalPhotosDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer l'ordonnance?</p>
-        <Button variant="danger" onClick={()=>DeletePhotos_(props.photosInfo)&window.location.replace('/patients')}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>await DeletePhotos_(props.photosInfo)&window.location.replace('/patients')}>Supprimer</Button>
     </Modal.Body>
     </Modal>}

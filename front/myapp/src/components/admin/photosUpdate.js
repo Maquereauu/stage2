@@ -3,7 +3,7 @@ import { UpdatePhotos_ } from "../../components/AllPhotos/Photos";
 export function PhotosUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdatePhotos = async (data) => {
-        UpdatePhotos_(data)
+        await UpdatePhotos_(data)
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdatePhotos)} className="align-center flex vertical center" >

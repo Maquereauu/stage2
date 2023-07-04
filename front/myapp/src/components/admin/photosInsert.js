@@ -16,12 +16,12 @@ export function PhotosInsert(props) {
         let c = 0
         let calls2 = [0,0];
         let error = 0
-        Object.entries(data).map(([key,value])=>{
+        Object.entries(data).map(async([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
-                UploadPhotos_(value)
+                await UploadPhotos_(value)
             }
             }else if(c%4==3){
                 calls2[1]=0
@@ -44,7 +44,7 @@ export function PhotosInsert(props) {
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
-            InsertPhotos_(dictionary)}
+            await InsertPhotos_(dictionary)}
         }
         if(!error){
             window.location.replace('/patients');

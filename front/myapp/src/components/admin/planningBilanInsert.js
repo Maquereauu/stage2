@@ -7,7 +7,7 @@ export function PlanningBilanInsert(props){
     const onSubmitInsertBilan = async (data) => {
         console.log(data)
         if(data.shift !== '0' && data.weekly !== '-1')
-{       InsertBilan_(data);
+{      await  InsertBilan_(data);
         window.location.replace('/planning')
     }
     }

@@ -6,7 +6,7 @@ import {useRef} from 'react';
 export function MoveInsert(props) {
     const { register, handleSubmit, reset,trigger } = useForm();
     const onSubmitInsertRdv = async (data) => {
-        InsertRdv_(data)
+        await InsertRdv_(data)
         window.location.replace('/patients');
     }
     return <div>

@@ -3,7 +3,7 @@ import { UpdatePlaies_ } from "../../components/AllPlaies/Plaies";
 export function TransmissionUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdatePlaies = async (data) => {
-        UpdatePlaies_(data)
+        await UpdatePlaies_(data)
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdatePlaies)} className="align-center flex vertical center" >

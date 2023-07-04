@@ -6,7 +6,7 @@ export function TransmissionDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalTransmissionDelete} onHide={props.handleCloseModalTransmissionDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le texte?</p>
-        <Button variant="danger" onClick={()=>DeletePlaies_(props.plaiesInfo)&window.location.replace('/patients')}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>await DeletePlaies_(props.plaiesInfo)&window.location.replace('/patients')}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
     

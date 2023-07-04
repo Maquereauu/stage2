@@ -11,12 +11,13 @@ export function TransmissionGroupDeleteAdmin(props){
     const yes = info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 5 && info.groupe == props.group)
     const no = info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.groupe == props.group && info2.type == 3)
     const Delete = (()=>{
-        yes.map((photos)=>{
-            DeletePhotos_(photos)
+        yes.map(async(photos)=>{
+            await DeletePhotos_(photos)
         });
-        no.map((plaies)=>{
-            DeletePlaies_(plaies)
+        no.map(async(plaies)=>{
+            await DeletePlaies_(plaies)
         })
+        window.location.replace('/patients')
     })
     useEffect(() => {
         const list = Photos_();
@@ -31,7 +32,7 @@ export function TransmissionGroupDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalTransmissionGroupDelete} onHide={props.handleCloseModalTransmissionGroupDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le groupe {props.group}?</p>
-        <Button variant="danger" onClick={()=>Delete()&window.location.replace('/patients')}>Supprimer</Button>
+        <Button variant="danger" onClick={()=>Delete()}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
     

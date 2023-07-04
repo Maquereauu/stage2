@@ -6,7 +6,7 @@ export function MedicDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalMedicDelete} onHide={props.handleCloseModalMedicDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le texte?</p>
-        <Button variant="danger" onClick={()=>DeletePlaies_(props.plaiesInfo)&window.location.replace('/patients')}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>await DeletePlaies_(props.plaiesInfo)&window.location.replace('/patients')}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
     

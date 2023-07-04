@@ -4,7 +4,7 @@ import { InsertRdv_ } from "../../components/AllRdv/Rdv";
 import { useForm } from "react-hook-form";
 export function PlanningRdvInsert(props){
     const onSubmitInsertRdv = async (data) => {
-        InsertRdv_(data);
+        await InsertRdv_(data);
         window.location.replace('/planning')
     }
     const { register, handleSubmit} = useForm()

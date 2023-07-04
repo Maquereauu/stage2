@@ -20,12 +20,12 @@ export function TransmissionInsert(props) {
         let c = 0
         let calls2 = [0,0];
         let error = 0
-        Object.entries(newData).map(([key,value])=>{
+        Object.entries(newData).map(async([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
-                UploadPhotos_(value)
+                    await UploadPhotos_(value)
             }
             }else{
             calls2[1]=value
@@ -47,12 +47,12 @@ export function TransmissionInsert(props) {
             setOops(1)
         }
         if(!error){
-            InsertPlaies_(newList)
+            await InsertPlaies_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
-            InsertPhotos_(dictionary)
+                await InsertPhotos_(dictionary)
         }
         }
         if(!error){

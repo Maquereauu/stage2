@@ -5,7 +5,7 @@ export function BilanUpdate(props) {
     const { register, handleSubmit, reset,trigger,watch } = useForm();
     const [weekly,setWeekly]=useState();
     const onSubmitUpdateBilan = async (data) => {
-        UpdateBilan_(data)
+        await UpdateBilan_(data)
         if(props.isPlanning)
         {window.location.replace('/planning');}
         else{window.location.replace('/patients');}

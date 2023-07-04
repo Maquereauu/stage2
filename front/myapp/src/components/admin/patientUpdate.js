@@ -3,7 +3,7 @@ import { UpdatePatient_ } from "../../components/AllPatient/Patient";
 export function PatientUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdatePatient = async (data) => {
-        UpdatePatient_(data)
+        await UpdatePatient_(data)
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdatePatient)} className="align-center flex vertical center" >
