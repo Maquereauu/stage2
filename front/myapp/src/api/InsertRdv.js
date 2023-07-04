@@ -1,6 +1,6 @@
 export const InsertRdv = async (Rdv) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/rdv/insert', {
+        'http://localhost:4444/rdv/insert', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

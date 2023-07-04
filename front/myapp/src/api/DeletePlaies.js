@@ -1,6 +1,6 @@
 export const DeletePlaies = async (Plaies) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/plaies/delete', {
+        'http://localhost:4444/plaies/delete', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

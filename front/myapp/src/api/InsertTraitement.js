@@ -1,6 +1,6 @@
 export const InsertTraitement = async (traitement) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/traitement/insert', {
+        'http://localhost:4444/traitement/insert', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

@@ -1,12 +1,12 @@
 const express = require("express");
 const multer = require("multer");
+const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 const allowCorsHandler = (req, res, next) => {
-  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com'];
+  const whitelist = ['https://ide-front.vercel.app', 'http://localhost:3000','https://vercel.com'];
   const origin = req.headers.origin;
-  console.log(origin)
   if (whitelist.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT');
@@ -141,18 +141,48 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
 });
 
 // CRUD photos
-
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-      callback(null, '../front/myapp/public/img');
-  },
-  filename: (req, file, callback) => {
-      callback(null,file.originalname);
-  }
+const storage = new Storage({
+  keyFilename: 'images-3e2d3-firebase-adminsdk-c8g82-513c6802ee.json',
+  projectId: 'images-3e2d3',
 });
+const bucket = storage.bucket('images-3e2d3.appspot.com');
+const multerStorage = multer.memoryStorage();
+const upload = multer({ storage: multerStorage });
+// const storage = multer.diskStorage({
+//   destination: (req, file, callback) => {
+//       callback(null, '../front/myapp/public/img');
+//   },
+//   filename: (req, file, callback) => {
+//       callback(null,file.originalname);
+//   }
+// });
+// app.use(multer({ storage: storage }).single('myFile'));
+// app.post('/photos/upload', function (req, res) {
+// });
+app.post('/photos/upload', upload.single('myFile'), (req, res, next) => {
+  if (!req.file) {
+    res.status(400).json({ error: 'Aucun fichier trouvé' });
+    return;
+  }
 
-app.use(multer({ storage: storage }).single('myFile'));
-app.post('/photos/upload', function (req, res) {
+  const file = bucket.file(req.file.originalname);
+  const blobStream = file.createWriteStream({
+    metadata: {
+      contentType: req.file.mimetype
+    }
+  });
+
+  blobStream.on('error', (error) => {
+    console.log(error);
+    res.status(500).json({ error: 'Erreur lors de l\'upload du fichier' });
+  });
+
+  blobStream.on('finish', () => {
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+    res.status(200).json({ imageUrl: publicUrl });
+  });
+
+  blobStream.end(req.file.buffer);
 });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/photos/insert", jsonParser, (req, res) => {

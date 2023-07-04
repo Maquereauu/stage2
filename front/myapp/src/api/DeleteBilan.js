@@ -1,6 +1,6 @@
 export const DeleteBilan = async (Bilan) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/bilan/delete', {
+        'http://localhost:4444/bilan/delete', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

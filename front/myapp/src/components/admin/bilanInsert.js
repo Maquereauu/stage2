@@ -76,7 +76,7 @@ export function BilanInsert(props) {
         if (typeof weekly !== "undefined" && weekly !== -1 && weekly !== 0) {
           reset({ date_debut: watch('date') });
         } else {
-          reset({ date_debut: "0000-00-00" });
+          reset({ date_debut: null });
         }
       }, [weekly,watch('date')]);
     return <div>
@@ -114,8 +114,8 @@ export function BilanInsert(props) {
             <label>Date fin
             <input className='background my-account- margin-top---' {...register("date_fin")} placeholder="fin (année-mois-jour)" type="date" id="date_fin" />
             </label></>:<>
-            <input hidden={true} className='background my-account- margin-top---' {...register("date_debut")} defaultValue={"0000-00-00"} placeholder="debut (année-mois-jour)" type="date" id="date_debut" />
-            <input hidden={true} className='background my-account- margin-top---' {...register("date_fin")} defaultValue={"0000-00-00"} placeholder="fin (année-mois-jour)" type="date" id="date_fin" /></>}
+            <input hidden={true} className='background my-account- margin-top---' {...register("date_debut")} defaultValue={null} placeholder="debut (année-mois-jour)" type="date" id="date_debut" />
+            <input hidden={true} className='background my-account- margin-top---' {...register("date_fin")} defaultValue={null} placeholder="fin (année-mois-jour)" type="date" id="date_fin" /></>}
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>
             {counter.map((item,index)=>{

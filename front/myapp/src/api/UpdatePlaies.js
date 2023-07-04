@@ -1,6 +1,6 @@
 export const UpdatePlaies = async (Plaies) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/plaies/update', {
+        'http://localhost:4444/plaies/update', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

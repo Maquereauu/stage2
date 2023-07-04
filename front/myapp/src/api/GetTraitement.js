@@ -1,6 +1,6 @@
 export const GetTraitement_ = async () => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/traitement/list', {
+        'http://localhost:4444/traitement/list', {
             method: 'GET', 
             headers: {
                 'Accept': 'application/json', 
