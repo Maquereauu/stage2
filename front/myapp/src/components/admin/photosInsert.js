@@ -16,13 +16,15 @@ export function PhotosInsert(props) {
         let c = 0
         let calls2 = [0,0];
         let error = 0
+        const uploadPromises = []
         Object.entries(data).map(([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
                     console.log(value)
-                UploadPhotos_(value)
+                    const uploadPromise = UploadPhotos_(value)
+                    uploadPromises.push(uploadPromise)
             }
             }else if(c%4==3){
                 calls2[1]=0
@@ -50,7 +52,9 @@ export function PhotosInsert(props) {
         }
         }
         if(!error){
-            window.location.replace('/patients');
+            Promise.all(uploadPromises).then(() => {
+                window.location.replace('/patients')
+        })
         }
     }
     // const insertAllForms = async() => {
