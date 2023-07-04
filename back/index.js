@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 const allowCorsHandler = (req, res, next) => {
-  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com'];
+  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com','http://localhost:3000'];
   const origin = req.headers.origin;
   if (whitelist.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
@@ -35,8 +35,6 @@ const firebaseConfig = {
     auth_provider_x509_cert_url: process.env.AUTH_PROVIDER_X509_CERT_URL,
     client_x509_cert_url: process.env.CLIENT_X509_CERT_URL
 };
-
-console.log(firebaseConfig)
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const { Sequelize } = require('sequelize');
@@ -156,7 +154,16 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
 
 // CRUD photos
 const storage = new Storage({
-  keyFilename: firebaseConfig,
+  credentials: { type: firebaseConfig.type,
+    project_id: firebaseConfig.project_id,
+    private_key_id: firebaseConfig.private_key_id,
+    private_key: firebaseConfig.private_key,
+    client_email: firebaseConfig.client_email,
+    client_id: firebaseConfig.client_id,
+    auth_uri: firebaseConfig.auth_uri,
+    token_uri: firebaseConfig.token_uri,
+    auth_provider_x509_cert_url: firebaseConfig.auth_provider_x509_cert_url,
+    client_x509_cert_url: firebaseConfig.client_x509_cert_url},
   projectId: 'images-3e2d3',
 });
 const bucket = storage.bucket('images-3e2d3.appspot.com');
