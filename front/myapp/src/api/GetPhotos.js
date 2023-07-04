@@ -1,6 +1,6 @@
 export const GetPhotos_ = async () => {
     const response = await fetch(
-        'http://localhost:4444/photos/list', {
+        'https://stage-dun.vercel.app/photos/list', {
             method: 'GET', 
             headers: {
                 'Accept': 'application/json', 

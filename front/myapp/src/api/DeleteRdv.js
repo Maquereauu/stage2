@@ -1,6 +1,6 @@
 export const DeleteRdv = async (Rdv) => {
     const response = await fetch(
-        'http://localhost:4444/rdv/delete', {
+        'https://stage-dun.vercel.app/rdv/delete', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

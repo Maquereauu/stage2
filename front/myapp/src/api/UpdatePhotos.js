@@ -1,6 +1,6 @@
 export const UpdatePhotos = async (Photos) => {
     const response = await fetch(
-        'http://localhost:4444/photos/update', {
+        'https://stage-dun.vercel.app/photos/update', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

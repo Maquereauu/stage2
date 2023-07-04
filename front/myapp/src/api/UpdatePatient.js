@@ -1,6 +1,6 @@
 export const UpdatePatient = async (patient) => {
     const response = await fetch(
-        'http://localhost:4444/patient/update', {
+        'https://stage-dun.vercel.app/patient/update', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 
