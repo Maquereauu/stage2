@@ -24,20 +24,20 @@ export function PatientDeleteAdmin(props){
     const no4 = info4.filter((info4)=>info4.id_patient == props.patientInfo.id)
     const no5 = info5.filter((info5)=>info5.id_patient == props.patientInfo.id)
     const Delete= async () =>{
-        no.map(async(photo)=>{
-            await DeletePhotos_(photo)
+        no.map((photo)=>{
+            DeletePhotos_(photo)
         })
-        no2.map(async(bilan)=>{
-            await DeleteBilan_(bilan)
+        no2.map((bilan)=>{
+            DeleteBilan_(bilan)
         })
-        no3.map(async(traitement)=>{
-            await DeleteTraitement_(traitement)
+        no3.map((traitement)=>{
+            DeleteTraitement_(traitement)
         })
-        no4.map(async(plaies)=>{
-            await DeletePlaies_(plaies)
+        no4.map((plaies)=>{
+            DeletePlaies_(plaies)
         })
-        no5.map(async(rdv)=>{
-            await DeleteRdv_(rdv)
+        no5.map((rdv)=>{
+            DeleteRdv_(rdv)
         })
     }
     useEffect(() => {
@@ -65,6 +65,6 @@ export function PatientDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalPatientDelete} onHide={props.handleCloseModalPatientDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le patient {props.patientInfo.nom} {props.patientInfo.prenom}</p>
-        <Button variant="danger" onClick={()=>DeletePatient_(props.patientInfo)&Delete()&window.location.replace('/patients')}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>await DeletePatient_(props.patientInfo)&await Delete()&window.location.replace('/patients')}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
