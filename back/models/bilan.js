@@ -25,11 +25,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     date_debut: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: true
     },
     date_fin: {
       type: DataTypes.DATEONLY,
-      allowNull: false
+      allowNull: true
     },
     groupe: {
       type: DataTypes.INTEGER,

@@ -22,7 +22,7 @@ export function PlanningBilanInsert(props){
         if (typeof weekly !== "undefined" && weekly !== -1 && weekly !== 0) {
           reset({ date_debut: watch('date') });
         } else {
-          reset({ date_debut: "0000-00-00",date_fin: "0000-00-00" });
+          reset({ date_debut: null,date_fin: null });
         }
       }, [weekly,watch('date')]);
     return <Modal animation={true} show={props.showModalPlanningBilanInsert} onHide={()=>{props.handleCloseModalPlanningBilanInsert();window.location.replace('/planning')}}>
