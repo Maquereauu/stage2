@@ -12,7 +12,7 @@ export function TraitementInsert(props) {
     const list=["id_patient","medicament","dose_matin","dose_midi","dose_soir","date_debut","date_fin"];
     const errors=["","Merci de bien vouloir rentrer des dates valides","Merci de bien vouloir remplir tous les formulaires","-_-"]
     const refs = useRef([]);
-    const onSubmitInsertTraitement = (data) => {
+    const onSubmitInsertTraitement = async (data) => {
             {console.log("test")}
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let error = 0
@@ -40,11 +40,11 @@ export function TraitementInsert(props) {
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
-            InsertTraitement_(dictionary)
+            await InsertTraitement_(dictionary)
         }
         }
         if(!error){
-            // window.location.replace('/patients');
+            window.location.replace('/patients');
         }
     }
     // const insertAllForms = async() => {
