@@ -44,7 +44,7 @@ export function TraitementInsert(props) {
         }
         }
         if(!error){
-            window.location.replace('/patients');
+            // window.location.replace('/patients');
         }
     }
     // const insertAllForms = async() => {
