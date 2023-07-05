@@ -19,7 +19,8 @@ const allowCorsHandler = async (req, res, next) => {
       res.status(200).end()
       return
     }
-    return await fn(req, res)
+    await fn(req, res)
+    return next();
   } else {
     return res.status(403).json({ error: 'Non'});
   }
