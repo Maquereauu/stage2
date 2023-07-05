@@ -15,6 +15,7 @@ const allowCorsHandler = (req, res, next) => {
       'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     );
     res.setHeader('Access-Control-Allow-Credentials', true);
+    res.sendStatus(200);
   } else {
     return res.status(403).json({ error: origin ,test: "salut"});
   }
