@@ -73,6 +73,7 @@ app.post("/patient/insert", jsonParser, (req, res) => {
     await models.patient.create({ nom: req.body.nom , prenom: req.body.prenom, tel: req.body.tel, adresse: req.body.adresse, medecin: req.body.medecin, tel_proche: req.body.tel_proche})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
+    await sequelize.close();
   })();
 });
 
@@ -81,6 +82,7 @@ app.get("/patient/list", function (req, res) {
     await sequelize.sync();
     const body = await models.patient.findAll({});
     res.send(body)
+    await sequelize.close();
   })();
 });
 
@@ -95,6 +97,7 @@ app.post("/patient/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
+    await sequelize.close();
   })();
 });
 
@@ -108,6 +111,7 @@ app.post("/patient/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
+    await sequelize.close();
   })();
 });
 // CRUD traitement
@@ -118,7 +122,7 @@ app.post("/traitement/insert", jsonParser, (req, res) => {
     await models.traitement.create({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose_midi: req.body.dose_midi ,dose_soir: req.body.dose_soir ,dose_matin: req.body.dose_matin ,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.get("/traitement/list", function (req, res) {
@@ -140,7 +144,7 @@ app.post("/traitement/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/traitement/delete", jsonParser, (req, res) => {
@@ -153,7 +157,7 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 // CRUD photos
@@ -216,7 +220,7 @@ app.post("/photos/insert", jsonParser, (req, res) => {
     await models.photos.create({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.get("/photos/list", function (req, res) {
@@ -224,7 +228,7 @@ app.get("/photos/list", function (req, res) {
     await sequelize.sync();
     const body = await models.photos.findAll({});
     res.send(body)
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/photos/update", jsonParser, (req, res) => {
@@ -238,7 +242,7 @@ app.post("/photos/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/photos/delete", jsonParser, (req, res) => {
@@ -251,7 +255,7 @@ app.post("/photos/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 //CRUD plaies
@@ -262,7 +266,7 @@ app.post("/plaies/insert", jsonParser, (req, res) => {
     await models.plaies.create({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe,type: req.body.type})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.get("/plaies/list", function (req, res) {
@@ -270,7 +274,7 @@ app.get("/plaies/list", function (req, res) {
     await sequelize.sync();
     const body = await models.plaies.findAll({});
     res.send(body)
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/plaies/update", jsonParser, (req, res) => {
@@ -284,7 +288,7 @@ app.post("/plaies/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/plaies/delete", jsonParser, (req, res) => {
@@ -297,7 +301,7 @@ app.post("/plaies/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 //CRUD bilan
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -307,7 +311,7 @@ app.post("/bilan/insert", jsonParser, (req, res) => {
     await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.get("/bilan/list", function (req, res) {
@@ -315,7 +319,7 @@ app.get("/bilan/list", function (req, res) {
     await sequelize.sync();
     const body = await models.bilan.findAll({});
     res.send(body)
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/bilan/update", jsonParser, (req, res) => {
@@ -329,7 +333,7 @@ app.post("/bilan/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/bilan/delete", jsonParser, (req, res) => {
@@ -342,7 +346,7 @@ app.post("/bilan/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 //CRUD rdv
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -352,7 +356,7 @@ app.post("/rdv/insert", jsonParser, (req, res) => {
     await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type })
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.get("/rdv/list", function (req, res) {
@@ -360,7 +364,7 @@ app.get("/rdv/list", function (req, res) {
     await sequelize.sync();
     const body = await models.rdv.findAll({});
     res.send(body)
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/rdv/update", jsonParser, (req, res) => {
@@ -374,7 +378,7 @@ app.post("/rdv/update", jsonParser, (req, res) => {
       })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 
 app.post("/rdv/delete", jsonParser, (req, res) => {
@@ -387,7 +391,7 @@ app.post("/rdv/delete", jsonParser, (req, res) => {
     })
     .then(result => res.json(result))
     .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+  await sequelize.close();})();
 });
 //Login
 app.get("/user/list", function (req, res) {
@@ -395,5 +399,5 @@ app.get("/user/list", function (req, res) {
     await sequelize.sync();
     const body = await models.compte.findAll({});
     res.send(body)
-  })();
+  await sequelize.close();})();
 });
