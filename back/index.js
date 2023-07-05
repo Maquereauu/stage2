@@ -25,8 +25,12 @@ const allowCorsHandler = fn => async (req, res, next) => {
   }
 };
 const handler = (req, res) => {
-  const d = new Date()
-  res.end(d.toString())}
+  const d = new Date();
+  const responseObject = { date: d.toString() };
+  const jsonResponse = JSON.stringify(responseObject);
+  res.setHeader('Content-Type', 'application/json');
+  res.end(jsonResponse);
+}
   
 app.use(allowCorsHandler(handler));
 const port = 4444;
