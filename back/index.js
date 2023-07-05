@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 const allowCorsHandler = (req, res, next) => {
-  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com','http://localhost:3000'];
+  const whitelist = ['https://ide-front.vercel.app/', 'https://stage-dun.vercel.app/','https://vercel.com/','http://localhost:3000'];
   const origin = req.headers.origin;
   if (whitelist.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
