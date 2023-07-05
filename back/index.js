@@ -5,19 +5,19 @@ const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
 const allowCorsHandler = (req, res, next) => {
-  // const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com','http://localhost:3000'];
-  // const origin = req.headers.origin;
-  // if (whitelist.indexOf(origin) !== -1) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://ide-front.vercel.app');
+  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com','http://localhost:3000'];
+  const origin = req.headers.origin;
+  if (whitelist.indexOf(origin) !== -1) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, PATCH, DELETE, POST, PUT');
     res.setHeader(
       'Access-Control-Allow-Headers',
       'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
     );
     res.setHeader('Access-Control-Allow-Credentials', true);
-  // } else {
-  //   return res.status(403).json({ error: origin ,test: "salut"});
-  // }
+  } else {
+    return res.status(403).json({ error: origin ,test: "salut"});
+  }
 
   next();
 };
