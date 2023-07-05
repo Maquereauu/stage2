@@ -4,42 +4,25 @@ const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-// const allowCorsHandler = (req, res, next) => {
-//   const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
-//   const origin = req.headers.origin;
-//   if (whitelist.indexOf(origin) !== -1) {
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-//     res.setHeader('Access-Control-Allow-Origin', origin);
-//     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-//     res.setHeader(
-//       'Access-Control-Allow-Headers',
-//       'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-//     );
-//     if (req.method === 'OPTIONS') {
-//       res.status(200).end();
-//       return;
-//     }
-//     next();
-//   } else {
-//     return res.status(403).json({ error: 'Non' });
-//   }
-// };
 const allowCorsHandler = (req, res, next) => {
+  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
   const origin = req.headers.origin;
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
+  if (whitelist.indexOf(origin) !== -1) {
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+    if (req.method === 'OPTIONS') {
+      res.status(200).end();
+      return;
+    }
+    next();
+  } else {
+    return res.status(403).json({ error: 'Non' });
   }
-
-  next();
 };
 
 app.use(allowCorsHandler);
