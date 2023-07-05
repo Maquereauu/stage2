@@ -23,8 +23,6 @@ const allowCorsHandler = async (req, res, next) => {
   } else {
     return res.status(403).json({ error: 'Non'});
   }
-
-  next();
 };
 app.use(allowCorsHandler);
 const port = 4444;
