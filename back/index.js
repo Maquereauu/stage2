@@ -4,7 +4,7 @@ const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-const allowCorsHandler = async (req, res, next) => {
+const allowCorsHandler = fn => async (req, res, next) => {
   const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app','https://vercel.com','http://localhost:3000'];
   const origin = req.headers.origin;
   if (whitelist.indexOf(origin) !== -1) {
@@ -19,12 +19,16 @@ const allowCorsHandler = async (req, res, next) => {
       res.status(200).end()
       return
     }
-    return next();
+    return await fn(req, res)
   } else {
     return res.status(403).json({ error: 'Non'});
   }
 };
-app.use(allowCorsHandler);
+const handler = (req, res) => {
+  const d = new Date()
+  res.end(d.toString())}
+  
+app.use(allowCorsHandler(handler));
 const port = 4444;
 const firebaseConfig = {
     type: process.env.TYPE,
