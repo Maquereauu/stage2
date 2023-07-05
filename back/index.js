@@ -4,7 +4,7 @@ const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
-const allowCorsHandler = async (req, res, next) => {
+const allowCorsHandler = (req, res, next) => {
   const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
   const origin = req.headers.origin;
   if (whitelist.indexOf(origin) !== -1) {
