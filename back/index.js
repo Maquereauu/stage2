@@ -111,7 +111,6 @@ app.post("/patient/delete", jsonParser, (req, res) => {
   })();
 });
 // CRUD traitement
-app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/traitement/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
@@ -209,7 +208,6 @@ app.post('/photos/upload', upload.single('myFile'), (req, res, next) => {
 
   blobStream.end(req.file.buffer);
 });
-app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/photos/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
@@ -255,7 +253,6 @@ app.post("/photos/delete", jsonParser, (req, res) => {
 });
 
 //CRUD plaies
-app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/plaies/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
@@ -300,7 +297,6 @@ app.post("/plaies/delete", jsonParser, (req, res) => {
   })();
 });
 //CRUD bilan
-app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/bilan/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
@@ -345,7 +341,6 @@ app.post("/bilan/delete", jsonParser, (req, res) => {
   })();
 });
 //CRUD rdv
-app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/rdv/insert", jsonParser, (req, res) => {
   (async () => {
     await sequelize.sync();
