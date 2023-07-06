@@ -20,10 +20,10 @@ const allowCorsHandler = (req, res, next) => {
       res.status(200).end();
       return;
     }
-    next();
   } else {
     return res.status(403).json({ error: 'Non' });
   }
+  next();
 };
 const closeSequelizeConnection = (req, res, next) => {
   res.once('finish', () => {
