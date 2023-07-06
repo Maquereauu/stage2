@@ -35,7 +35,11 @@ const closeSequelizeConnection = (req, res, next) => {
 
   next();
 };
-app.use(allowCorsHandler);
+// app.use(allowCorsHandler);
+app.use(cors({
+  origin: 'https://ide-front.vercel.app',
+  credentials: true
+}));
 app.use(closeSequelizeConnection);
 const port = 4444;
 const firebaseConfig = {
