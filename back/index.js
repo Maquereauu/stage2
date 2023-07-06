@@ -57,6 +57,22 @@ const sequelize = new Sequelize('sql7630695', 'sql7630695', process.env.PASSWORD
   host: process.env.LINK,
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
+  pool: {
+    max: 10,
+    min: 0, 
+    acquire: 30000, 
+    idle: 10000
+  }
+});
+process.on('SIGINT', async () => {
+  try {
+    await sequelize.close();
+    console.log('Sequelize connection pool closed.');
+    process.exit(0);
+  } catch (error) {
+    console.error('Failed to close Sequelize connection pool:', error);
+    process.exit(1);
+  }
 });
 try {
   sequelize.authenticate();
