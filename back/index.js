@@ -41,7 +41,7 @@ const firebaseConfig = {
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('sql7630695', 'sql7630695', process.env.PASSWORD, {
+const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, {
   host: process.env.LINK,
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
