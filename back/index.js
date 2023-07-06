@@ -25,14 +25,16 @@ const allowCorsHandler = (req, res, next) => {
   }
 };
 const closeConnection = (req, res, next) => {
-  res.on('finish', () => {
+  const originalEnd = res.end;
+  res.end = function (...args) {
     sequelize.close()
       .then(() => console.log('Sequelize connection closed.'))
-      .catch(error => console.error('Failed to close Sequelize connection:', error));
-  });
+      .catch(error => console.error('Failed to close Sequelize connection:', error))
+      .finally(() => originalEnd.apply(this, args));
+  };
 
   next();
-}
+};
 app.use(allowCorsHandler);
 app.use(closeConnection);
 const port = 4444;
@@ -51,7 +53,7 @@ const firebaseConfig = {
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, {
+const sequelize = new Sequelize('sql7630695', 'sql7630695', process.env.PASSWORD, {
   host: process.env.LINK,
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
