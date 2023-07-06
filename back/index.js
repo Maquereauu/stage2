@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const cors = require('cors');
 const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
