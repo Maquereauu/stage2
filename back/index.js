@@ -1,6 +1,5 @@
 const express = require("express");
 const multer = require("multer");
-const cors = require('cors');
 const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -36,11 +35,7 @@ const closeSequelizeConnection = (req, res, next) => {
 
   next();
 };
-// app.use(allowCorsHandler);
-app.use(cors({
-  origin: 'https://ide-front.vercel.app',
-  credentials: true
-}));
+app.use(allowCorsHandler);
 app.use(closeSequelizeConnection);
 const port = 4444;
 const firebaseConfig = {
