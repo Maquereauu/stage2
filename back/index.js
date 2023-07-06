@@ -24,7 +24,17 @@ const allowCorsHandler = (req, res, next) => {
     return res.status(403).json({ error: 'Non' });
   }
 };
+const closeConnection = (req, res, next) => {
+  res.on('finish', () => {
+    sequelize.close()
+      .then(() => console.log('Sequelize connection closed.'))
+      .catch(error => console.error('Failed to close Sequelize connection:', error));
+  });
+
+  next();
+}
 app.use(allowCorsHandler);
+app.use(closeConnection);
 const port = 4444;
 const firebaseConfig = {
     type: process.env.TYPE,
