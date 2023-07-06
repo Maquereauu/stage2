@@ -67,67 +67,88 @@ app.get("/", function (req, res) {
   res.send("Hello World!");
 });
 
-app.listen(port, function () {
-  console.log(`App listening on port ${port}!`);
-});
+sequelize.sync()
+  .then(() => {
+    console.log('Models synchronized with database.');
+    // Démarrage du serveur une fois que la synchronisation est terminée
+    app.listen(port, () => {
+      console.log(`App listening on port ${port}!`);
+    });
+  })
+  .catch(error => {
+    console.error('Failed to synchronize models with database:', error);
+  });
 
 var initModels = require("./models/init-models");
 var models = initModels(sequelize);
 
 // CRUD patient
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/patient/insert", jsonParser, (req, res) => {
-  (async () => {
-    await sequelize.sync();
-    await models.patient.create({ nom: req.body.nom , prenom: req.body.prenom, tel: req.body.tel, adresse: req.body.adresse, medecin: req.body.medecin, tel_proche: req.body.tel_proche})
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-    
-  })();
+app.post("/patient/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.patient.create({
+      nom: req.body.nom,
+      prenom: req.body.prenom,
+      tel: req.body.tel,
+      adresse: req.body.adresse,
+      medecin: req.body.medecin,
+      tel_proche: req.body.tel_proche
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/patient/list", function (req, res) {
-  (async () => {
-    await sequelize.sync();
-    const body = await models.patient.findAll({});
-    res.send(body)
-    
-  })();
+app.get("/patient/list", async (req, res) => {
+  try {
+    const patients = await models.patient.findAll({});
+    res.send(patients);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/patient/update", jsonParser, (req, res) => {
-  (async () => {
-    await sequelize.sync();
-    await models.patient.update({ nom: req.body.nom , prenom: req.body.prenom, tel: req.body.tel, adresse: req.body.adresse, medecin: req.body.medecin, tel_proche: req.body.tel_proche},
+app.post("/patient/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.patient.update(
+      {
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        tel: req.body.tel,
+        adresse: req.body.adresse,
+        medecin: req.body.medecin,
+        tel_proche: req.body.tel_proche
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-    
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/patient/delete", jsonParser, (req, res) => {
-  (async () => {
-    await sequelize.sync();
-    await models.patient.destroy({
+app.post("/patient/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.patient.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-    
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 // CRUD traitement
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/traitement/insert", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.traitement.create({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose_midi: req.body.dose_midi ,dose_soir: req.body.dose_soir ,dose_matin: req.body.dose_matin ,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
@@ -136,7 +157,7 @@ app.post("/traitement/insert", jsonParser, (req, res) => {
 
 app.get("/traitement/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.traitement.findAll({});
     res.send(body)
   })();
@@ -144,7 +165,7 @@ app.get("/traitement/list", function (req, res) {
 
 app.post("/traitement/update", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.traitement.update({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose_midi: req.body.dose_midi ,dose_soir: req.body.dose_soir ,dose_matin: req.body.dose_matin,date_debut: req.body.date_debut ,date_fin: req.body.date_fin },
       {
         where: {
@@ -158,7 +179,7 @@ app.post("/traitement/update", jsonParser, (req, res) => {
 
 app.post("/traitement/delete", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.traitement.destroy({
       where: {
         id: req.body.id
@@ -225,7 +246,7 @@ app.post('/photos/upload', upload.single('myFile'), (req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/photos/insert", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.photos.create({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
@@ -234,7 +255,7 @@ app.post("/photos/insert", jsonParser, (req, res) => {
 
 app.get("/photos/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.photos.findAll({});
     res.send(body)
   })();
@@ -242,7 +263,7 @@ app.get("/photos/list", function (req, res) {
 
 app.post("/photos/update", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.photos.update({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe },
       {
         where: {
@@ -256,7 +277,7 @@ app.post("/photos/update", jsonParser, (req, res) => {
 
 app.post("/photos/delete", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.photos.destroy({
       where: {
         id: req.body.id
@@ -271,7 +292,7 @@ app.post("/photos/delete", jsonParser, (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/plaies/insert", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.plaies.create({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe,type: req.body.type})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
@@ -280,7 +301,7 @@ app.post("/plaies/insert", jsonParser, (req, res) => {
 
 app.get("/plaies/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.plaies.findAll({});
     res.send(body)
   })();
@@ -288,7 +309,7 @@ app.get("/plaies/list", function (req, res) {
 
 app.post("/plaies/update", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.plaies.update({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe ,type: req.body.type},
       {
         where: {
@@ -302,7 +323,7 @@ app.post("/plaies/update", jsonParser, (req, res) => {
 
 app.post("/plaies/delete", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.plaies.destroy({
       where: {
         id: req.body.id
@@ -316,7 +337,7 @@ app.post("/plaies/delete", jsonParser, (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/bilan/insert", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
@@ -325,7 +346,7 @@ app.post("/bilan/insert", jsonParser, (req, res) => {
 
 app.get("/bilan/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.bilan.findAll({});
     res.send(body)
   })();
@@ -333,7 +354,7 @@ app.get("/bilan/list", function (req, res) {
 
 app.post("/bilan/update", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.bilan.update({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift,date_debut: req.body.date_debut ,date_fin: req.body.date_fin},
       {
         where: {
@@ -347,7 +368,7 @@ app.post("/bilan/update", jsonParser, (req, res) => {
 
 app.post("/bilan/delete", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.bilan.destroy({
       where: {
         id: req.body.id
@@ -361,7 +382,7 @@ app.post("/bilan/delete", jsonParser, (req, res) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.post("/rdv/insert", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type })
       .then(result => res.json(result))
       .catch(err => res.send(JSON.stringify(err.message)));
@@ -370,7 +391,7 @@ app.post("/rdv/insert", jsonParser, (req, res) => {
 
 app.get("/rdv/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.rdv.findAll({});
     res.send(body)
   })();
@@ -378,7 +399,7 @@ app.get("/rdv/list", function (req, res) {
 
 app.post("/rdv/update", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.rdv.update({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type},
       {
         where: {
@@ -392,7 +413,7 @@ app.post("/rdv/update", jsonParser, (req, res) => {
 
 app.post("/rdv/delete", jsonParser, (req, res) => {
   (async () => {
-    await sequelize.sync();
+    
     await models.rdv.destroy({
       where: {
         id: req.body.id
@@ -405,7 +426,7 @@ app.post("/rdv/delete", jsonParser, (req, res) => {
 //Login
 app.get("/user/list", function (req, res) {
   (async () => {
-    await sequelize.sync();
+    
     const body = await models.compte.findAll({});
     res.send(body)
   })();
