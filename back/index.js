@@ -146,48 +146,67 @@ app.post("/patient/delete", jsonParser, async (req, res) => {
 });
 // CRUD traitement
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/traitement/insert", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.traitement.create({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose_midi: req.body.dose_midi ,dose_soir: req.body.dose_soir ,dose_matin: req.body.dose_matin ,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+app.post("/traitement/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.traitement.create({
+      id_patient: req.body.id_patient,
+      medicament: req.body.medicament,
+      dose_midi: req.body.dose_midi,
+      dose_soir: req.body.dose_soir,
+      dose_matin: req.body.dose_matin,
+      date_debut: req.body.date_debut,
+      date_fin: req.body.date_fin
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/traitement/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.traitement.findAll({});
-    res.send(body)
-  })();
+app.get("/traitement/list", async (req, res) => {
+  try {
+    const traitements = await models.traitement.findAll({});
+    res.send(traitements);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/traitement/update", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.traitement.update({ id_patient:req.body.id_patient, medicament: req.body.medicament ,dose_midi: req.body.dose_midi ,dose_soir: req.body.dose_soir ,dose_matin: req.body.dose_matin,date_debut: req.body.date_debut ,date_fin: req.body.date_fin },
+app.post("/traitement/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.traitement.update(
+      {
+        id_patient: req.body.id_patient,
+        medicament: req.body.medicament,
+        dose_midi: req.body.dose_midi,
+        dose_soir: req.body.dose_soir,
+        dose_matin: req.body.dose_matin,
+        date_debut: req.body.date_debut,
+        date_fin: req.body.date_fin
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/traitement/delete", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.traitement.destroy({
+app.post("/traitement/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.traitement.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
 // CRUD photos
@@ -244,190 +263,251 @@ app.post('/photos/upload', upload.single('myFile'), (req, res, next) => {
   blobStream.end(req.file.buffer);
 });
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/photos/insert", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.photos.create({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe})
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+app.post("/photos/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.photos.create({
+      id_patient: req.body.id_patient,
+      type: req.body.type,
+      image: req.body.image,
+      groupe: req.body.groupe
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/photos/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.photos.findAll({});
-    res.send(body)
-  })();
+app.get("/photos/list", async (req, res) => {
+  try {
+    const photos = await models.photos.findAll({});
+    res.send(photos);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/photos/update", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.photos.update({ id_patient:req.body.id_patient, type: req.body.type ,image: req.body.image ,groupe: req.body.groupe },
+app.post("/photos/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.photos.update(
+      {
+        id_patient: req.body.id_patient,
+        type: req.body.type,
+        image: req.body.image,
+        groupe: req.body.groupe
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/photos/delete", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.photos.destroy({
+app.post("/photos/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.photos.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
 //CRUD plaies
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/plaies/insert", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.plaies.create({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe,type: req.body.type})
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+app.post("/plaies/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.plaies.create({
+      id_patient: req.body.id_patient,
+      text: req.body.text,
+      groupe: req.body.groupe,
+      type: req.body.type
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/plaies/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.plaies.findAll({});
-    res.send(body)
-  })();
+app.get("/plaies/list", async (req, res) => {
+  try {
+    const plaies = await models.plaies.findAll({});
+    res.send(plaies);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/plaies/update", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.plaies.update({ id_patient:req.body.id_patient, text: req.body.text ,groupe: req.body.groupe ,type: req.body.type},
+app.post("/plaies/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.plaies.update(
+      {
+        id_patient: req.body.id_patient,
+        text: req.body.text,
+        groupe: req.body.groupe,
+        type: req.body.type
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/plaies/delete", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.plaies.destroy({
+app.post("/plaies/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.plaies.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 //CRUD bilan
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/bilan/insert", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.bilan.create({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift,date_debut: req.body.date_debut ,date_fin: req.body.date_fin})
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+app.post("/bilan/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.bilan.create({
+      id_patient: req.body.id_patient,
+      text: req.body.text,
+      weekly: req.body.weekly,
+      date: req.body.date,
+      groupe: req.body.groupe,
+      shift: req.body.shift,
+      date_debut: req.body.date_debut,
+      date_fin: req.body.date_fin
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/bilan/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.bilan.findAll({});
-    res.send(body)
-  })();
+app.get("/bilan/list", async (req, res) => {
+  try {
+    const bilans = await models.bilan.findAll({});
+    res.send(bilans);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/bilan/update", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.bilan.update({ id_patient:req.body.id_patient, text: req.body.text ,weekly: req.body.weekly,date: req.body.date,groupe: req.body.groupe ,shift: req.body.shift,date_debut: req.body.date_debut ,date_fin: req.body.date_fin},
+app.post("/bilan/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.bilan.update(
+      {
+        id_patient: req.body.id_patient,
+        text: req.body.text,
+        weekly: req.body.weekly,
+        date: req.body.date,
+        groupe: req.body.groupe,
+        shift: req.body.shift,
+        date_debut: req.body.date_debut,
+        date_fin: req.body.date_fin
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/bilan/delete", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.bilan.destroy({
+app.post("/bilan/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.bilan.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 //CRUD rdv
 app.use(bodyParser.urlencoded({ extended: true }));
-app.post("/rdv/insert", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.rdv.create({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type })
-      .then(result => res.json(result))
-      .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+app.post("/rdv/insert", jsonParser, async (req, res) => {
+  try {
+    const result = await models.rdv.create({
+      id_patient: req.body.id_patient,
+      text: req.body.text,
+      date: req.body.date,
+      type: req.body.type
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.get("/rdv/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.rdv.findAll({});
-    res.send(body)
-  })();
+app.get("/rdv/list", async (req, res) => {
+  try {
+    const rdvs = await models.rdv.findAll({});
+    res.send(rdvs);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/rdv/update", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.rdv.update({ id_patient:req.body.id_patient, text: req.body.text ,date: req.body.date ,type: req.body.type},
+app.post("/rdv/update", jsonParser, async (req, res) => {
+  try {
+    const result = await models.rdv.update(
+      {
+        id_patient: req.body.id_patient,
+        text: req.body.text,
+        date: req.body.date,
+        type: req.body.type
+      },
       {
         where: {
           id: req.body.id
         }
-      })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+      }
+    );
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 
-app.post("/rdv/delete", jsonParser, (req, res) => {
-  (async () => {
-    
-    await models.rdv.destroy({
+app.post("/rdv/delete", jsonParser, async (req, res) => {
+  try {
+    const result = await models.rdv.destroy({
       where: {
         id: req.body.id
       }
-    })
-    .then(result => res.json(result))
-    .catch(err => res.send(JSON.stringify(err.message)));
-  })();
+    });
+    res.json(result);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
 //Login
-app.get("/user/list", function (req, res) {
-  (async () => {
-    
-    const body = await models.compte.findAll({});
-    res.send(body)
-  })();
+app.get("/user/list", async (req, res) => {
+  try {
+    const users = await models.compte.findAll({});
+    res.send(users);
+  } catch (error) {
+    res.send(JSON.stringify(error.message));
+  }
 });
