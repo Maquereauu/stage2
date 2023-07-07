@@ -61,7 +61,7 @@ const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, 
   pool: {
     max: 20,
     min: 0, 
-    acquire: 30000, 
+    acquire: 20000, 
     idle: 10000
   }
 });
