@@ -40,7 +40,7 @@ export function MedicList(props) {
                 <div onClick={()=>props.handleShowModalMedicGroupDelete()&props.setGroup(groupe)}>Supprimer</div>
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Plaies, key) => {
-                  if("image" in Bilan){
+                  if("image" in Plaies){
                     const ref = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
                     const url = getDownloadURL(ref)
                   }
