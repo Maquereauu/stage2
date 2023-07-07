@@ -26,8 +26,8 @@ export function PhotosList(props) {
         ReactSession.remove("patient"+Photos.id_patient, true)
         ReactSession.remove("patient"+Photos.id_patient+"photo", true)
         ReactSession.remove("notifpatient",true)
-        const test = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
-        const url = getDownloadURL(test)
+        const ref = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
+        const url = getDownloadURL(ref)
         return <div key={key} className="box2 margin-top">
             <div className="margin-bottom-- flex space-evenly">
             <div onClick={()=>props.handleShowModalPhotosDelete()&props.setPhotosInfo(Photos)}>Supprimer</div>

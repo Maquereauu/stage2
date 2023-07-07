@@ -1,12 +1,28 @@
 import Button from 'react-bootstrap/Button';
 import React, { useEffect, useState } from 'react';
 import { ReactSession } from 'react-client-session';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export function MedicList(props) {
     const [disabled,setDisabled]=useState(false);
     const [update,setUpdate]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 3)
     const no = props.info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.type == 2)
     const list = [...yes,...no]
+    const storage = getStorage();
+    const [imageUrls, setImageUrls] = useState([]);
+    useEffect(() => {
+        const fetchImageUrls = async () => {
+          const urls = await Promise.all(yes.map(async (Photos) => {
+            const imageRef = ref(storage, 'gs://images-3e2d3.appspot.com/' + Photos.image);
+            const url = await getDownloadURL(imageRef);
+            return url;
+          }));
+    
+          setImageUrls(urls);
+        };
+    
+        fetchImageUrls();
+      }, []);
     var groupBy = function(xs, key) {
         return xs.reduce(function(rv, x) {
           (rv[x[key]] = rv[x[key]] || []).push(x);
@@ -24,7 +40,10 @@ export function MedicList(props) {
                 <div onClick={()=>props.handleShowModalMedicGroupDelete()&props.setGroup(groupe)}>Supprimer</div>
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Plaies, key) => {
-                  console.log(Plaies);
+                  if("image" in Bilan){
+                    const ref = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
+                    const url = getDownloadURL(ref)
+                  }
                   return (
                     <div key={key} className="box2 margin-top">
                       <div className="margin-bottom-- flex space-evenly">
@@ -32,7 +51,7 @@ export function MedicList(props) {
                       <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">
                           {"image" in Plaies ? (<>
-                            <img className="prod-img" src={"./img/" + Plaies.image} alt={Plaies.image} />
+                            <img className="prod-img" src={imageUrls[key]} alt={Plaies.image} />
                             {ReactSession.set("photo"+Plaies.id, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"medic", true)}
