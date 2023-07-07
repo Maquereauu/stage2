@@ -23,23 +23,30 @@ export function PatientDeleteAdmin(props){
     const no3 = info3.filter((info3)=>info3.id_patient == props.patientInfo.id)
     const no4 = info4.filter((info4)=>info4.id_patient == props.patientInfo.id)
     const no5 = info5.filter((info5)=>info5.id_patient == props.patientInfo.id)
-    const Delete= async () =>{
-        no.map((photo)=>{
-            DeletePhotos_(photo)
-        })
-        no2.map((bilan)=>{
-            DeleteBilan_(bilan)
-        })
-        no3.map((traitement)=>{
-            DeleteTraitement_(traitement)
-        })
-        no4.map((plaies)=>{
-            DeletePlaies_(plaies)
-        })
-        no5.map((rdv)=>{
-            DeleteRdv_(rdv)
-        })
-    }
+    const Delete = async () => {
+        const promises = [];
+        
+        no.forEach(photo => {
+          promises.push(DeletePhotos_(photo));
+        });
+      
+        no2.forEach(bilan => {
+          promises.push(DeleteBilan_(bilan));
+        });
+      
+        no3.forEach(traitement => {
+          promises.push(DeleteTraitement_(traitement));
+        });
+      
+        no4.forEach(plaies => {
+          promises.push(DeletePlaies_(plaies));
+        });
+      
+        no5.forEach(rdv => {
+          promises.push(DeleteRdv_(rdv));
+        });
+        await Promise.all(promises);
+      };
     useEffect(() => {
         const list = Photos_();
         list
@@ -65,11 +72,6 @@ export function PatientDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalPatientDelete} onHide={props.handleCloseModalPatientDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le patient {props.patientInfo.nom} {props.patientInfo.prenom}</p>
-        <Button type="button" variant="danger" onClick={() => {
-  DeletePatient_(props.patientInfo)
-    .then(() => Delete())
-    .then(() => window.location.replace('/patients'))
-    .catch(error => console.error("Erreur lors de la suppression :", error.message));
-}}>Supprimer</Button>
+        <Button type="button" variant="danger" onClick={async()=>{await DeletePatient_(props.patientInfo);await Delete();window.location.replace('/patients')}}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
