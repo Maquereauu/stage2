@@ -23,7 +23,7 @@ export function PatientDeleteAdmin(props){
     const no3 = info3.filter((info3)=>info3.id_patient == props.patientInfo.id)
     const no4 = info4.filter((info4)=>info4.id_patient == props.patientInfo.id)
     const no5 = info5.filter((info5)=>info5.id_patient == props.patientInfo.id)
-    const Delete= () =>{
+    const Delete= async () =>{
         no.map((photo)=>{
             DeletePhotos_(photo)
         })
@@ -65,6 +65,6 @@ export function PatientDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalPatientDelete} onHide={props.handleCloseModalPatientDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le patient {props.patientInfo.nom} {props.patientInfo.prenom}</p>
-        <Button variant="danger" onClick={async()=>await DeletePatient_(props.patientInfo)&await Delete()&window.location.replace('/patients')}>Supprimer</Button>
+        <Button type="button" variant="danger" onClick={async()=>{await DeletePatient_(props.patientInfo);await Delete();window.location.replace('/patients')}}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
