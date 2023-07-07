@@ -59,7 +59,7 @@ const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, 
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
   pool: {
-    max: 5,
+    max: 10,
     min: 0, 
     acquire: 30000, 
     idle: 10000
@@ -89,14 +89,13 @@ process.on('SIGINT', async () => {
     console.error('Unable to connect to the database:', error);
   }
 })();
+var initModels = require("./models/init-models");
+var models = initModels(sequelize);
 
 app.get("/", function (req, res) {
   res.send("Hello World!");
 });
 
-
-var initModels = require("./models/init-models");
-var models = initModels(sequelize);
 
 // CRUD patient
 app.use(bodyParser.urlencoded({ extended: true }));
