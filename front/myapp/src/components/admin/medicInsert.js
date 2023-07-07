@@ -20,12 +20,14 @@ export function MedicInsert(props) {
         let c = 0
         let calls2 = [0,0];
         let error = 0
+        const uploadPromises = []
         Object.entries(newData).map(async ([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
-                await UploadPhotos_(value)
+                    const uploadPromise = UploadPhotos_(value)
+                    uploadPromises.push(uploadPromise)
             }
             }else{
             calls2[1]=value
@@ -56,7 +58,9 @@ export function MedicInsert(props) {
         }
         }
         if(!error){
-            window.location.replace('/patients');
+            Promise.all(uploadPromises).then(() => {
+                window.location.replace('/patients')
+        })
         }
     }
     const sendAllForms = async() => {

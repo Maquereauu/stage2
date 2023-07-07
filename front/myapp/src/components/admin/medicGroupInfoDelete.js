@@ -10,15 +10,17 @@ export function MedicGroupDeleteAdmin(props){
     const [info2,setInfo2]=useState([]);
     const yes = info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 3 && info.groupe == props.group)
     const no = info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.groupe == props.group && info2.type == 2)
-    const Delete = (()=>{
-        yes.map(async (photos)=>{
-            await DeletePhotos_(photos)
-        });
-        no.map(async(Medics)=>{
-            await DeletePlaies_(Medics)
-        })
-        window.location.replace('/patients')
-    })
+    const Delete = async ()=>{
+        const promises = [];
+        yes.forEach(photo => {
+            promises.push(DeletePhotos_(photo));
+          });
+        
+          no.forEach(medic => {
+            promises.push(DeleteBilan_(medic));
+          });
+          await Promise.all(promises);
+        }
     useEffect(() => {
         const list = Photos_();
         list
@@ -32,7 +34,7 @@ export function MedicGroupDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalMedicGroupDelete} onHide={props.handleCloseModalMedicGroupDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le groupe {props.group}?</p>
-        <Button variant="danger" onClick={()=>Delete()}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>{await Delete();window.location.replace('/patients')}}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
     

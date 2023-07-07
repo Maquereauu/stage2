@@ -18,21 +18,18 @@ export function BilanInsert(props) {
     const onSubmitInsertPhotos = async (data) => {
         const newList = Object.fromEntries(Object.entries(data).slice(0, 8));
         const newData = Object.fromEntries(Object.entries(data).slice(8));
-        if(test == 1){
-            console.log(newList)
-            if(newList.shift !== '0' && newList.weekly !== '-1'){
-                InsertBilan_(newList)
-            }
-        if(counter.length !==0)
-        {const calls=[...Array(refs.current.length)].map(e => Array(list.length))
+        const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
-        Object.entries(newData).map(async([key,value])=>{
+        let error = 0
+        const uploadPromises = []
+        Object.entries(newData).map(async ([key,value])=>{
             calls2[0]=list[c%4]
             if(c%4==2){
                 if(typeof(value[0]) !== "undefined")
                 {calls2[1]=value[0].name
-                await UploadPhotos_(value)
+                    const uploadPromise = UploadPhotos_(value)
+                    uploadPromises.push(uploadPromise)
             }
             }else{
             calls2[1]=value
@@ -43,11 +40,31 @@ export function BilanInsert(props) {
         })
         for(let i = 0;i<counter.length;i++){
             const dictionary = Object.fromEntries(calls[i]);
+            if(dictionary.image == "" || dictionary.groupe == ""){
+                error = 1
+                setOops(1)
+            }else if(error == 0){
+                setOops(0)
+            }
+        }
+        if(newList.text == "" || newList.groupe == ""){
+            setOops(1)
+        }
+        if(!error){
+            await InsertPlaies_(newList)
+        }
+        for(let i = 0;i<counter.length;i++){
+            if(!error)
+            {const dictionary = Object.fromEntries(calls[i]);
            await InsertPhotos_(dictionary)
-        }}
-        test = 0;
-        window.location.replace('/patients');
-    }}
+        }
+        }
+        if(!error){
+            Promise.all(uploadPromises).then(() => {
+                window.location.replace('/patients')
+        })
+        }
+    }
     // const insertAllForms = async() => {
     //     console.log(allData)
     //     allData.map((data,key)=>{
@@ -58,10 +75,8 @@ export function BilanInsert(props) {
     //     // window.location.replace('/patients');
     // }
     const sendAllForms = async() => {
-        for(let i=0;i<counter.length;i++){
-            refs.current[i].click();
-        }
-        refs2.current[0].click();
+        if(refs2.current[0])
+        {refs2.current[0].click();}
     }
     const deleteByIndex = index => {
         setCounter(oldValues => {

@@ -10,14 +10,17 @@ export function BilanGroupDeleteAdmin(props){
     const [info2,setInfo2]=useState([]);
     const yes = info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 4 && info.groupe == props.group)
     const no = info2.filter((info2)=>info2.id_patient === props.patientInfo.id && info2.groupe == props.group)
-    const Delete = (()=>{
-        yes.map(async (photos)=>{
-            await DeletePhotos_(photos)
-        });
-        no.map(async(bilans)=>{
-            await DeleteBilan_(bilans)
-        })
-        window.location.replace('/patients')})
+    const Delete = async ()=>{
+        const promises = [];
+        yes.forEach(photo => {
+            promises.push(DeletePhotos_(photo));
+          });
+        
+          no.forEach(bilan => {
+            promises.push(DeleteBilan_(bilan));
+          });
+          await Promise.all(promises);
+        }
     useEffect(() => {
         const list = Photos_();
         list
@@ -31,7 +34,7 @@ export function BilanGroupDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalBilanGroupDelete} onHide={props.handleCloseModalBilanGroupDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le groupe {props.group}?</p>
-        <Button variant="danger" onClick={()=>Delete()}>Supprimer</Button>
+        <Button variant="danger" onClick={async()=>{await Delete();window.location.replace('/patients')}}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
     
