@@ -41,8 +41,8 @@ export function MedicList(props) {
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Plaies, key) => {
                   if("image" in Plaies){
-                    const ref = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
-                    const url = getDownloadURL(ref)
+                    const getRef = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key].image)
+                    const url = getDownloadURL(getRef)
                   }
                   return (
                     <div key={key} className="box2 margin-top">
