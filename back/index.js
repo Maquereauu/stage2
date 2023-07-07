@@ -433,3 +433,4 @@ app.get("/user/list", function (req, res) {
     res.send(body)
   })();
 });
+export default app;
