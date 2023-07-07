@@ -17,7 +17,7 @@ export function PlaiesGroupDeleteAdmin(props){
           });
         
           no.forEach(plaie => {
-            promises.push(DeleteBilan_(plaie));
+            promises.push(DeletePlaies_(plaie));
           });
           await Promise.all(promises);
         }

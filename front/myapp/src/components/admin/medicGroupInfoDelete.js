@@ -17,7 +17,7 @@ export function MedicGroupDeleteAdmin(props){
           });
         
           no.forEach(medic => {
-            promises.push(DeleteBilan_(medic));
+            promises.push(DeletePlaies_(medic));
           });
           await Promise.all(promises);
         }

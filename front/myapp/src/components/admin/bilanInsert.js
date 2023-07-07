@@ -11,6 +11,7 @@ export function BilanInsert(props) {
     const { register, handleSubmit, reset,trigger,watch } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const list=["id_patient","type","image","groupe"];
+    const [oops,setOops]=useState(0);
     const [weekly,setWeekly]=useState();
     const refs = useRef([]);
     const refs2 = useRef([]);
@@ -51,7 +52,7 @@ export function BilanInsert(props) {
             setOops(1)
         }
         if(!error){
-            await InsertPlaies_(newList)
+            await InsertBilan_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
