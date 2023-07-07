@@ -59,7 +59,7 @@ const sequelize = new Sequelize('bbhdprtg0bomy642ezho', 'up9qasebeb3nnzfa', proc
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
   pool: {
-    max: 10,
+    max: 3,
     min: 0, 
     acquire: 30000, 
     idle: 10000
