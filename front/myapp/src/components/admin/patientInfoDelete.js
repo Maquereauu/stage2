@@ -23,7 +23,7 @@ export function PatientDeleteAdmin(props){
     const no3 = info3.filter((info3)=>info3.id_patient == props.patientInfo.id)
     const no4 = info4.filter((info4)=>info4.id_patient == props.patientInfo.id)
     const no5 = info5.filter((info5)=>info5.id_patient == props.patientInfo.id)
-    const Delete= async () =>{
+    const Delete= () =>{
         no.map((photo)=>{
             DeletePhotos_(photo)
         })
