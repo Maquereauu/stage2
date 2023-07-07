@@ -65,6 +65,11 @@ export function PatientDeleteAdmin(props){
     return <Modal animation={true} show={props.showModalPatientDelete} onHide={props.handleCloseModalPatientDelete}>
     <Modal.Body>
         <p>Êtes vous sur de vouloir supprimer le patient {props.patientInfo.nom} {props.patientInfo.prenom}</p>
-        <Button type="button" variant="danger" onClick={async()=>{await DeletePatient_(props.patientInfo);await Delete();window.location.replace('/patients')}}>Supprimer</Button>
+        <Button type="button" variant="danger" onClick={() => {
+  DeletePatient_(props.patientInfo)
+    .then(() => Delete())
+    .then(() => window.location.replace('/patients'))
+    .catch(error => console.error("Erreur lors de la suppression :", error.message));
+}}>Supprimer</Button>
     </Modal.Body>
     </Modal>}
