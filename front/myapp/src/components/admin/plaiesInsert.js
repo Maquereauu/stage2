@@ -6,16 +6,32 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import {useRef} from 'react';
 export function PlaiesInsert(props) {
-    const { register, handleSubmit, reset,trigger } = useForm();
+    const { register, handleSubmit, reset,trigger,watch,setValue } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const list=["id_patient","type","image","groupe"];
     const errors=["","Merci de bien vouloir remplir tous les formulaires","-_-"]
     const [oops,setOops]=useState(0);
     const refs = useRef([]);
     const refs2 = useRef([]);
+    const [newGroup,setNewGroup]=useState();
+    const PatientBilanList = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 1)
+    const groups = []
+    const allgroups = PatientBilanList.map((bilan)=>{
+        groups.push(bilan.groupe)
+    })
+    const groupList = groups.filter((bilan, index) => { 
+        return groups.indexOf(bilan) == index;
+    })
     const onSubmitInsertPhotos = async (data) => {
-        const newList = Object.fromEntries(Object.entries(data).slice(0, 4));
-        const newData = Object.fromEntries(Object.entries(data).slice(4));
+        let newList;
+        let newData;
+        if (data.addgroupe) {
+          newList = Object.fromEntries(Object.entries(data).slice(0, 5));
+          newData = Object.fromEntries(Object.entries(data).slice(5));
+        } else {
+          newList = Object.fromEntries(Object.entries(data).slice(0, 4));
+          newData = Object.fromEntries(Object.entries(data).slice(4));
+        }
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
@@ -49,6 +65,9 @@ export function PlaiesInsert(props) {
             setOops(1)
         }
         if(!error){
+            if (newList.addgroupe) {
+                newList.groupe = newList.addgroupe;
+              }
             await InsertPlaies_(newList)
         }
         for(let i = 0;i<counter.length;i++){
@@ -72,6 +91,19 @@ export function PlaiesInsert(props) {
           return oldValues.filter((_, i) => i !== index)
         })
       }
+      const onChange2 = (event) => {
+        const value = event.target.value;
+        setNewGroup(value);
+      };
+      useEffect(() => {
+        if (newGroup == -1) {
+            setValue("groupe", watch("addgroupe"));
+          }else if(typeof(newGroup == "undefined")){
+            
+          } else {
+            setValue("groupe", newGroup);
+          }
+      }, [newGroup,watch('group'),watch('addgroupe')]);
     return <div>
         <h1 className="title flex2 center margin-top--">Plaies</h1>
         <div className="flex2 vertical center">
@@ -81,7 +113,16 @@ export function PlaiesInsert(props) {
             <form onSubmit={handleSubmit(onSubmitInsertPhotos)}>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
-            <input required={true} className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
+            <select {...register("groupe")} id="groupe" name="groupe" onChange={onChange2}>
+                <option value={-2}>Liste groupes</option>
+                <option value={-1}>Créer un nouveau groupe</option>
+                {groupList.map((group,key)=>{
+                    return <option key={key} value={group}>{group}</option>
+                })}
+            </select>
+            {typeof(newGroup) !== "undefined" && newGroup== -1?
+            <input required={true} className='background my-account- margin-top---' {...register("addgroupe")} placeholder="groupe" type="text" id="groupe" />
+            :<></>}
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("type")} defaultValue={1} type="hidden" id="type" />
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>

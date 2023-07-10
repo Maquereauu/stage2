@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import {useRef} from 'react';
 export function BilanInsert(props) {
-    const { register, handleSubmit, reset,trigger,watch } = useForm();
+    const { register, handleSubmit, reset,trigger,watch,setValue } = useForm();
     const [counter,setCounter]=useState(["salut"]);
     const list=["id_patient","type","image","groupe"];
     const [oops,setOops]=useState(0);
@@ -25,8 +25,15 @@ export function BilanInsert(props) {
     const refs = useRef([]);
     const refs2 = useRef([]);
     const onSubmitInsertPhotos = async (data) => {
-        const newList = Object.fromEntries(Object.entries(data).slice(0, 8));
-        const newData = Object.fromEntries(Object.entries(data).slice(8));
+        let newList;
+        let newData;
+        if (data.addgroupe) {
+          newList = Object.fromEntries(Object.entries(data).slice(0, 9));
+          newData = Object.fromEntries(Object.entries(data).slice(9));
+        } else {
+          newList = Object.fromEntries(Object.entries(data).slice(0, 8));
+          newData = Object.fromEntries(Object.entries(data).slice(8));
+        }
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
@@ -103,19 +110,23 @@ export function BilanInsert(props) {
         const value = event.target.value;
         setNewGroup(value);
       };
-    useEffect(() => {
-        if (typeof(weekly) != "undefined" && weekly != -1 && weekly != 0) {
-          reset({ date_debut: watch('date') });
+      useEffect(() => {
+        if (typeof(weekly) !== "undefined" && weekly !== -1 && weekly !== 0) {
+          setValue("date_debut", watch("date"));
         } else {
-          reset({ date_debut: null,date_fin: null });
+          setValue("date_debut", null);
+          setValue("date_fin", null);
         }
-      }, [weekly,watch('date')]);
+      }, [weekly, watch('date')]);
+      
       useEffect(() => {
         if (newGroup == -1) {
-          reset({ groupe: watch("addgroupe") });
-        } else {
-          reset({ groupe: watch("groupe") });
-        }
+            setValue("groupe", watch("addgroupe"));
+          }else if(typeof(newGroup == "undefined")){
+            
+          } else {
+            setValue("groupe", newGroup);
+          }
       }, [newGroup,watch('group'),watch('addgroupe')]);
     return <div>
         <h1 className="title flex2 center margin-top--">Bilan</h1>
@@ -132,8 +143,9 @@ export function BilanInsert(props) {
                     return <option key={key} value={group}>{group}</option>
                 })}
             </select>
-            {/* {console.log(watch("groupe"))} */}
-            {typeof(newGroup) !== "undefined" && newGroup== -1?<> <input required={true} className='background my-account- margin-top---' {...register("addgroupe")} defaultValue={""} placeholder="groupe" type="text" id="groupe" /></>:<></>}
+            {typeof(newGroup) !== "undefined" && newGroup== -1?
+            <input required={true} className='background my-account- margin-top---' {...register("addgroupe")} placeholder="groupe" type="text" id="groupe" />
+            :<></>}
             <select {...register("shift")} id="shift" name="shift">
                 <option value={0}>Tournée</option>
                 <option value={1}>1</option>
@@ -155,7 +167,7 @@ export function BilanInsert(props) {
             </select>
             {typeof(weekly) !== "undefined" && weekly!= -1 && weekly != 0?<>
             <label>Date début
-            <input className='background my-account- margin-top---' {...register("date_debut")} value={watch("date_debut")} placeholder={"Veuillez choisir une date"} readOnly type="text" id="date_debut" />
+            <input className='background my-account- margin-top---' {...register("date_debut")} value={watch('date_debut')} placeholder={"Veuillez choisir une date"} readOnly type="text" id="date_debut" />
             </label>
             <label>Date fin
             <input className='background my-account- margin-top---' {...register("date_fin")} placeholder="fin (année-mois-jour)" type="date" id="date_fin" />
