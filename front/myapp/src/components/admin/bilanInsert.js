@@ -80,7 +80,7 @@ export function BilanInsert(props) {
         }
         if(!error){
             Promise.all(uploadPromises).then(() => {
-                // window.location.replace('/patients')
+                window.location.replace('/patients')
         })
         }
     }
