@@ -37,28 +37,7 @@ const closeSequelizeConnection = (req, res, next) => {
 
   next();
 };
-// app.use(allowCorsHandler);
-app.use(cors({
-  origin: [
-    'https://ide-front.vercel.app',
-    'https://stage-dun.vercel.app',
-    'https://vercel.com',
-    'http://localhost:3000'
-  ],
-  methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
-  allowedHeaders: [
-    'X-CSRF-Token',
-    'X-Requested-With',
-    'Accept',
-    'Accept-Version',
-    'Content-Length',
-    'Content-MD5',
-    'Content-Type',
-    'Date',
-    'X-Api-Version'
-  ],
-  credentials: true
-}));
+app.use(allowCorsHandler);
 app.use(closeSequelizeConnection);
 const port = 4444;
 const firebaseConfig = {
