@@ -60,8 +60,10 @@ export function BilanInsert(props) {
             setOops(1)
         }
         if(!error){
-            console.log(newList)
-            // await InsertBilan_(newList)
+            if (newList.addgroupe) {
+                newList.groupe = newList.addgroupe;
+              }
+            await InsertBilan_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
