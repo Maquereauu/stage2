@@ -19,7 +19,7 @@
     $primaryColor3: #367ab2;
     $primaryColor4: #eef0ef;
     $primaryColor5: #222626;
-    $primaryColor6: #000000;
+    $primaryColor6: #31a56f;
 
     $secondaryColor1: #e1ffd2;
     $secondaryColor2: #ffd2d2;
@@ -47,13 +47,21 @@
     .background-color-1-5 {
         background-color: $primaryColor5;
     }
-
+    .background-color-2-2 {
+        background-color: $secondaryColor2;
+    }
     .background-color-2-3 {
         background-color: $secondaryColor3;
     }
 
     .background-color-2-4 {
         background-color: $secondaryColor4;
+    }
+    .background-color-1-6 {
+        background-color: $primaryColor6;
+    }
+    .background-color-1-4 {
+        background-color: $primaryColor4;
     }
     .background-color-t1 {
         background-color: $primaryColor2;
@@ -342,6 +350,9 @@
                 margin-top: 7.5px !important;
             }
         }
+        &-bottom {
+            margin-bottom: 100px !important;
+        }
         &-bottom-- {
             margin-bottom: 40px !important;
         }
@@ -605,7 +616,9 @@
     }
 
     // Title-text //
-
+    .bigger{
+        font-size: 10.5px !important;
+    }
     body div#root {
         overflow-x: hidden;
         padding: 0px 0px 0px 0px;
@@ -661,10 +674,12 @@
                 padding-left: 60px;
             }
         }
-
+        p{
+            font-size: 10.5px;
+        }
         p.text {
             font-family: $textFont;
-            font-size: 20px;
+            font-size: 25px;
 
             &.center-text {
                 text-align: center;
@@ -674,7 +689,6 @@
                 color: $primaryColor4;
             }
         }
-
         // Text-position //
 
         div.center {

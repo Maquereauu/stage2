@@ -64,7 +64,7 @@ export function TransmissionList(props) {
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"transmission", true)}
                             {ReactSession.remove("notifpatient",true)}
-                            <p>{Plaies.text}</p>
+                            <p className='bigger'>{Plaies.text}</p>
                             {update?<><div onClick={()=>props.handleShowModalTransmissionUpdate()&props.setPlaiesInfo(Plaies)}>Modifier</div><div onClick={()=>props.handleShowModalTransmissionDelete()&props.setPlaiesInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>
                           )}

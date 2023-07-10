@@ -16,7 +16,7 @@ export function TraitementList(props) {
             <div onClick={()=>props.handleShowModalTraitementUpdate()&props.setTraitementInfo(traitement)}>Modifier</div>
             </div>
             <div className="background-color-2-3">
-                <div className="margin-bottom--- flex space-evenly">
+                <div className="margin-bottom--- flex space-evenly bigger">
                     <p>Médicament: {traitement.medicament}</p>
                     <p>Dose matin: {traitement.dose_matin}</p>
                     <p>Dose midi: {traitement.dose_midi}</p>

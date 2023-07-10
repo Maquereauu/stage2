@@ -3,7 +3,7 @@ import { UpdateTraitement_ } from "../../components/AllTraitement/Traitement";
 export function TraitementUpdate(props) {
     const { register, handleSubmit } = useForm();
     const onSubmitUpdateTraitement = async (data) => {
-        UpdateTraitement_(data)
+        await UpdateTraitement_(data)
         window.location.replace('/patients');
     }
     return <form onSubmit={handleSubmit(onSubmitUpdateTraitement)} className="align-center flex vertical center" >

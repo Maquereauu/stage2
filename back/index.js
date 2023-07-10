@@ -62,7 +62,7 @@ const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, 
     max: 10,
     min: 0, 
     acquire: 10000, 
-    idle: 5000
+    idle: 1000
   }
 });
 process.on('SIGINT', async () => {
@@ -433,4 +433,3 @@ app.get("/user/list", function (req, res) {
     res.send(body)
   })();
 });
-export default app;

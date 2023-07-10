@@ -63,27 +63,27 @@ export function BilanList(props) {
                             {ReactSession.remove("patient"+Bilan.id_patient, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
                             {ReactSession.remove("notifpatient",true)}
-                            <p>{Bilan.text}</p>
-                            <p>{Bilan.date}</p>
+                            <p className='bigger'>{Bilan.text}</p>
+                            <p className='bigger'>{Bilan.date}</p>
                             {
                             (() => {
                               switch (Bilan.weekly) {
                                 case 0:
-                                  return <p>Récurrence: Aucune</p>;
+                                  return <p className='bigger'>Récurrence: Aucune</p>;
                                 case 1:
-                                  return <p>Récurrence: Hebdomadaire</p>;
+                                  return <p className='bigger'>Récurrence: Hebdomadaire</p>;
                                 case 2:
-                                  return <p>Récurrence: 15 jours</p>;
+                                  return <p className='bigger'>Récurrence: 15 jours</p>;
                                 case 3:
-                                  return <p>Récurrence: 1 mois</p>;
+                                  return <p className='bigger'>Récurrence: 1 mois</p>;
                                 case 4:
-                                  return <p>Récurrence: 2 mois</p>;
+                                  return <p className='bigger'>Récurrence: 2 mois</p>;
                                 case 5:
-                                  return <p>Récurrence: 3 mois</p>;
+                                  return <p className='bigger'>Récurrence: 3 mois</p>;
                               }
                             })()
                           }
-                          {Bilan.weekly != 0?<><p>date début {Bilan.date_debut}</p><p>date fin {Bilan.date_fin}</p></>:<></>}
+                          {Bilan.weekly != 0?<><p className='bigger'>date début {Bilan.date_debut}</p><p className='bigger'>date fin {Bilan.date_fin}</p></>:<></>}
                           {update?<><div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)}>Modifier</div><div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)}>Supprimer</div></>:<></>}
                             </>
                           )}

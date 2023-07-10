@@ -17,8 +17,8 @@ export function RdvList(props) {
             </div>
             <div className="background-color-2-3">
                 <div className="margin-bottom--- flex space-evenly">
-                    <p>Info: {Rdv.text}</p>
-                    <p>Date: {Rdv.date}</p>
+                    <p className='bigger'>Info: {Rdv.text}</p>
+                    <p className='bigger'>Date: {Rdv.date}</p>
             </div>
             </div>
             </div>})}

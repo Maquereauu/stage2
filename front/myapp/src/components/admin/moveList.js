@@ -32,7 +32,7 @@ export function MoveList(props) {
                     <div onClick={()=>props.handleShowModalMoveUpdate()&props.setRdvInfo(Rdv)}>Modifier</div>
                     </div>
                     <div className="background-color-2-3">
-                        <div className="margin-bottom--- flex space-evenly">
+                        <div className="margin-bottom--- flex space-evenly bigger">
                             <p>Détails: {Rdv.text}</p>
                             <p>Patient: {patient[0].nom}/{patient[0].prenom}</p>
                             <p>Date: {Rdv.date}</p>

@@ -53,8 +53,8 @@ export function PlanningBilanInsert(props){
             <label>Date fin
             <input className='background my-account- margin-top---' {...register("date_fin")} placeholder="fin (année-mois-jour)" type="date" id="date_fin" />
             </label></>:<>
-            <input hidden className='background my-account- margin-top---' {...register("date_debut")} defaultValue={"0000-00-00"} placeholder="debut (année-mois-jour)" type="date" id="date_debut" />
-            <input hidden className='background my-account- margin-top---' {...register("date_fin")} defaultValue={"0000-00-00"} placeholder="fin (année-mois-jour)" type="date" id="date_fin" /></>}
+            <input hidden className='background my-account- margin-top---' {...register("date_debut")} defaultValue={null} placeholder="debut (année-mois-jour)" type="date" id="date_debut" />
+            <input hidden className='background my-account- margin-top---' {...register("date_fin")} defaultValue={null} placeholder="fin (année-mois-jour)" type="date" id="date_fin" /></>}
             <input  type="submit" value="Insérer le nouveau bilan" />
             </form>
     </Modal.Body>

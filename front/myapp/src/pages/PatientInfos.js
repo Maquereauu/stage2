@@ -74,7 +74,7 @@ export default function PatientInfo(props){
                 }} />
             </div>
             </div>
-            <div className="">
+            <div className="margin-bottom">
             {search?patientsMap:patientList.map((patient,key)=>{
     return <div key={key} className="background-color-2-3 border">
     <div className='flex box2'>

@@ -64,7 +64,7 @@ export function PlaiesList(props) {
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"plaies", true)}
                             {ReactSession.remove("notifpatient",true)}
-                            <p>{Plaies.text}</p>
+                            <p className='bigger'>{Plaies.text}</p>
                             {update?<><div onClick={()=>props.handleShowModalPlaiesUpdate()&props.setPlaiesInfo(Plaies)}>Modifier</div><div onClick={()=>props.handleShowModalPlaiesDelete()&props.setPlaiesInfo(Plaies)}>Supprimer</div></>:<></>}
                             </>
                           )}
