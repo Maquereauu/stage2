@@ -74,24 +74,24 @@ export default function Planning(props){
         if(day.format("dddd") === moment(Bilan.date,"YYYY-MM-DD").format("dddd") && moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date,"YYYY-MM-DD")) && Bilan.weekly !== 0 && (!moment(day.format("YYYY-MM-DD")).isAfter(moment(Bilan.date_fin,"YYYY-MM-DD"))||moment(day.format("YYYY-MM-DD"))==moment(Bilan.date_fin,"YYYY-MM-DD")) ){
           if (Bilan.shift == 1){
             if(Bilan.id_patient !== 0 ){
-                if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
+                if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%28===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%56 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%84 === 0 && Bilan.weekly===5))
                   {return <><div className="box2 background-color-t1"><p>Bilan/Soin</p><div className='background-color-2-2'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div> 
                 <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
-              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
+              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%28===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%56 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%84 === 0 && Bilan.weekly===5))
               {return <><div className="box2 background-color-t1"><p>Bilan/Soin</p><div className='background-color-2-2'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }
           }else if (Bilan.shift == 2){
             if(Bilan.id_patient !== 0 ){
-              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
+              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%28===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%56 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%84 === 0 && Bilan.weekly===5))
                 {return <><div className="box2 background-color-t2"><p>Bilan/Soin</p><div className='background-color-2-3'><p>{Bilan.text}</p><p>{patient[0].nom}/{patient[0].prenom}</p></div>
                 <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
                 <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}
             }else{
-              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%35===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%70 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%105 === 0 && Bilan.weekly===5))
+              if((day.diff(Bilan.date,'days')%7===0 && Bilan.weekly===1) || (day.diff(Bilan.date,'days')%14===0 && Bilan.weekly===2) || (day.diff(Bilan.date,'days')%28===0 && Bilan.weekly===3) || (day.diff(Bilan.date,'days')%56 === 0 && Bilan.weekly===4) || (day.diff(Bilan.date,'days')%84 === 0 && Bilan.weekly===5))
               {return <><div className="box2 background-color-t2"><p>Bilan/Soin</p><div className='background-color-2-3'><p>{Bilan.text}</p></div>
               <div onClick={()=>props.handleShowModalBilanDelete()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Supprimer</div>
               <div onClick={()=>props.handleShowModalBilanUpdate()&props.setBilanInfo(Bilan)&props.setIsPlanning(1)}>Modifier</div></div></>}

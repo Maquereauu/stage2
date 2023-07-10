@@ -15,11 +15,10 @@ export function PlanningBilanInsert(props){
     const [weekly,setWeekly]=useState();
     const onChange = (event) => {
         const value = event.target.value;
-        if(value!=0)
-        {setWeekly(value);}
+        setWeekly(value);
       };
       useEffect(() => {
-        if (typeof weekly !== "undefined" && weekly !== -1 && weekly !== 0) {
+        if (typeof(weekly) != "undefined" && weekly != -1 && weekly != 0) {
           reset({ date_debut: watch('date') });
         } else {
           reset({ date_debut: null,date_fin: null });

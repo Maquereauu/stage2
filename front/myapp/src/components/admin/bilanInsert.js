@@ -13,9 +13,17 @@ export function BilanInsert(props) {
     const list=["id_patient","type","image","groupe"];
     const [oops,setOops]=useState(0);
     const [weekly,setWeekly]=useState();
+    const [newGroup,setNewGroup]=useState();
+    const PatientBilanList = props.info.filter((info)=>info.id_patient === props.patientInfo.id)
+    const groups = []
+    const allgroups = PatientBilanList.map((bilan)=>{
+        groups.push(bilan.groupe)
+    })
+    const groupList = groups.filter((bilan, index) => { 
+        return groups.indexOf(bilan) == index;
+    })
     const refs = useRef([]);
     const refs2 = useRef([]);
-    let test = 1;
     const onSubmitInsertPhotos = async (data) => {
         const newList = Object.fromEntries(Object.entries(data).slice(0, 8));
         const newData = Object.fromEntries(Object.entries(data).slice(8));
@@ -52,7 +60,8 @@ export function BilanInsert(props) {
             setOops(1)
         }
         if(!error){
-            await InsertBilan_(newList)
+            console.log(newList)
+            // await InsertBilan_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
@@ -62,7 +71,7 @@ export function BilanInsert(props) {
         }
         if(!error){
             Promise.all(uploadPromises).then(() => {
-                window.location.replace('/patients')
+                // window.location.replace('/patients')
         })
         }
     }
@@ -88,22 +97,41 @@ export function BilanInsert(props) {
         const value = event.target.value;
         setWeekly(value);
       };
-      useEffect(() => {
-        if (typeof weekly !== "undefined" && weekly !== -1 && weekly !== 0) {
+      const onChange2 = (event) => {
+        const value = event.target.value;
+        setNewGroup(value);
+      };
+    useEffect(() => {
+        if (typeof(weekly) != "undefined" && weekly != -1 && weekly != 0) {
           reset({ date_debut: watch('date') });
         } else {
-          reset({ date_debut: null });
+          reset({ date_debut: null,date_fin: null });
         }
       }, [weekly,watch('date')]);
+      useEffect(() => {
+        if (newGroup == -1) {
+          reset({ groupe: watch("addgroupe") });
+        } else {
+          reset({ groupe: watch("groupe") });
+        }
+      }, [newGroup,watch('group'),watch('addgroupe')]);
     return <div>
         <h1 className="title flex2 center margin-top--">Bilan</h1>
         <div className="flex2 vertical center">
             <h2 className='title top left align-center'>Infos</h2>
             <div className="flex2 margin-top--- vertical align-center">
-            <form onSubmit={handleSubmit(onSubmitInsertPhotos)}>
+            <form className='margin-bottom---' onSubmit={handleSubmit(onSubmitInsertPhotos)}>
             <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient")} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
             <input required={true} className='background my-account- margin-top---' {...register("text")} placeholder="text" type="text" id="text" />
-            <input className='background my-account- margin-top---' {...register("groupe")} placeholder="groupe" type="text" id="groupe" />
+            <select {...register("groupe")} id="groupe" name="groupe" onChange={onChange2}>
+                <option value={-2}>Liste groupes</option>
+                <option value={-1}>Créer un nouveau groupe</option>
+                {groupList.map((group,key)=>{
+                    return <option key={key} value={group}>{group}</option>
+                })}
+            </select>
+            {/* {console.log(watch("groupe"))} */}
+            {typeof(newGroup) !== "undefined" && newGroup== -1?<> <input required={true} className='background my-account- margin-top---' {...register("addgroupe")} defaultValue={""} placeholder="groupe" type="text" id="groupe" /></>:<></>}
             <select {...register("shift")} id="shift" name="shift">
                 <option value={0}>Tournée</option>
                 <option value={1}>1</option>
@@ -125,7 +153,7 @@ export function BilanInsert(props) {
             </select>
             {typeof(weekly) !== "undefined" && weekly!= -1 && weekly != 0?<>
             <label>Date début
-            <input className='background my-account- margin-top---' {...register("date_debut")} value={watch('date_debut')} placeholder={"Veuillez choisir une date"} readOnly type="text" id="date_debut" />
+            <input className='background my-account- margin-top---' {...register("date_debut")} value={watch("date_debut")} placeholder={"Veuillez choisir une date"} readOnly type="text" id="date_debut" />
             </label>
             <label>Date fin
             <input className='background my-account- margin-top---' {...register("date_fin")} placeholder="fin (année-mois-jour)" type="date" id="date_fin" />
@@ -135,7 +163,7 @@ export function BilanInsert(props) {
             <input hidden={true} id={0} ref={(element) => {refs2.current[0] = element}} type="submit" value="Insérer la nouvelle plaie" />
             </form>
             {counter.map((item,index)=>{
-                return <div key={index} className="flex gap">
+                return <div key={index} className="flex gap margin-bottom---">
                     <form id={"form"+index} key={index} onSubmit={handleSubmit(onSubmitInsertPhotos)} className="align-center flex vertical center" >
                     <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient"+index)} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
                     <input className='background my-account- margin-top---' {...register("type"+index)} defaultValue={4} placeholder="type" type="hidden" id={"type"+index} />
@@ -144,10 +172,10 @@ export function BilanInsert(props) {
                     <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer la nouvelle ordonnance" />
                     </form>
                 </div>})}
-                <Button variant="secondary" onClick={()=>setCounter(oldArray=>[...oldArray,"salut"])}>Ajouter une ligne</Button>
-                <Button variant="danger" onClick={()=>deleteByIndex(counter.length-1)}>Supprimer une ligne</Button>
+                <Button variant="secondary" className="margin-bottom---" onClick={()=>setCounter(oldArray=>[...oldArray,"salut"])}>Ajouter une ligne</Button>
+                <Button variant="danger" className="margin-bottom---" onClick={()=>deleteByIndex(counter.length-1)}>Supprimer une ligne</Button>
+                <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             </div>
-            <Button variant="primary" onClick={()=>window.location.replace('/patients')}>Ne rien insérer</Button>
             <div className="flex2 center margin-top--">
                 <Button variant="primary" onClick={sendAllForms}>Insérer les nouvelles infos</Button>
             </div>

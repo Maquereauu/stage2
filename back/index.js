@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require("multer");
+const cors = require('cors');
 const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -36,7 +37,28 @@ const closeSequelizeConnection = (req, res, next) => {
 
   next();
 };
-app.use(allowCorsHandler);
+// app.use(allowCorsHandler);
+app.use(cors({
+  origin: [
+    'https://ide-front.vercel.app',
+    'https://stage-dun.vercel.app',
+    'https://vercel.com',
+    'http://localhost:3000'
+  ],
+  methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
+  allowedHeaders: [
+    'X-CSRF-Token',
+    'X-Requested-With',
+    'Accept',
+    'Accept-Version',
+    'Content-Length',
+    'Content-MD5',
+    'Content-Type',
+    'Date',
+    'X-Api-Version'
+  ],
+  credentials: true
+}));
 app.use(closeSequelizeConnection);
 const port = 4444;
 const firebaseConfig = {
@@ -62,7 +84,7 @@ const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, 
     max: 10,
     min: 0, 
     acquire: 10000, 
-    idle: 1000
+    idle: 2000
   }
 });
 process.on('SIGINT', async () => {
@@ -433,3 +455,4 @@ app.get("/user/list", function (req, res) {
     res.send(body)
   })();
 });
+export default app;

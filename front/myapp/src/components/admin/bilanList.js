@@ -35,7 +35,7 @@ export function BilanList(props) {
           {Object.keys(newlist).map((groupe) => {
             return (
               <>
-                <div>Groupe{groupe}</div>
+                <div>Groupe :{groupe}</div>
                 <div onClick={()=>props.handleShowModalBilanGroupDelete()&props.setGroup(groupe)}>Supprimer</div>
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Bilan, key) => {
