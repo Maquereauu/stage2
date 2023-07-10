@@ -60,7 +60,7 @@ const sequelize = new Sequelize('basetest2', 'maquereau', process.env.PASSWORD, 
   dialect: 'mysql' /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
   dialectModule: require('mysql2'),
   pool: {
-    max: 8,
+    max: 13,
     min: 0, 
     acquire: 10000, 
     idle: 1000
