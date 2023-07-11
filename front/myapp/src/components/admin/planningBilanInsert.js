@@ -8,7 +8,7 @@ export function PlanningBilanInsert(props){
         console.log(data)
         if(data.shift !== '0' && data.weekly !== '-1')
 {      await  InsertBilan_(data);
-        // window.location.replace('/planning')
+        window.location.replace('/planning')
     }
     }
     const { register, handleSubmit, reset,trigger,watch } = useForm();
