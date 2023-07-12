@@ -5,6 +5,7 @@ const { Storage } = require('@google-cloud/storage');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
+const sequelize = require('./db')
 const allowCorsHandler = (req, res, next) => {
   const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
   const origin = req.headers.origin;
@@ -54,7 +55,6 @@ const firebaseConfig = {
 };
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-sequelize = require('./db')
 process.on('SIGINT', async () => {
   try {
     await sequelize.close();
