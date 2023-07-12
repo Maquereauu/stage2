@@ -10,7 +10,7 @@ function createSequelizeInstance() {
     dialect: 'mysql',
     dialectModule: require('mysql2'),
     pool: {
-      max: 8,
+      max: 40,
       min: 0,
       acquire: 10000,
       idle: 1500
