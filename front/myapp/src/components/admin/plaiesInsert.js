@@ -32,6 +32,10 @@ export function PlaiesInsert(props) {
           newList = Object.fromEntries(Object.entries(data).slice(0, 4));
           newData = Object.fromEntries(Object.entries(data).slice(4));
         }
+        console.log("Newlist:")
+        console.log(newList)
+        console.log("NewData:")
+        console.log(newData)
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
