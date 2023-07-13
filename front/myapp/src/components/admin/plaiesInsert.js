@@ -82,7 +82,10 @@ export function PlaiesInsert(props) {
         })
         }
     }
-    const sendAllForms = async() => {
+    const sendAllForms = () => {
+        for(let i=0;i<counter.length;i++){
+            setValue("groupe"+i,watch("groupe"))
+        }
         if(refs2.current[0])
         {refs2.current[0].click();}
     }
@@ -103,10 +106,7 @@ export function PlaiesInsert(props) {
           } else {
             setValue("groupe", newGroup);
           }
-        for(let i=0;i<counter.length;i++){
-            setValue("groupe"+i,watch("groupe"))
-        }
-      }, [newGroup,watch('group'),watch('addgroupe')],counter);
+      }, [newGroup,watch('group'),watch('addgroupe')]);
     return <div>
         <h1 className="title flex2 center margin-top--">Plaies</h1>
         <div className="flex2 vertical center">
