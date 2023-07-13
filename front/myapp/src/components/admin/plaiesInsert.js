@@ -25,18 +25,21 @@ export function PlaiesInsert(props) {
     const onSubmitInsertPhotos = async (data) => {
         let newList;
         let newData;
+        let please;
         if (data.addgroupe) {
-          newList = Object.fromEntries(Object.entries(data).slice(0, 5));
-          await newList.push(data[-1])
-          newData = Object.fromEntries(Object.entries(data).slice(5));
+            please={"addgroupe":data.addgroupe};
+            please = Object.entries(please)
+          newList = (Object.entries(data).slice(0, 4));
+          newData = Object.fromEntries(Object.entries(data).slice(4));
+          if(newData.addgroupe){
+            delete newData.addgroupe
+        }
+          newList.push(please[0])
+          newList = Object.fromEntries(newList)
         } else {
           newList = Object.fromEntries(Object.entries(data).slice(0, 4));
           newData = Object.fromEntries(Object.entries(data).slice(4));
         }
-        console.log("Newlist:")
-        console.log(newList)
-        console.log("NewData:")
-        console.log(newData)
         const calls=[...Array(refs.current.length)].map(e => Array(list.length))
         let c = 0
         let calls2 = [0,0];
@@ -78,13 +81,13 @@ export function PlaiesInsert(props) {
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
-                console.log(dictionary)
+                // console.log(dictionary)
            await InsertPhotos_(dictionary)
         }
         }
         if(!error){
             Promise.all(uploadPromises).then(() => {
-                // window.location.replace('/patients')
+                window.location.replace('/patients')
         })
         }
     }

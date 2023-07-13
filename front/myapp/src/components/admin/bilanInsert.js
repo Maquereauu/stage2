@@ -27,9 +27,17 @@ export function BilanInsert(props) {
     const onSubmitInsertPhotos = async (data) => {
         let newList;
         let newData;
+        let please;
         if (data.addgroupe) {
-          newList = Object.fromEntries(Object.entries(data).slice(0, 9));
-          newData = Object.fromEntries(Object.entries(data).slice(9));
+            please={"addgroupe":data.addgroupe};
+            please = Object.entries(please)
+          newList = (Object.entries(data).slice(0, 8));
+          newData = Object.fromEntries(Object.entries(data).slice(8));
+          if(newData.addgroupe){
+            delete newData.addgroupe
+        }
+          newList.push(please[0])
+          newList = Object.fromEntries(newList)
         } else {
           newList = Object.fromEntries(Object.entries(data).slice(0, 8));
           newData = Object.fromEntries(Object.entries(data).slice(8));
@@ -63,18 +71,19 @@ export function BilanInsert(props) {
                 setOops(0)
             }
         }
-        if(newList.text == "" || newList.groupe == ""){
+        if(newList.text == "" ||( newList.groupe == "" || newList.addgroupe == "")){
             setOops(1)
         }
         if(!error){
             if (newList.addgroupe) {
                 newList.groupe = newList.addgroupe;
               }
-            await InsertBilan_(newList)
+            await InsertPlaies_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
+                // console.log(dictionary)
            await InsertPhotos_(dictionary)
         }
         }
