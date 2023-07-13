@@ -78,7 +78,7 @@ export function BilanInsert(props) {
             if (newList.addgroupe) {
                 newList.groupe = newList.addgroupe;
               }
-            await InsertPlaies_(newList)
+            await InsertBilan_(newList)
         }
         for(let i = 0;i<counter.length;i++){
             if(!error)
