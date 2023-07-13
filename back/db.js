@@ -12,8 +12,8 @@ function createSequelizeInstance() {
     pool: {
       max: 10,
       min: 0,
-      acquire: 10000,
-      idle: 3000
+      acquire: 30000,
+      idle: 10000
     }
   });
 
