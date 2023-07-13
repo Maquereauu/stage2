@@ -27,7 +27,7 @@ export function PlaiesInsert(props) {
         let newData;
         if (data.addgroupe) {
           newList = Object.fromEntries(Object.entries(data).slice(0, 5));
-          newList.push(data[-1])
+          await newList.push(data[-1])
           newData = Object.fromEntries(Object.entries(data).slice(5));
         } else {
           newList = Object.fromEntries(Object.entries(data).slice(0, 4));
