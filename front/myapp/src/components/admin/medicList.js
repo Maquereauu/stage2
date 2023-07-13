@@ -36,7 +36,7 @@ export function MedicList(props) {
             console.log(groupe);
             return (
               <>
-                <div>Groupe{groupe}</div>
+                <div>Groupe {groupe}</div>
                 <div onClick={()=>props.handleShowModalMedicGroupDelete()&props.setGroup(groupe)}>Supprimer</div>
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Plaies, key) => {
