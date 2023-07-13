@@ -13,7 +13,7 @@ function createSequelizeInstance() {
       max: 10,
       min: 0,
       acquire: 10000,
-      idle: 1500
+      idle: 3000
     }
   });
 
