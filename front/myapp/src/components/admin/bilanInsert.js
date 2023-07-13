@@ -93,7 +93,10 @@ export function BilanInsert(props) {
     //     setAllData([])
     //     // window.location.replace('/patients');
     // }
-    const sendAllForms = async() => {
+    const sendAllForms = () => {
+        for(let i=0;i<counter.length;i++){
+            setValue("groupe"+i,watch("groupe"))
+        }
         if(refs2.current[0])
         {refs2.current[0].click();}
     }
@@ -182,7 +185,7 @@ export function BilanInsert(props) {
                     <input required={true} className='background my-account- margin-top--- margin-right--' {...register("id_patient"+index)} defaultValue={props.patientInfo.id} type="hidden" id="id_patient" />
                     <input className='background my-account- margin-top---' {...register("type"+index)} defaultValue={4} placeholder="type" type="hidden" id={"type"+index} />
                     <input className='background my-account- margin-top---' {...register("image"+index)} placeholder="image" type="file" id="image" />
-                    <input className='background my-account- margin-top---' {...register("groupe"+index)} placeholder="groupe" type="text" id="groupe" />
+                    <input className='background my-account- margin-top---' {...register("groupe"+index)} placeholder="groupe" type="hidden" id="groupe" />
                     <input hidden={true} id={index} ref={(element) => {refs.current[index] = element}} type="submit" value="Insérer la nouvelle ordonnance" />
                     </form>
                 </div>})}
