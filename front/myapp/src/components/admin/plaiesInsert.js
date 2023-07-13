@@ -73,12 +73,13 @@ export function PlaiesInsert(props) {
         for(let i = 0;i<counter.length;i++){
             if(!error)
             {const dictionary = Object.fromEntries(calls[i]);
+                console.log(dictionary)
            await InsertPhotos_(dictionary)
         }
         }
         if(!error){
             Promise.all(uploadPromises).then(() => {
-                window.location.replace('/patients')
+                // window.location.replace('/patients')
         })
         }
     }
