@@ -1,4 +1,4 @@
-const express = require("express");
+ const express = require("express");
 const multer = require("multer");
 const cors = require('cors');
 const { Storage } = require('@google-cloud/storage');
@@ -14,6 +14,8 @@ const allowCorsHandler = (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', origin);
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
     res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
     res.setHeader(
       'Access-Control-Allow-Headers',
       'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
