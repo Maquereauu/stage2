@@ -32,7 +32,7 @@ export function BilanList(props) {
     const newlist = groupBy(list, 'groupe')
     return (
         <><div onClick={()=>update?setUpdate(false):setUpdate(true)}>Modifier</div>
-          {Object.keys(newlist).map((groupe) => {
+          {Object.keys(newlist).map((groupe,groupeNumber) => {
             return (
               <>
                 <div>Groupe :{groupe}</div>
@@ -50,7 +50,7 @@ export function BilanList(props) {
                       <div className="background-color-2-3">
                         <div className="margin-bottom--- flex space-evenly">
                           {"image" in Bilan ? (<>
-                            <img className="prod-img" src={imageUrls[key]} alt={Bilan.image} />
+                            <img className="prod-img" src={imageUrls[key+groupeNumber]} alt={Bilan.image} />
                             {ReactSession.set("photo"+Bilan.id, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient, true)}
                             {ReactSession.remove("patient"+Bilan.id_patient+"bilan", true)}
