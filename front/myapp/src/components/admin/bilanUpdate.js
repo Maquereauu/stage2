@@ -7,9 +7,9 @@ export function BilanUpdate(props) {
     const onSubmitUpdateBilan = async (data) => {
         console.log(data)
         await UpdateBilan_(data)
-        // if(props.isPlanning)
-        // {window.location.replace('/planning');}
-        // else{window.location.replace('/patients');}
+        if(props.isPlanning)
+        {window.location.replace('/planning');}
+        else{window.location.replace('/patients');}
     }
     const onChange = (event) => {
         const value = event.target.value;
