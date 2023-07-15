@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactSession } from 'react-client-session';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 export function TransmissionList(props) {
+  let imageCounter = 0
     const [disabled,setDisabled]=useState(false);
     const [update,setUpdate]=useState(false);
     const yes = props.info.filter((info)=>info.id_patient === props.patientInfo.id && info.type == 5)
@@ -33,6 +34,8 @@ export function TransmissionList(props) {
     return (
         <><div onClick={()=>update?setUpdate(false):setUpdate(true)}>Modifier</div>
           {Object.keys(newlist).map((groupe,groupeNumber) => {
+            let newImageCounter = imageCounter
+            imageCounter = 0
             return (
               <>
                 <div>Groupe {groupe}</div>
@@ -40,7 +43,7 @@ export function TransmissionList(props) {
                 <div className='box2 background-color-1-5'>
                 {newlist[groupe].map((Plaies, key) => {
                    if("image" in Plaies){
-                    const getRef = ref(storage, 'gs://images-3e2d3.appspot.com/' + yes[key+groupeNumber].image)
+                    const getRef = ref(storage, 'gs://images-3e2d3.appspot.com/' + Plaies.image)
                     const url = getDownloadURL(getRef)
                   }
                   return (
@@ -51,7 +54,8 @@ export function TransmissionList(props) {
                         <div className="margin-bottom--- flex space-evenly">
                           {"image" in Plaies ? (
                             <>
-                            <img className="prod-img" src={imageUrls[key+groupeNumber]} alt={Plaies.image} />
+                            <img className="prod-img" src={imageUrls[key+(groupeNumber*newImageCounter)]} alt={Plaies.image} />
+                            {imageCounter++}
                             {ReactSession.set("photo"+Plaies.id, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient, true)}
                             {ReactSession.remove("patient"+Plaies.id_patient+"transmission", true)}
