@@ -2,25 +2,27 @@ import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from 'react';
 import { UpdateBilan_ } from "../../components/AllBilan/Bilan";
 export function BilanUpdate(props) {
-    const { register, handleSubmit, reset,trigger,watch } = useForm();
+    const { register, handleSubmit, reset,trigger,watch,setValue } = useForm();
     const [weekly,setWeekly]=useState();
     const onSubmitUpdateBilan = async (data) => {
+        console.log(data)
         await UpdateBilan_(data)
-        if(props.isPlanning)
-        {window.location.replace('/planning');}
-        else{window.location.replace('/patients');}
+        // if(props.isPlanning)
+        // {window.location.replace('/planning');}
+        // else{window.location.replace('/patients');}
     }
     const onChange = (event) => {
         const value = event.target.value;
         setWeekly(value);
       };
       useEffect(() => {
-        if (typeof weekly !== "undefined" && weekly !== -1 && weekly !== 0) {
-          reset({ date_debut: watch('date') });
+        if (typeof(weekly) !== "undefined" && weekly !== -1 && weekly !== 0) {
+          setValue("date_debut", watch("date"));
         } else {
-          reset({ date_debut: props.bilanInfo.date_debut });
+          setValue("date_debut", null);
+          setValue("date_fin", null);
         }
-      }, [weekly,watch('date')]);
+      }, [weekly, watch('date')]);
     return <form onSubmit={handleSubmit(onSubmitUpdateBilan)} className="align-center flex vertical center" >
         <h1 className="title flex2 center margin-top--">Bilan</h1>
         <div className="flex2 vertical center">
