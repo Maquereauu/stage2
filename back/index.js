@@ -183,7 +183,7 @@ app.post("/traitement/delete", jsonParser, (req, res) => {
     .catch(err => res.send(JSON.stringify(err.message)));
   })();
 });
-
+//
 // CRUD photos
 const storage = new Storage({
   credentials: { type: firebaseConfig.type,
