@@ -7,7 +7,7 @@ dotenv.config();
 const app = express();
 const sequelize = require('./db')
 const allowCorsHandler = (req, res, next) => {
-  const whitelist = ['https://ide-front.vercel.app', 'https://stage-dun.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
+  const whitelist = ['https://ide-front2.vercel.app', 'https://stage2-backend.vercel.app', 'https://vercel.com', 'http://localhost:3000'];
   const origin = req.headers.origin;
   if (whitelist.indexOf(origin) !== -1) {
     res.setHeader('Access-Control-Allow-Credentials', true);

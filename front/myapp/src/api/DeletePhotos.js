@@ -1,6 +1,6 @@
 export const DeletePhotos = async (photos) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/photos/delete', {
+        'https://stage2-backend.vercel.app/photos/delete', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

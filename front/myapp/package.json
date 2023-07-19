@@ -2,7 +2,7 @@
   "name": "stage",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://ide-front.vercel.app",
+  "proxy": "https://ide-front2.vercel.app",
   "dependencies": {
     "@daypilot/daypilot-lite-react": "^3.14.0",
     "@emotion/react": "^11.11.0",

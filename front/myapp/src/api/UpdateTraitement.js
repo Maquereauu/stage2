@@ -1,6 +1,6 @@
 export const UpdateTraitement = async (Traitement) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/traitement/update', {
+        'https://stage2-backend.vercel.app/traitement/update', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 

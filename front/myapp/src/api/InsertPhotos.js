@@ -1,6 +1,6 @@
 export const InsertPhotos = async (Photos) => {
     const response = await fetch(
-        'https://stage-dun.vercel.app/photos/insert', {
+        'https://stage2-backend.vercel.app/photos/insert', {
             method: 'POST', 
             headers: {
                 'Accept': 'application/json', 
